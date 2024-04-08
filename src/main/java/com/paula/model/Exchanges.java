@@ -8,31 +8,28 @@ public class Exchanges {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer exchange_id;
-    private Integer id_user_bidder;
-    private Integer id_user_applicant;
-    private Integer book_id_bidder;
-    private Integer book_id_applicant;
-    
+
+    @ManyToOne
+    @JoinColumn(name = "id_user_bidder")
+    private User bidder;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user_applicant")
+    private User applicant;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id_bidder")
+    private Books bookBidder;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id_applicant")
+    private Books bookApplicant;
+
     @ManyToOne
     @JoinColumn(name = "exchange_condition")
     private ExchangeCondition exchangeCondition;
 
-    @ManyToOne
-    @JoinColumn(name = "id_user_order")
-    private User user_order;
-
     public Exchanges() {
-    }
-    
-    public Exchanges(Integer exchange_id, Integer id_user_bidder, Integer id_user_applicant, Integer book_id_bidder,
-            Integer book_id_applicant, ExchangeCondition exchangeCondition, User user_order) {
-        this.exchange_id = exchange_id;
-        this.id_user_bidder = id_user_bidder;
-        this.id_user_applicant = id_user_applicant;
-        this.book_id_bidder = book_id_bidder;
-        this.book_id_applicant = book_id_applicant;
-        this.exchangeCondition = exchangeCondition;
-        this.user_order = user_order;
     }
 
     public Integer getExchange_id() {
@@ -43,36 +40,36 @@ public class Exchanges {
         this.exchange_id = exchange_id;
     }
 
-    public Integer getId_user_bidder() {
-        return id_user_bidder;
+    public User getBidder() {
+        return bidder;
     }
 
-    public void setId_user_bidder(Integer id_user_bidder) {
-        this.id_user_bidder = id_user_bidder;
+    public void setBidder(User bidder) {
+        this.bidder = bidder;
     }
 
-    public Integer getId_user_applicant() {
-        return id_user_applicant;
+    public User getApplicant() {
+        return applicant;
     }
 
-    public void setId_user_applicant(Integer id_user_applicant) {
-        this.id_user_applicant = id_user_applicant;
+    public void setApplicant(User applicant) {
+        this.applicant = applicant;
     }
 
-    public Integer getBook_id_bidder() {
-        return book_id_bidder;
+    public Books getBookBidder() {
+        return bookBidder;
     }
 
-    public void setBook_id_bidder(Integer book_id_bidder) {
-        this.book_id_bidder = book_id_bidder;
+    public void setBookBidder(Books bookBidder) {
+        this.bookBidder = bookBidder;
     }
 
-    public Integer getBook_id_applicant() {
-        return book_id_applicant;
+    public Books getBookApplicant() {
+        return bookApplicant;
     }
 
-    public void setBook_id_applicant(Integer book_id_applicant) {
-        this.book_id_applicant = book_id_applicant;
+    public void setBookApplicant(Books bookApplicant) {
+        this.bookApplicant = bookApplicant;
     }
 
     public ExchangeCondition getExchangeCondition() {
@@ -82,12 +79,4 @@ public class Exchanges {
     public void setExchangeCondition(ExchangeCondition exchangeCondition) {
         this.exchangeCondition = exchangeCondition;
     }
-
-    public User getUser_order() {
-        return user_order;
-    }
-
-    public void setUser_order(User user_order) {
-        this.user_order = user_order;
-    }  
 }

@@ -1,43 +1,32 @@
 package com.paula.model;
 
-import java.util.*;
+import java.util.List;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class User {
-    @Id   
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_user;
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
+    private Integer role_id;
     private String name;
     private String username;
     private String email;
     private String shipping_address;
     private String password;
-    
+
     @OneToMany(mappedBy = "user")
     private List<Books> books;
 
-    @OneToMany(mappedBy = "user_order")
-    private List<Exchanges> exchanges;
+    @OneToMany(mappedBy = "bidder")
+    private List<Exchanges> exchangesAsBidder;
 
-    public User() {}
+    @OneToMany(mappedBy = "applicant")
+    private List<Exchanges> exchangesAsApplicant;
 
-    public User(Integer id_user, Role role, String name, String username, String email, String shipping_address,
-            String password, List<Books> books, List<Exchanges> exchanges) {
-        this.id_user = id_user;
-        this.role = role;
-        this.name = name;
-        this.username = username;
-        this.email = email;
-        this.shipping_address = shipping_address;
-        this.password = password;
-        this.books = books;
-        this.exchanges = exchanges;
+    public User() {
     }
 
     public Integer getId_user() {
@@ -46,6 +35,14 @@ public class User {
 
     public void setId_user(Integer id_user) {
         this.id_user = id_user;
+    }
+
+    public Integer getRole_id() {
+        return role_id;
+    }
+
+    public void setRole_id(Integer role_id) {
+        this.role_id = role_id;
     }
 
     public String getName() {
@@ -96,11 +93,19 @@ public class User {
         this.books = books;
     }
 
-    public Role getRole() {
-        return role;
+    public List<Exchanges> getExchangesAsBidder() {
+        return exchangesAsBidder;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setExchangesAsBidder(List<Exchanges> exchangesAsBidder) {
+        this.exchangesAsBidder = exchangesAsBidder;
+    }
+
+    public List<Exchanges> getExchangesAsApplicant() {
+        return exchangesAsApplicant;
+    }
+
+    public void setExchangesAsApplicant(List<Exchanges> exchangesAsApplicant) {
+        this.exchangesAsApplicant = exchangesAsApplicant;
     }
 }
