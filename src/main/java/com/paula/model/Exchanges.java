@@ -1,24 +1,38 @@
 package com.paula.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "exchanges")
 public class Exchanges {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer exchange_id;
     private Integer id_user_bidder;
     private Integer id_user_applicant;
     private Integer book_id_bidder;
     private Integer book_id_applicant;
-    private Integer exchange_condition;
     
+    @ManyToOne
+    @JoinColumn(name = "exchange_condition")
+    private ExchangeCondition exchangeCondition;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user_order")
+    private User user_order;
+
     public Exchanges() {
     }
     
     public Exchanges(Integer exchange_id, Integer id_user_bidder, Integer id_user_applicant, Integer book_id_bidder,
-            Integer book_id_applicant, Integer exchange_condition) {
+            Integer book_id_applicant, ExchangeCondition exchangeCondition, User user_order) {
         this.exchange_id = exchange_id;
         this.id_user_bidder = id_user_bidder;
         this.id_user_applicant = id_user_applicant;
         this.book_id_bidder = book_id_bidder;
         this.book_id_applicant = book_id_applicant;
-        this.exchange_condition = exchange_condition;
+        this.exchangeCondition = exchangeCondition;
+        this.user_order = user_order;
     }
 
     public Integer getExchange_id() {
@@ -61,11 +75,19 @@ public class Exchanges {
         this.book_id_applicant = book_id_applicant;
     }
 
-    public Integer getExchange_condition() {
-        return exchange_condition;
+    public ExchangeCondition getExchangeCondition() {
+        return exchangeCondition;
     }
 
-    public void setExchange_condition(Integer exchange_condition) {
-        this.exchange_condition = exchange_condition;
+    public void setExchangeCondition(ExchangeCondition exchangeCondition) {
+        this.exchangeCondition = exchangeCondition;
     }
+
+    public User getUser_order() {
+        return user_order;
+    }
+
+    public void setUser_order(User user_order) {
+        this.user_order = user_order;
+    }  
 }

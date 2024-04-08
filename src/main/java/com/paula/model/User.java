@@ -1,25 +1,43 @@
 package com.paula.model;
 
+import java.util.*;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
+    @Id   
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_user;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
     private String name;
     private String username;
     private String email;
     private String shipping_address;
-    private String user_type;
     private String password;
     
+    @OneToMany(mappedBy = "user")
+    private List<Books> books;
+
+    @OneToMany(mappedBy = "user_order")
+    private List<Exchanges> exchanges;
+
     public User() {}
 
-    public User(Integer id_user, String name, String username, String email, String shipping_address, String user_type,
-            String password) {
+    public User(Integer id_user, Role role, String name, String username, String email, String shipping_address,
+            String password, List<Books> books, List<Exchanges> exchanges) {
         this.id_user = id_user;
+        this.role = role;
         this.name = name;
         this.username = username;
         this.email = email;
         this.shipping_address = shipping_address;
-        this.user_type = user_type;
         this.password = password;
+        this.books = books;
+        this.exchanges = exchanges;
     }
 
     public Integer getId_user() {
@@ -62,19 +80,27 @@ public class User {
         this.shipping_address = shipping_address;
     }
 
-    public String getUser_type() {
-        return user_type;
-    }
-
-    public void setUser_type(String user_type) {
-        this.user_type = user_type;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Books> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Books> books) {
+        this.books = books;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

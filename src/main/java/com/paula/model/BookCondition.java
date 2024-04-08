@@ -1,8 +1,19 @@
 package com.paula.model;
 
+import java.util.List;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "book_condition")
 public class BookCondition {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_condition;
     private String condition_name;
+
+    @OneToMany(mappedBy = "condition")
+    private List<Books> books;
 
     public BookCondition() {}
 
