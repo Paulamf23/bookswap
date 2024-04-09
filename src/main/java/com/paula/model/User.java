@@ -7,57 +7,66 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "users")
 public class User {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_user;
-    private Integer role_id;
+    @Column(name = "id_user")
+    private Integer userId;
+    
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+    
     private String name;
+    
     private String username;
+    
     private String email;
-    private String shipping_address;
+    
+    private String shippingAddress;
+    
     private String password;
-
+    
     @OneToMany(mappedBy = "user")
     private List<Books> books;
-
+    
     @OneToMany(mappedBy = "bidder")
     private List<Exchanges> exchangesAsBidder;
-
+    
     @OneToMany(mappedBy = "applicant")
     private List<Exchanges> exchangesAsApplicant;
 
-    public User() {
-    }
+    public User() {}
 
-    public User(Integer id_user, Integer role_id, String name, String username, String email, String shipping_address,
+    public User(Integer userId, Role role, String name, String username, String email, String shippingAddress,
             String password, List<Books> books, List<Exchanges> exchangesAsBidder,
             List<Exchanges> exchangesAsApplicant) {
-        this.id_user = id_user;
-        this.role_id = role_id;
+        this.userId = userId;
+        this.role = role;
         this.name = name;
         this.username = username;
         this.email = email;
-        this.shipping_address = shipping_address;
+        this.shippingAddress = shippingAddress;
         this.password = password;
         this.books = books;
         this.exchangesAsBidder = exchangesAsBidder;
         this.exchangesAsApplicant = exchangesAsApplicant;
     }
 
-    public Integer getId_user() {
-        return id_user;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setId_user(Integer id_user) {
-        this.id_user = id_user;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public Integer getRole_id() {
-        return role_id;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRole_id(Integer role_id) {
-        this.role_id = role_id;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String getName() {
@@ -84,12 +93,12 @@ public class User {
         this.email = email;
     }
 
-    public String getShipping_address() {
-        return shipping_address;
+    public String getShippingAddress() {
+        return shippingAddress;
     }
 
-    public void setShipping_address(String shipping_address) {
-        this.shipping_address = shipping_address;
+    public void setShippingAddress(String shippingAddress) {
+        this.shippingAddress = shippingAddress;
     }
 
     public String getPassword() {
