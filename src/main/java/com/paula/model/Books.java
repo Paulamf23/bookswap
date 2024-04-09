@@ -21,8 +21,21 @@ public class Books {
     private String title;
     private String author;
     private String ISBN;
+    private String genre;
 
     public Books() {
+    }
+
+    public Books(Integer book_id, Integer year, BookCondition condition, User user, String title, String author,
+            String iSBN, String genre) {
+        this.book_id = book_id;
+        this.year = year;
+        this.condition = condition;
+        this.user = user;
+        this.title = title;
+        this.author = author;
+        ISBN = iSBN;
+        this.genre = genre;
     }
 
     public Integer getBook_id() {
@@ -80,4 +93,13 @@ public class Books {
     public void setISBN(String iSBN) {
         ISBN = iSBN;
     }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
 }

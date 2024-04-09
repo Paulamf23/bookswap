@@ -29,6 +29,21 @@ public class User {
     public User() {
     }
 
+    public User(Integer id_user, Integer role_id, String name, String username, String email, String shipping_address,
+            String password, List<Books> books, List<Exchanges> exchangesAsBidder,
+            List<Exchanges> exchangesAsApplicant) {
+        this.id_user = id_user;
+        this.role_id = role_id;
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.shipping_address = shipping_address;
+        this.password = password;
+        this.books = books;
+        this.exchangesAsBidder = exchangesAsBidder;
+        this.exchangesAsApplicant = exchangesAsApplicant;
+    }
+
     public Integer getId_user() {
         return id_user;
     }

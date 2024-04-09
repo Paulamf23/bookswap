@@ -32,6 +32,16 @@ public class Exchanges {
     public Exchanges() {
     }
 
+    public Exchanges(Integer exchange_id, User bidder, User applicant, Books bookBidder, Books bookApplicant,
+            ExchangeCondition exchangeCondition) {
+        this.exchange_id = exchange_id;
+        this.bidder = bidder;
+        this.applicant = applicant;
+        this.bookBidder = bookBidder;
+        this.bookApplicant = bookApplicant;
+        this.exchangeCondition = exchangeCondition;
+    }
+
     public Integer getExchange_id() {
         return exchange_id;
     }
