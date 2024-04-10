@@ -7,8 +7,15 @@ import jakarta.persistence.*;
 public class Books {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer book_id;
+    @Column(name = "book_id")
+    private Integer bookId;
+
+    @Column(name = "year")
     private Integer year;
+
+    @ManyToOne
+    @JoinColumn(name = "id_genre")
+    private Genres genre;
 
     @ManyToOne
     @JoinColumn(name = "id_condition")
@@ -18,32 +25,36 @@ public class Books {
     @JoinColumn(name = "id_user")
     private User user;
 
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "author")
     private String author;
+
+    @Column(name = "ISBN")
     private String ISBN;
-    private String genre;
 
     public Books() {
     }
 
-    public Books(Integer book_id, Integer year, BookCondition condition, User user, String title, String author,
-            String iSBN, String genre) {
-        this.book_id = book_id;
+    public Books(Integer bookId, Integer year, Genres genre, BookCondition condition, User user, String title,
+            String author, String iSBN) {
+        this.bookId = bookId;
         this.year = year;
+        this.genre = genre;
         this.condition = condition;
         this.user = user;
         this.title = title;
         this.author = author;
         ISBN = iSBN;
-        this.genre = genre;
     }
 
-    public Integer getBook_id() {
-        return book_id;
+    public Integer getBookId() {
+        return bookId;
     }
 
-    public void setBook_id(Integer book_id) {
-        this.book_id = book_id;
+    public void setBookId(Integer bookId) {
+        this.bookId = bookId;
     }
 
     public Integer getYear() {
@@ -52,6 +63,14 @@ public class Books {
 
     public void setYear(Integer year) {
         this.year = year;
+    }
+
+    public Genres getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genres genre) {
+        this.genre = genre;
     }
 
     public BookCondition getCondition() {
@@ -94,12 +113,5 @@ public class Books {
         ISBN = iSBN;
     }
 
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
+    
 }
