@@ -1,9 +1,80 @@
-.input-group{
-    width: 50%;
+.bi-person {
+    background-color: #93674E; 
+    padding: 10px; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    width: 40px; 
+    height: 40px; 
 }
 
+.bi-person a {
+    font-size: 24px; 
+    margin-right: 20px; 
+    color: #fff; 
+    text-decoration: none !important; 
+}
 
+.navbar-search button{
+    border-radius: 0%; 
+    border-color: black;
+    border-width: 1px;
+    color: black;
+}
 
-/* .custom-bg-color {
+.navbar-search button:hover {
+    background-color: #93674E; 
+    color: #fff;
+    border-radius: 0%; 
+}
+
+.navbar-logo {
+    margin-right: 50px;
+    margin-left: 0px;
+}
+
+.navbar-search {
+    max-width: 60%;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+header, footer {
     background-color: #E8D6C6 !important;
-} */
+}
+
+#filtroGeneroBtn {
+    background-color: #93674E;
+    border-color: #93674E;
+}
+
+#filtroGeneroBtn:hover {
+    background-color: #7a503b;
+    border-color: #7a503b;
+}
+
+ .dropdown{
+    display: flex;
+    flex-direction: column;
+} 
+
+.dropdown-menu{
+    column-count: 3;
+}
+
+.img-banner{
+    width: 100%;
+}
