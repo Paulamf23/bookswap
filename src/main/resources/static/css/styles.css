@@ -4,11 +4,6 @@
     box-sizing: border-box;
 }
 
-body {
-    margin: 0; /* Eliminar margen del body */
-    padding: 0; /* Eliminar relleno del body */
-}
-
 /* HEADER */
 
 header {
@@ -181,7 +176,7 @@ main h1 {
     color: #E8D6C6;
 }
 
-.info-childs input{
+.info-childs button{
     background-color: transparent;
     outline: none;
     border: solid 2px #E8D6C6;
@@ -192,7 +187,7 @@ main h1 {
     transition: background-color .3s ease;
 }
 
-.info-childs input:hover{
+.info-childs button:hover{
     background-color: #E8D6C6;
     border: none;
     color: #7a503b;
@@ -276,10 +271,13 @@ main h1 {
     border: solid 4px #93674E;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    border-left: none;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 60%;
     text-align: center;
+}
+
+.hidden {
+    display: none;
 }
