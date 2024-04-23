@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "role")
 public class Role {
     
     @Id
@@ -16,7 +16,7 @@ public class Role {
     private String roleName;
     
     @OneToMany(mappedBy = "role")
-    private List<User> users;
+    private List<User> user;
 
     public Role() {}
     
@@ -36,11 +36,11 @@ public class Role {
         this.roleName = roleName;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<User> getUser() {
+        return user;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUser(List<User> user) {
+        this.user = user;
     }
 }

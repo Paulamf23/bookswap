@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "genres")
-public class Genres {
+@Table(name = "genre")
+public class Genre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,12 +16,12 @@ public class Genres {
     private String genreName;
 
     @OneToMany(mappedBy = "genre")
-    private List<Books> books;
+    private List<Book> book;
 
-    public Genres() {
+    public Genre() {
     }
 
-    public Genres(Integer genreId, String genreName) {
+    public Genre(Integer genreId, String genreName) {
         this.genreId = genreId;
         this.genreName = genreName;
     }
@@ -42,11 +42,11 @@ public class Genres {
         this.genreName = genreName;
     }
 
-    public List<Books> getBooks() {
-        return books;
+    public List<Book> getBook() {
+        return book;
     }
 
-    public void setBooks(List<Books> books) {
-        this.books = books;
+    public void setBooks(List<Book> books) {
+        this.book = books;
     }
 }

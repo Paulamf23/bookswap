@@ -3,11 +3,11 @@ package com.paula.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "exchanges")
-public class Exchanges {
+@Table(name = "exchange")
+public class Exchange {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer exchange_id;
+    private Integer exchangeId;
 
     @ManyToOne
     @JoinColumn(name = "id_user_bidder")
@@ -19,22 +19,22 @@ public class Exchanges {
 
     @ManyToOne
     @JoinColumn(name = "book_id_bidder")
-    private Books bookBidder;
+    private Book bookBidder;
 
     @ManyToOne
     @JoinColumn(name = "book_id_applicant")
-    private Books bookApplicant;
+    private Book bookApplicant;
 
     @ManyToOne
     @JoinColumn(name = "exchange_condition")
     private ExchangeCondition exchangeCondition;
 
-    public Exchanges() {
+    public Exchange() {
     }
 
-    public Exchanges(Integer exchange_id, User bidder, User applicant, Books bookBidder, Books bookApplicant,
+    public Exchange(Integer exchange_id, User bidder, User applicant, Book bookBidder, Book bookApplicant,
             ExchangeCondition exchangeCondition) {
-        this.exchange_id = exchange_id;
+        this.exchangeId = exchange_id;
         this.bidder = bidder;
         this.applicant = applicant;
         this.bookBidder = bookBidder;
@@ -43,11 +43,11 @@ public class Exchanges {
     }
 
     public Integer getExchange_id() {
-        return exchange_id;
+        return exchangeId;
     }
 
     public void setExchange_id(Integer exchange_id) {
-        this.exchange_id = exchange_id;
+        this.exchangeId = exchange_id;
     }
 
     public User getBidder() {
@@ -66,19 +66,19 @@ public class Exchanges {
         this.applicant = applicant;
     }
 
-    public Books getBookBidder() {
+    public Book getBookBidder() {
         return bookBidder;
     }
 
-    public void setBookBidder(Books bookBidder) {
+    public void setBookBidder(Book bookBidder) {
         this.bookBidder = bookBidder;
     }
 
-    public Books getBookApplicant() {
+    public Book getBookApplicant() {
         return bookApplicant;
     }
 
-    public void setBookApplicant(Books bookApplicant) {
+    public void setBookApplicant(Book bookApplicant) {
         this.bookApplicant = bookApplicant;
     }
 

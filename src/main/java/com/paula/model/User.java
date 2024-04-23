@@ -1,46 +1,49 @@
 package com.paula.model;
 
+import javax.persistence.*;
 import java.util.List;
 
-import javax.persistence.*;
-
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user")
+    @Column(name = "user_id")
     private Integer userId;
     
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
     
+    @Column(nullable = false)
     private String name;
     
+    @Column(nullable = false)
     private String username;
     
+    @Column(unique = true)
     private String email;
     
     private String shippingAddress;
     
+    @Column(nullable = false, length = 64)
     private String password;
     
     @OneToMany(mappedBy = "user")
-    private List<Books> books;
+    private List<Book> book;
     
     @OneToMany(mappedBy = "bidder")
-    private List<Exchanges> exchangesAsBidder;
+    private List<Exchange> exchangeAsBidder;
     
     @OneToMany(mappedBy = "applicant")
-    private List<Exchanges> exchangesAsApplicant;
+    private List<Exchange> exchangeAsApplicant;
 
     public User() {}
 
     public User(Integer userId, Role role, String name, String username, String email, String shippingAddress,
-            String password, List<Books> books, List<Exchanges> exchangesAsBidder,
-            List<Exchanges> exchangesAsApplicant) {
+            String password, List<Book> book, List<Exchange> exchangeAsBidder,
+            List<Exchange> exchangeAsApplicant) {
         this.userId = userId;
         this.role = role;
         this.name = name;
@@ -48,9 +51,9 @@ public class User {
         this.email = email;
         this.shippingAddress = shippingAddress;
         this.password = password;
-        this.books = books;
-        this.exchangesAsBidder = exchangesAsBidder;
-        this.exchangesAsApplicant = exchangesAsApplicant;
+        this.book = book;
+        this.exchangeAsBidder = exchangeAsBidder;
+        this.exchangeAsApplicant = exchangeAsApplicant;
     }
 
     public Integer getUserId() {
@@ -109,27 +112,27 @@ public class User {
         this.password = password;
     }
 
-    public List<Books> getBooks() {
-        return books;
+    public List<Book> getBook() {
+        return book;
     }
 
-    public void setBooks(List<Books> books) {
-        this.books = books;
+    public void setBook(List<Book> book) {
+        this.book = book;
     }
 
-    public List<Exchanges> getExchangesAsBidder() {
-        return exchangesAsBidder;
+    public List<Exchange> getExchangeAsBidder() {
+        return exchangeAsBidder;
     }
 
-    public void setExchangesAsBidder(List<Exchanges> exchangesAsBidder) {
-        this.exchangesAsBidder = exchangesAsBidder;
+    public void setExchangeAsBidder(List<Exchange> exchangeAsBidder) {
+        this.exchangeAsBidder = exchangeAsBidder;
     }
 
-    public List<Exchanges> getExchangesAsApplicant() {
-        return exchangesAsApplicant;
+    public List<Exchange> getExchangeAsApplicant() {
+        return exchangeAsApplicant;
     }
 
-    public void setExchangesAsApplicant(List<Exchanges> exchangesAsApplicant) {
-        this.exchangesAsApplicant = exchangesAsApplicant;
+    public void setExchangeAsApplicant(List<Exchange> exchangeAsApplicant) {
+        this.exchangeAsApplicant = exchangeAsApplicant;
     }
 }

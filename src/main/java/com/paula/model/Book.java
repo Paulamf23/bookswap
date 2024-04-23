@@ -3,8 +3,8 @@ package com.paula.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "books")
-public class Books {
+@Table(name = "book")
+public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
@@ -15,7 +15,7 @@ public class Books {
 
     @ManyToOne
     @JoinColumn(name = "id_genre")
-    private Genres genre;
+    private Genre genre;
 
     @ManyToOne
     @JoinColumn(name = "id_condition")
@@ -34,10 +34,10 @@ public class Books {
     @Column(name = "ISBN")
     private String ISBN;
 
-    public Books() {
+    public Book() {
     }
 
-    public Books(Integer bookId, Integer year, Genres genre, BookCondition condition, User user, String title,
+    public Book(Integer bookId, Integer year, Genre genre, BookCondition condition, User user, String title,
             String author, String iSBN) {
         this.bookId = bookId;
         this.year = year;
@@ -65,11 +65,11 @@ public class Books {
         this.year = year;
     }
 
-    public Genres getGenre() {
+    public Genre getGenre() {
         return genre;
     }
 
-    public void setGenre(Genres genre) {
+    public void setGenre(Genre genre) {
         this.genre = genre;
     }
 
