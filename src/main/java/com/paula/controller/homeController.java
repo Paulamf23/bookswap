@@ -13,7 +13,7 @@ public class homeController {
         return "general/home";
     }
 
-    @GetMapping("/login") // Agregamos un nuevo método para manejar la solicitud de la página de inicio de sesión
+    @GetMapping("/login") 
     public String loginPage() {
         return "general/login";
     }

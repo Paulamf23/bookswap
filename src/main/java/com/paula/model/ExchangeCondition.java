@@ -2,7 +2,7 @@ package com.paula.model;
 
 import java.util.List;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "exchange_conditions")

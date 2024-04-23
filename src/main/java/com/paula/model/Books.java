@@ -1,6 +1,6 @@
 package com.paula.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "books")

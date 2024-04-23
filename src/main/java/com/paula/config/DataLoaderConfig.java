@@ -3,9 +3,9 @@ package com.paula.config;
 import com.paula.model.Role;
 import org.springframework.stereotype.Component;
 
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.EntityManager;
-import jakarta.transaction.Transactional;
+import javax.persistence.PersistenceContext;
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 @Component
 public class DataLoaderConfig {
