@@ -1,22 +1,24 @@
 * {
-    padding: 0;
     margin: 0;
     box-sizing: border-box;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* HEADER */
 
-header {
+header, footer {
     background-color: #E8D6C6 !important;
-    padding: 0.5rem 0;
+    padding: 0;
     margin: 0;
 }
 
 .container {
     max-width: 100%;
-    margin: 0 auto;
+    margin: 10px 0;
     width: 100%;
     padding: 0;
+    margin-top: 0;
 }
 
 nav {
@@ -29,12 +31,12 @@ nav .logo {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 10%;
 }
 
 .logo img {
     width: 100%;
     object-fit: cover;
-    margin-right: 8px;
 }
 
 nav ul {
@@ -73,62 +75,74 @@ nav ul li a:hover {
     display: none;
 }
 
+.button_header{
+    text-decoration: none;
+    background-color: transparent;
+    outline: none;
+    border: solid 2px #7a503b;
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: #7a503b;
+    cursor: pointer;
+    transition: background-color .3s ease;
+}
+
+.button_header:hover{
+    text-decoration: none;
+    border-radius: 20px;
+    background-color: #7a503b;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    color: #E8D6C6;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+}
+
 /* BANNER */
 
-main {
-    display: flex;
+.home{
     align-items: center;
     justify-content: center;
-    min-height: 80vh;
     color: #7a503b;
-    margin: 0; 
-    padding: 0;
-}
-
-.home h4 {
-    font-size: 4.1rem;
-}
-
-main h1 {
-    font-size: 2rem;
 }
 
 .form-input {
-    margin: 1rem 0;
-    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
     position: relative;
 }
 
 .form-input input {
     width: 100%;
     outline: none;
-    padding: 1.4rem 1rem;
+    padding: 1rem 1rem;
     margin: 1rem 0rem;
-    border-radius: 0.4px;
+    border-radius: 20%;
     border: none;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .form-input button {
     position: absolute;
-    top: 25px;
+    top: 23%;
     right: 0;
-    padding: 0.8rem 1.5rem;
-    margin: 0 1rem;
+    padding: 0.3rem 0.7rem;
+    margin: 0.25rem 0.55rem;
     outline: none;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     background-color: #93674E;
     font-size: 1.3rem;
     cursor: pointer;
+    color: #E8D6C6;
 }
 
 .content {
     background-image: url('../images/banner.png');
     background-size: cover;
     background-position: center;
-    height: 500px;
-    margin-top: 0;
+    height: 280px;
 }
 
 /* LOGIN */
@@ -169,6 +183,7 @@ main h1 {
 .info-childs h2{
     font-size: 2.5rem;
     color: #E8D6C6;
+    font-weight: bold;
 }
 
 .info-childs p{
@@ -176,7 +191,7 @@ main h1 {
     color: #E8D6C6;
 }
 
-.info-childs a{
+.button{
     text-decoration: none;
     background-color: transparent;
     outline: none;
@@ -188,7 +203,8 @@ main h1 {
     transition: background-color .3s ease;
 }
 
-.info-childs a:hover{
+.button:hover{
+    text-decoration: none;
     background-color: #E8D6C6;
     border: none;
     color: #7a503b;

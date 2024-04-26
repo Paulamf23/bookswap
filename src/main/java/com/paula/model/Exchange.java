@@ -1,92 +1,42 @@
 package com.paula.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "exchange")
-public class Exchange {
+public class Exchange implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "exchangeId")
     private Integer exchangeId;
 
     @ManyToOne
-    @JoinColumn(name = "id_user_bidder")
-    private User bidder;
+    private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "id_user_applicant")
-    private User applicant;
+    @OneToOne
+    private Book book;
 
-    @ManyToOne
-    @JoinColumn(name = "book_id_bidder")
-    private Book bookBidder;
+    @Column(name = "exchange_condition")
+	@Enumerated(EnumType.STRING)
+	private ExchangeCondition exchange_condition;
 
-    @ManyToOne
-    @JoinColumn(name = "book_id_applicant")
-    private Book bookApplicant;
-
-    @ManyToOne
-    @JoinColumn(name = "exchange_condition")
-    private ExchangeCondition exchangeCondition;
-
-    public Exchange() {
-    }
-
-    public Exchange(Integer exchange_id, User bidder, User applicant, Book bookBidder, Book bookApplicant,
-            ExchangeCondition exchangeCondition) {
-        this.exchangeId = exchange_id;
-        this.bidder = bidder;
-        this.applicant = applicant;
-        this.bookBidder = bookBidder;
-        this.bookApplicant = bookApplicant;
-        this.exchangeCondition = exchangeCondition;
-    }
-
-    public Integer getExchange_id() {
-        return exchangeId;
-    }
-
-    public void setExchange_id(Integer exchange_id) {
-        this.exchangeId = exchange_id;
-    }
-
-    public User getBidder() {
-        return bidder;
-    }
-
-    public void setBidder(User bidder) {
-        this.bidder = bidder;
-    }
-
-    public User getApplicant() {
-        return applicant;
-    }
-
-    public void setApplicant(User applicant) {
-        this.applicant = applicant;
-    }
-
-    public Book getBookBidder() {
-        return bookBidder;
-    }
-
-    public void setBookBidder(Book bookBidder) {
-        this.bookBidder = bookBidder;
-    }
-
-    public Book getBookApplicant() {
-        return bookApplicant;
-    }
-
-    public void setBookApplicant(Book bookApplicant) {
-        this.bookApplicant = bookApplicant;
-    }
-
-    public ExchangeCondition getExchangeCondition() {
-        return exchangeCondition;
-    }
-
-    public void setExchangeCondition(ExchangeCondition exchangeCondition) {
-        this.exchangeCondition = exchangeCondition;
-    }
+    public Exchange(ExchangeCondition exchange_condition, int exchangeId) {
+		this.exchange_condition = exchange_condition;
+		this.exchangeId = exchangeId;
+	}
+	
+	public Exchange(User user, ExchangeCondition exchangeCondition, Book book) {
+		this.user = user;
+		this.exchange_condition = exchangeCondition;
+		this.book = book;
+	}
 }
