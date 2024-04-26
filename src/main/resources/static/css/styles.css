@@ -273,6 +273,29 @@ nav ul li a:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
 }
 
+.container-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form{
+    margin-top: 20px;
+}
+
+.fa-arrow-left{
+    color: #7a503b;
+    font-size: 30px;
+}
+
+.fa-arrow-left:hover{
+    color: #E8D6C6;
+    outline: none;
+    background-color: #7a503b;
+    border-radius: 10px;
+    padding: 0.6rem 0.6rem;
+    font-size: 30px;
+}
 /* ------------------------------------------------- */
 
 .information-register{
