@@ -30,7 +30,7 @@
             <div class="form-information">
                 <div class="form-information-childs">
                     <h2>Iniciar Sesión</h2>
-                    <form class="form" th:action="@{/general/proceso_login}" th:object="${user}" method="post">
+                    <form class="form" th:action="@{/loginUser}" th:object="${user}" method="post">
                         <label>
                             <i class="fa fa-user" aria-hidden="true"></i>
                             <input type="text" th:field="*{username}" placeholder="Nombre de usuario" required>

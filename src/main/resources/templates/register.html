@@ -22,22 +22,22 @@
             <div class="form-information-register">
                 <div class="form-information-childs">
                     <h2>Regístrate</h2>
-                    <form class="form" th:action="@{/general/proceso_register}" th:object="${user}" method="post">
+                    <form class="form" th:action="@{/newUser}" th:object="${user}" method="post" onsubmit="return validarRegistro();">
                         <label>
                             <i class="fa fa-pencil" aria-hidden="true"></i>
-                            <input type="text" th:field="*{name}" placeholder="Nombre completo" required>
+                            <input type="text" th:field="*{name}" placeholder="Nombre completo" name="name" required>
                         </label>
                         <label>
                             <i class="fa fa-user" aria-hidden="true"></i>
-                            <input type="text" th:field="*{username}" placeholder="Nombre de usuario" required>
+                            <input type="text" th:field="*{username}" placeholder="Nombre de usuario" name="username" required>
                         </label>
                         <label>
                             <i class="fa fa-envelope" aria-hidden="true"></i>
-                            <input type="text" th:field="*{email}" placeholder="Email" required>
+                            <input type="text" th:field="*{email}" placeholder="Email" name="email" required>
                         </label>
                         <label>
                             <i class="fa fa-lock" aria-hidden="true"></i>
-                            <input type="password" th:field="*{password}" placeholder="Contraseña" required>
+                            <input type="password" th:field="*{password}" placeholder="Contraseña" name="password" required>
                         </label>
                         <label>
                             <i class="fa fa-lock" aria-hidden="true"></i>

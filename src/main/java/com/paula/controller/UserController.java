@@ -40,7 +40,7 @@ public class UserController {
     // private ExchangeService exchangeService;
 
     @GetMapping("/general")
-    public String home() {
+    public String home(HttpSession session) {
         return "home";
     }
 
@@ -50,7 +50,7 @@ public class UserController {
         return "login";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/loginUser")
     public String login(@Valid @ModelAttribute User user, BindingResult bindigResult, HttpSession hSession, Model model,
             RedirectAttributes redirect) {
         if (bindigResult.hasErrors()) {
@@ -78,7 +78,7 @@ public class UserController {
         return "register";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/newUser")
     public String newUser(@Valid @ModelAttribute User user, BindingResult bindingResult, Model model,
             RedirectAttributes redirectAttributes,
             @RequestParam(name = "repeatPassword", required = false) String repeatedPassword,
@@ -121,7 +121,7 @@ public class UserController {
         return "redirect:/general";
     }
 
-    @GetMapping("/perfil/logOut")
+    @GetMapping("/logOut")
     public String logOut(Model model, HttpSession hSession) {
         if (hSession.getAttribute("email") != null) {
             hSession.setAttribute("email", null);
