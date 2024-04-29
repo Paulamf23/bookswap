@@ -27,7 +27,7 @@ public class UserController {
     private UserService userService;
 
 
-    @GetMapping("/general")
+    @GetMapping("/")
     public String home(HttpSession session) {
         return "home";
     }
