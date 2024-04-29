@@ -74,7 +74,10 @@ public class UserController {
             return "register";
         } else {
             User existingUser = userService.getUser(user.getEmail());
-            if (existingUser == null) {
+            if (existingUser != null) { 
+                redirectAttributes.addFlashAttribute("errorUsuarioExiste", "El correo electrónico ya está registrado.");
+                return "redirect:/register"; 
+            } else {
                 if (user.getEmail() != null && user.getPassword() != null && repeatedPassword != null &&
                         user.getName() != null && user.getUsername() != null
                         && user.getPassword().equals(repeatedPassword)) {
