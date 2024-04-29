@@ -91,7 +91,7 @@ public class UserController {
                     session.setAttribute("email", user.getEmail());
                     session.setAttribute("name", user.getName());
                     session.setAttribute("username", user.getUsername());
-                    return "home";
+                    return "/home";
                 }
             }
             redirectAttributes.addFlashAttribute("errorUsuarioExiste", "El nombre de usuario ya existe.");
