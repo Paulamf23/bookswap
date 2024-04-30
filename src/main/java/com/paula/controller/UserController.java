@@ -98,4 +98,13 @@ public class UserController {
             return "register";
         }
     }
+
+    @GetMapping("/logOut")
+    public String logOut(Model model, HttpSession hSession) {
+        if (hSession.getAttribute("email") != null) {
+            hSession.setAttribute("email", null);
+            return "home";
+        }
+        return "home";
+    }
 }
