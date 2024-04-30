@@ -10,16 +10,14 @@
                 </div>
                 <li><a href="#">Inicio</a></li>
                 <li><a href="#">Libros</a></li>
-                <!-- Verificar si la sesión está iniciada -->
                 <th:block th:if="${session.email != null}">
                     <li><a href="#">Mis mensajes</a></li>
                     <li><a href="#">Comunidad</a></li>
                     <li><a href="#">Perfil</a></li>
-                    <li><a href="/logOut">Cerrar Sesión</a></li>
+                    <li><a class="button_header" role="button" href="/logOut"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
                 </th:block>
-                <!-- Si la sesión no está iniciada -->
                 <th:block th:if="${session.email == null}">
-                    <li><a href="/login">Entrar</a></li>
+                    <li><a class="button_header" role="button" href="/login">Entrar</a></li>
                 </th:block>
             </ul>
             <div class="btn">
