@@ -46,7 +46,7 @@ public class UserController {
         if (bindigResult.hasErrors()) {
             model.addAttribute("user", user);
             System.out.println("Ha habido un error al iniciar sesion" + bindigResult.getFieldErrors());
-            return "home";
+            return "register";
         }
         if (user.getEmail() != null && user.getPassword() != null) {
             for (User userFind : userService.getUsers()) {
