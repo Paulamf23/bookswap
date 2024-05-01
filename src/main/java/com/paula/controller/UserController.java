@@ -45,6 +45,7 @@ public class UserController {
             RedirectAttributes redirect) {
         if (bindigResult.hasErrors()) {
             model.addAttribute("user", user);
+            System.out.println("Ha habido un error al iniciar sesion" + bindigResult.getFieldErrors());
             return "login";
         }
         if (user.getEmail() != null && user.getPassword() != null) {
