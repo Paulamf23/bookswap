@@ -107,4 +107,9 @@ public class UserController {
         }
         return "home";
     }
+
+    @GetMapping("/perfil")
+    public String perfilPage() {
+        return "/perfil";
+    }
 }
