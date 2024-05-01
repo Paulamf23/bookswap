@@ -89,6 +89,7 @@ public class UserController {
                     user.setPassword(encryptedPassword);
                     user.setName(user.getName());
                     user.setUsername(user.getUsername());
+                    user.setEmail(user.getEmail());
                     userService.createUser(user);
                     session.setAttribute("email", user.getEmail());
                     session.setAttribute("name", user.getName());
