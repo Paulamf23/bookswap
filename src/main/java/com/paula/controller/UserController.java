@@ -59,7 +59,7 @@ public class UserController {
         }
 
         redirect.addFlashAttribute("errorUsuarioNoExiste", "Usuario o contraseña incorrectos.");
-        return "redirect:/home";
+        return "redirect:/login";
     }
 
     @GetMapping("/register")
