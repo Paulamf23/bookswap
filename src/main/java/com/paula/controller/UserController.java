@@ -29,6 +29,8 @@ public class UserController {
 
     @GetMapping("/")
     public String home(HttpSession session) {
+        String userEmail = (String) session.getAttribute("email");
+        System.out.println("Usuario registrado: " + userEmail);
         return "home";
     }
 
@@ -106,10 +108,5 @@ public class UserController {
             return "home";
         }
         return "home";
-    }
-
-    @GetMapping("/perfil")
-    public String perfilPage() {
-        return "/perfil";
     }
 }
