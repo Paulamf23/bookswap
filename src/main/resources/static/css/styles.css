@@ -322,3 +322,22 @@ nav ul li a:hover {
 .hidden {
     display: none;
 }
+
+/* PAGINA PERFIL */
+
+.textoPerfil{
+    font-size: 2.6rem;
+    font-weight: 200;
+    line-height: 1.2;
+    background-color: #E8D6C6;
+    color: 93674E;
+    border-radius: 18px;
+    padding-left: 20px;
+    padding-right: 0px;
+    width: 34%;
+    cursor: pointer;
+}
+
+.p-md-5 {
+    padding: 0px;
+}
