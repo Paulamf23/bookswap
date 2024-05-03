@@ -43,20 +43,24 @@ public class UserController {
     @PostMapping("/loginUser")
     public String login(@Valid @ModelAttribute User user, BindingResult bindingResult, HttpSession hSession,
             Model model, RedirectAttributes redirect) {
+        if (hSession.getAttribute("email") != null) {
+            return "redirect:/home";
+        }
+    
         if (bindingResult.hasErrors()) {
-            System.out.println("Ha habido un error al iniciar sesión: " + bindingResult.getFieldErrors());
             return "login";
         } else {
             User userFind = userService.getUser(user.getEmail());
             if (userFind != null && Encriptation.validatePassword(user.getPassword(), userFind.getPassword())) {
                 hSession.setAttribute("email", userFind.getEmail());
-                return "home";
+                return "redirect:/home"; 
             } else {
                 redirect.addFlashAttribute("errorUsuarioNoExiste", "Usuario o contraseña incorrectos.");
                 return "redirect:/login";
             }
         }
     }
+    
 
     @GetMapping("/register")
     public String registerPage(Model model) {
