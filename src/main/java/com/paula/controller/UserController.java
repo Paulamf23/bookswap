@@ -39,28 +39,39 @@ public class UserController {
         return "login";
     }
 
-    // Error aqui!!!!
-    @PostMapping("/loginUser")
-    public String login(@Valid @ModelAttribute User user, BindingResult bindingResult, HttpSession hSession,
-            Model model, RedirectAttributes redirect) {
+    // // Error aqui!!!!
+    // @PostMapping("/loginUser")
+    // public String login(@Valid @ModelAttribute User user, BindingResult bindingResult, HttpSession hSession,
+    //         Model model, RedirectAttributes redirect) {
+    //     if (hSession.getAttribute("email") != null) {
+    //         return "redirect:/home";
+    //     }
+    
+    //     if (bindingResult.hasErrors()) {
+    //         return "login";
+    //     } else {
+    //         User userFind = userService.getUser(user.getEmail());
+    //         if (userFind != null && Encriptation.validatePassword(user.getPassword(), userFind.getPassword())) {
+    //             hSession.setAttribute("email", userFind.getEmail());
+    //             return "redirect:/home"; 
+    //         } else {
+    //             redirect.addFlashAttribute("errorUsuarioNoExiste", "Usuario o contraseña incorrectos.");
+    //             return "redirect:/login";
+    //         }
+    //     }
+    // }
+    
+    @GetMapping("/perfil")
+    public String perfilPage(HttpSession hSession) {
         if (hSession.getAttribute("email") != null) {
-            return "redirect:/home";
+            String email = hSession.getAttribute("email").toString();
+            User user = userService.getUser(email);
+            hSession.setAttribute("userInfo", user);
+            return "perfil";
         }
-    
-        if (bindingResult.hasErrors()) {
-            return "login";
-        } else {
-            User userFind = userService.getUser(user.getEmail());
-            if (userFind != null && Encriptation.validatePassword(user.getPassword(), userFind.getPassword())) {
-                hSession.setAttribute("email", userFind.getEmail());
-                return "redirect:/home"; 
-            } else {
-                redirect.addFlashAttribute("errorUsuarioNoExiste", "Usuario o contraseña incorrectos.");
-                return "redirect:/login";
-            }
-        }
+
+        return "redirect:/home";
     }
-    
 
     @GetMapping("/register")
     public String registerPage(Model model) {
@@ -95,7 +106,7 @@ public class UserController {
                     session.setAttribute("email", user.getEmail());
                     session.setAttribute("name", user.getName());
                     session.setAttribute("username", user.getUsername());
-                    return "home";
+                    return "redirect:/home";
                 }
             }
             redirectAttributes.addFlashAttribute("errorUsuarioExiste", "El nombre de usuario ya existe.");
