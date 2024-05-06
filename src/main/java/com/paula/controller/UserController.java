@@ -40,14 +40,15 @@ public class UserController {
     }
 
     @PostMapping("/loginUser")
-    public String login(@RequestParam String username, @RequestParam String password, HttpSession hSession,
-            RedirectAttributes redirect) {
-        User userFind = userService.getUser(username);
-        if (userFind != null && Encriptation.validatePassword(password, userFind.getPassword())) {
-            hSession.setAttribute("email", userFind.getEmail());
+    public String loginUser(@ModelAttribute User user, HttpSession session, RedirectAttributes redirectAttributes) {
+        User existingUser = userService.getUser(user.getUsername());
+        if (existingUser != null && Encriptation.validatePassword(user.getPassword(), existingUser.getPassword())) {
+            session.setAttribute("email", existingUser.getEmail());
+            session.setAttribute("name", existingUser.getName());
+            session.setAttribute("username", existingUser.getUsername());
             return "redirect:/home";
         } else {
-            redirect.addFlashAttribute("errorUsuarioNoExiste", "Usuario o contraseña incorrectos.");
+            redirectAttributes.addFlashAttribute("error", "Nombre de usuario o contraseña incorrectos.");
             return "redirect:/login";
         }
     }
