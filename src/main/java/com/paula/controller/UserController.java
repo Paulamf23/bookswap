@@ -39,7 +39,6 @@ public class UserController {
         return "login";
     }
 
-    // Error aqui!!!!
     @PostMapping("/loginUser")
     public String login(@Valid @ModelAttribute User user, BindingResult bindingResult, HttpSession hSession,
             Model model, RedirectAttributes redirect) {
@@ -51,7 +50,9 @@ public class UserController {
             if (userFind != null && Encriptation.validatePassword(user.getPassword(),
                     userFind.getPassword())) {
                 hSession.setAttribute("email", userFind.getEmail());
+                System.out.println("El usuario se ha logueado correctamente");
                 return "redirect:/home";
+                
             } else {
                 System.out.println(redirect.addFlashAttribute("errorUsuarioNoExiste", "Usuario o contraseña incorrectos."));
                 return "redirect:/login";
