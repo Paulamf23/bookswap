@@ -41,6 +41,7 @@ public class UserController {
 
     @PostMapping("/loginUser")
     public String loginUser(@ModelAttribute User user, HttpSession session, RedirectAttributes redirectAttributes) {
+        System.out.println("Intento de inicio de sesión con usuario: " + user.getUsername());
         User existingUser = userService.getUser(user.getUsername());
         if (existingUser != null && Encriptation.validatePassword(user.getPassword(), existingUser.getPassword())) {
             session.setAttribute("email", existingUser.getEmail());
