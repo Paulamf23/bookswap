@@ -50,6 +50,7 @@ public class UserController {
         else {
             System.out.println("mail: " + user.getEmail() + " - no esta iniciado!");
             User userFind = userService.getUser(user.getEmail());
+            System.out.println("mail: " + userFind + "esta en carga!");
             if (userFind != null && Encriptation.validatePassword(user.getPassword(),
                     userFind.getPassword())) {
                 System.out.println("antes del logueo");
