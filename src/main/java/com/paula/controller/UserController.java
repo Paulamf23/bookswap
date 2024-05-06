@@ -45,7 +45,6 @@ public class UserController {
         User existingUser = userService.getUser(user.getUsername());
         if (existingUser != null && Encriptation.validatePassword(user.getPassword(), existingUser.getPassword())) {
             session.setAttribute("email", existingUser.getEmail());
-            session.setAttribute("name", existingUser.getName());
             session.setAttribute("username", existingUser.getUsername());
             return "redirect:/home";
         } else {
