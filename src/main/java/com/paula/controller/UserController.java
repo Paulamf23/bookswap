@@ -46,10 +46,7 @@ public class UserController {
         if (hSession.getAttribute("email") != null) {
             return "redirect:/home";
         }
-        if (bindingResult.hasErrors()) {
-            System.out.println("Esta entrando aqui y por eso no funciona");
-            return "login";
-        } else {
+        else {
             User userFind = userService.getUser(user.getEmail());
             if (userFind != null && Encriptation.validatePassword(user.getPassword(),
                     userFind.getPassword())) {
