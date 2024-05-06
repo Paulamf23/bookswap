@@ -47,6 +47,7 @@ public class UserController {
             return "redirect:/home";
         }
         if (bindingResult.hasErrors()) {
+            System.out.println("Esta entrando aqui y por eso no funciona");
             return "login";
         } else {
             User userFind = userService.getUser(user.getEmail());
@@ -55,7 +56,7 @@ public class UserController {
                 hSession.setAttribute("email", userFind.getEmail());
                 return "redirect:/home";
             } else {
-                redirect.addFlashAttribute("errorUsuarioNoExiste", "Usuario o contraseña incorrectos.");
+                System.out.println(redirect.addFlashAttribute("errorUsuarioNoExiste", "Usuario o contraseña incorrectos."));
                 return "redirect:/login";
             }
         }
