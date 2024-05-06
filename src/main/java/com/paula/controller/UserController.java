@@ -40,29 +40,15 @@ public class UserController {
     }
 
     @PostMapping("/loginUser")
-    public String login(@Valid @ModelAttribute User user, BindingResult bindingResult, HttpSession hSession,
-            Model model, RedirectAttributes redirect) {
-        System.out.println("comienzo login");
-        if (hSession.getAttribute("email") != null) {
-            System.out.println("mail: " + user.getEmail() + " - ya esta iniciado!");
+    public String login(@RequestParam String username, @RequestParam String password, HttpSession hSession,
+            RedirectAttributes redirect) {
+        User userFind = userService.getUser(username);
+        if (userFind != null && Encriptation.validatePassword(password, userFind.getPassword())) {
+            hSession.setAttribute("email", userFind.getEmail());
             return "redirect:/home";
-        }
-        else {
-            System.out.println("mail: " + user.getEmail() + " - no esta iniciado!");
-            User userFind = userService.getUser(user.getEmail());
-            System.out.println("mail: " + userFind + "esta en carga!");
-            if (userFind != null && Encriptation.validatePassword(user.getPassword(),
-                    userFind.getPassword())) {
-                System.out.println("antes del logueo");
-                hSession.setAttribute("email", userFind.getEmail());
-                System.out.println("El usuario se ha logueado correctamente");
-                return "redirect:/home";
-                
-            } else {
-                System.out.println("ha petau");
-                System.out.println(redirect.addFlashAttribute("errorUsuarioNoExiste", "Usuario o contraseña incorrectos."));
-                return "redirect:/login";
-            }
+        } else {
+            redirect.addFlashAttribute("errorUsuarioNoExiste", "Usuario o contraseña incorrectos.");
+            return "redirect:/login";
         }
     }
 
