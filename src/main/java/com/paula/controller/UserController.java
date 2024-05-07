@@ -46,7 +46,7 @@ public class UserController {
         if (existingUser != null) {
             if (Encriptation.validatePassword(user.getPassword(), existingUser.getPassword())) {
                 session.setAttribute("username", existingUser.getUsername());
-                return "redirect:/home"; 
+                return "redirect:/"; 
             } else {
                 redirectAttributes.addFlashAttribute("loginError", "Contraseña incorrecta");
                 return "redirect:/login";
