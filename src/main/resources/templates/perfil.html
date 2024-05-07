@@ -29,7 +29,7 @@
                             <p class="user-email"><span th:text="${user.email}"></span></p>
                         </div>
                     </div>
-                    <th:block th:if="${session.role = registeredUser}">
+                    <th:block th:if="${user.role = registeredUser}">
                         <div class="col-md-6 d-flex flex-column justify-content-between">
                             <a class="enlace-perfil mt-auto" href="#">
                                 <div class="col p-4 d-flex flex-column position-static">
@@ -43,7 +43,7 @@
                             </a>
                         </div>
                     </th:block>
-                    <th:block th:if="${session.role = admin}">
+                    <th:block th:if="${user.role = admin}">
                         <div class="col-md-6 d-flex flex-column justify-content-between">
                             <a class="enlace-perfil mt-auto" href="#">
                                 <div class="col p-4 d-flex flex-column position-static">
