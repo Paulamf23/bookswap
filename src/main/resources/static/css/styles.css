@@ -365,9 +365,9 @@ nav ul li a:hover {
 
 .position-relative{
     background-color: #E8D6C6;
-    margin-left: 0%;
-    margin-right: 0%;
-    align-items: self-end;
+    margin-left: 10%;
+    margin-right: 10%;
+    max-width: 82%;
     justify-content: space-around;
 }
 
@@ -379,8 +379,9 @@ nav ul li a:hover {
     color: #7a503b;
 }
 
-.mb-0:hover{
+.enlace-perfil:hover{
     color: #7a503b;
+    text-decoration: none;
 }
 /* Media queries */
 
