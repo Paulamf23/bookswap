@@ -27,6 +27,7 @@
                         <div class="textoPerfil">
                             <h1 th:text="${user.username}"></h1>
                             <p class="user-email"><span th:text="${user.email}"></span></p>
+                            <p class="user-email"><span th:text="${user.role}"></span></p>
                         </div>
                     </div>
                     <th:block th:if="${user.role = registeredUser}">
