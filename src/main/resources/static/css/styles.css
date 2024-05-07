@@ -341,3 +341,27 @@ nav ul li a:hover {
 .p-md-5 {
     padding: 0px;
 }
+
+/* Media queries */
+
+@media only screen and (max-width: 768px) {
+    .container-form {
+        flex-direction: column;
+        height: auto;
+    }
+    .information,
+    .information-register {
+        width: 100%;
+        border-radius: 0;
+    }
+    .form-information,
+    .form-information-register {
+        width: 100%;
+        border-radius: 0;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+    .form-input {
+        width: 80%;
+    }
+}
