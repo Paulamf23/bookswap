@@ -23,6 +23,11 @@
             <div class="col-lg-6 px-0">
                 <img src="../../images/perfil.webp" class="perfil" alt="Perfil">
                 <h1 class="textoPerfil" th:text="${username}"></h1>
+                <div class="user-info">
+                    <p class="user-name">Nombre: <span th:text="${user.nombre}"></span></p>
+                    <p class="user-email">Correo: <span th:text="${user.correo}"></span></p>
+                    <p class="user-role">Rol: <span th:text="${user.rol}"></span></p>
+                </div>
             </div>
         </div>
 
