@@ -46,7 +46,7 @@ public class UserController {
         if (existingUser != null) {
             if (Encriptation.validatePassword(user.getPassword(), existingUser.getPassword())) {
                 session.setAttribute("username", existingUser.getUsername());
-                return "redirect:/"; 
+                return "redirect:/";
             } else {
                 redirectAttributes.addFlashAttribute("loginError", "Contraseña incorrecta");
                 return "redirect:/login";
@@ -62,13 +62,9 @@ public class UserController {
         if (hSession.getAttribute("username") != null) {
             String username = hSession.getAttribute("username").toString();
             User user = userService.getUser(username);
-            hSession.setAttribute("userInfo", user);
-
-            model.addAttribute("username", user.getUsername());
-
+            model.addAttribute("user", user);
             return "perfil";
         }
-
         return "redirect:/";
     }
 
