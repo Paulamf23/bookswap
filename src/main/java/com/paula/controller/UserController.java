@@ -119,16 +119,15 @@ public class UserController {
     }
 
     @GetMapping("/myBooks")
-    public String myBookPage(HttpSession hSession, Model model) {
-        if (hSession.getAttribute("username") != null) {
-            String username = hSession.getAttribute("username").toString();
-            User user = userService.getUser(username);
+    public String myBooksPage(Model model, HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            User user = userService.getUserByUsername(username);
             model.addAttribute("user", user);
-            return "myBooks";
+            return "myBooks"; 
+        } else {
+            return "redirect:/login"; 
         }
-        return "redirect:/perfil";
     }
-
-
 
 }
