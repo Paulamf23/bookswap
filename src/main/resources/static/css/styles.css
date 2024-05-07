@@ -363,12 +363,9 @@ nav ul li a:hover {
     
 }
 
-.position-relative{
+.enlace-perfil{
     background-color: #E8D6C6;
-    margin-left: 10%;
-    margin-right: 10%;
-    max-width: 82%;
-    justify-content: space-around;
+    width: 20%;
 }
 
 .mb-0{
