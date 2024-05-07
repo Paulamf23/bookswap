@@ -326,14 +326,16 @@ nav ul li a:hover {
 /* PAGINA PERFIL */
 
 .textoPerfil{
-    font-size: 2rem;
+    font-size: 1rem;
     font-weight: 200rem;
     text-align: center;
-    line-height: 1.2;
+    line-height: 1;
     background-color: #E8D6C6;
     color: #93674E;
     border-radius: 18px;
     border: 1px solid #93674E;
+    width: 70%;
+    margin-top: 3%;
 }
 
 .p-md-5 {
@@ -374,11 +376,19 @@ nav ul li a:hover {
     color: #7a503b;
 }
 
-.enlace-perfil:hover{
+.botones-perfil .enlace-perfil {
     color: #7a503b;
     text-decoration: none;
 }
 
+.botones-perfil .enlace-perfil:hover {
+    color: #93674e;
+    text-decoration: underline;
+}
+
+.botones-perfil {
+    margin-top: 20px;
+}
 /* Media queries */
 
 @media only screen and (max-width: 768px) {
