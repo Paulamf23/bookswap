@@ -379,6 +379,20 @@ nav ul li a:hover {
     color: #7a503b;
     text-decoration: none;
 }
+
+.user-info {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.user-info p {
+    margin-bottom: 5px;
+}
+
+.user-info span {
+    font-weight: bold;
+}
+
 /* Media queries */
 
 @media only screen and (max-width: 768px) {
