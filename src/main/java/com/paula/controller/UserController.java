@@ -48,7 +48,7 @@ public class UserController {
             session.setAttribute("username", existingUser.getUsername());
             return "redirect:/home";
         } else {
-            redirectAttributes.addFlashAttribute("error", "Nombre de usuario o contraseña incorrectos.");
+            System.out.println(redirectAttributes.addFlashAttribute("error", "Nombre de usuario o contraseña incorrectos."));
             return "redirect:/login";
         }
     }
