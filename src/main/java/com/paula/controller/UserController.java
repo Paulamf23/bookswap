@@ -28,8 +28,8 @@ public class UserController {
 
     @GetMapping("/")
     public String home(HttpSession session) {
-        String userEmail = (String) session.getAttribute("email");
-        System.out.println("Usuario registrado: " + userEmail);
+        String userUsername = (String) session.getAttribute("username");
+        System.out.println("Usuario registrado: " + userUsername);
         return "home";
     }
 
@@ -59,9 +59,9 @@ public class UserController {
 
     @GetMapping("/perfil")
     public String perfilPage(HttpSession hSession, Model model) {
-        if (hSession.getAttribute("email") != null) {
-            String email = hSession.getAttribute("email").toString();
-            User user = userService.getUser(email);
+        if (hSession.getAttribute("username") != null) {
+            String username = hSession.getAttribute("username").toString();
+            User user = userService.getUser(username);
             hSession.setAttribute("userInfo", user);
 
             model.addAttribute("username", user.getUsername());
@@ -86,9 +86,9 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "register";
         } else {
-            User existingUser = userService.getUser(user.getEmail());
+            User existingUser = userService.getUser(user.getUsername());
             if (existingUser != null) {
-                redirectAttributes.addFlashAttribute("errorUsuarioExiste", "El correo electrónico ya está registrado.");
+                redirectAttributes.addFlashAttribute("errorUsuarioExiste", "El nombre de usuario ya está registrado.");
                 return "redirect:/register";
             } else {
                 if (user.getEmail() != null && user.getPassword() != null && repeatedPassword != null &&
@@ -115,8 +115,8 @@ public class UserController {
 
     @GetMapping("/logOut")
     public String logOut(Model model, HttpSession hSession) {
-        if (hSession.getAttribute("email") != null) {
-            hSession.setAttribute("email", null);
+        if (hSession.getAttribute("username") != null) {
+            hSession.setAttribute("username", null);
             return "home";
         }
         return "home";

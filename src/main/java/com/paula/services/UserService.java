@@ -22,12 +22,12 @@ public class UserService {
         return userRepository.findAll();
     }
     
-    public User searchUser(String email) {
-        return userRepository.findByEmail(email);
+    public User searchUser(String username) {
+        return userRepository.findByUsername(username);
     }
     
-    public User getUser(String email) {
-        return userRepository.findByEmail(email);
+    public User getUser(String username) {
+        return userRepository.findByUsername(username);
     }
 
     @SuppressWarnings("deprecation")
@@ -39,8 +39,8 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
-    public int getUserId(String email) {
-        User user = searchUser(email);
+    public int getUserId(String username) {
+        User user = searchUser(username);
         if (user != null) {
             return user.getUserId();
         }
