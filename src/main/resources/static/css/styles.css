@@ -335,7 +335,6 @@ nav ul li a:hover {
     border-radius: 18px;
     border: 1px solid #93674E;
     width: 70%;
-    margin-top: 3%;
 }
 
 .p-md-5 {
@@ -376,19 +375,12 @@ nav ul li a:hover {
     color: #7a503b;
 }
 
-.botones-perfil .enlace-perfil {
+.enlace-perfil:hover{
     color: #7a503b;
     text-decoration: none;
 }
 
-.botones-perfil .enlace-perfil:hover {
-    color: #93674e;
-    text-decoration: underline;
-}
 
-.botones-perfil {
-    margin-top: 20px;
-}
 /* Media queries */
 
 @media only screen and (max-width: 768px) {
