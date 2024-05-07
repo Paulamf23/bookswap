@@ -69,7 +69,7 @@ public class UserController {
             return "perfil";
         }
 
-        return "redirect:/home";
+        return "redirect:/";
     }
 
     @GetMapping("/register")
