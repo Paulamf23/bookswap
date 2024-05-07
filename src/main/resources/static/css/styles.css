@@ -333,9 +333,6 @@ nav ul li a:hover {
     background-color: #E8D6C6;
     color: #93674E;
     border-radius: 18px;
-    width: 25%;
-    cursor: pointer;
-    margin-top: 2%;
     border: 1px solid #93674E;
 }
 
@@ -356,7 +353,7 @@ nav ul li a:hover {
 }
 
 .col-md-6{
-    padding-right: 1rem;
+    align-content: center;
 }
 
 .flex-column{
