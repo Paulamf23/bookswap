@@ -46,6 +46,7 @@ public class UserController {
         if (existingUser != null && Encriptation.validatePassword(user.getPassword(), existingUser.getPassword())) {
             session.setAttribute("email", existingUser.getEmail());
             session.setAttribute("username", existingUser.getUsername());
+            System.out.println("Usuario registrado correctamente");
             return "redirect:/home";
         } else {
             System.out.println(redirectAttributes.addFlashAttribute("error", "Nombre de usuario o contraseña incorrectos."));
