@@ -345,8 +345,8 @@ nav ul li a:hover {
 }
 
 .mb-2{
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left:auto;
+    margin-right: auto;
 }
 
 .perfil{
