@@ -29,20 +29,41 @@
                             <p class="user-email"><span th:text="${user.email}"></span></p>
                         </div>
                     </div>
-                    <div class="col-md-6 d-flex flex-column justify-content-between">
-                        <a class="enlace-perfil mt-auto" href="#">
-                            <div class="col p-4 d-flex flex-column position-static">
-                                <h3 class="mb-0">Mis Favoritos</h3>
-                            </div>
-                        </a>
-                        <a class="enlace-perfil mb-auto" href="#">
-                            <div class="col p-4 d-flex flex-column position-static">
-                                <h3 class="mb-0">Mis Libros Publicados</h3>
-                            </div>
-                        </a>
-                    </div>
+                    <th:block th:if="${session.role = 'registeredUser'}">
+                        <div class="col-md-6 d-flex flex-column justify-content-between">
+                            <a class="enlace-perfil mt-auto" href="#">
+                                <div class="col p-4 d-flex flex-column position-static">
+                                    <h3 class="mb-0">Mis Favoritos</h3>
+                                </div>
+                            </a>
+                            <a class="enlace-perfil mb-auto" href="#">
+                                <div class="col p-4 d-flex flex-column position-static">
+                                    <h3 class="mb-0">Mis Libros</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </th:block>
+                    <th:block th:if="${session.role = 'admin'}">
+                        <div class="col-md-6 d-flex flex-column justify-content-between">
+                            <a class="enlace-perfil mt-auto" href="#">
+                                <div class="col p-4 d-flex flex-column position-static">
+                                    <h3 class="mb-0">Gestionar Usuarios</h3>
+                                </div>
+                            </a>
+                            <a class="enlace-perfil mb-auto" href="#">
+                                <div class="col p-4 d-flex flex-column position-static">
+                                    <h3 class="mb-0">Boton 2</h3>
+                                </div>
+                            </a>
+                            <a class="enlace-perfil mb-auto" href="#">
+                                <div class="col p-4 d-flex flex-column position-static">
+                                    <h3 class="mb-0">Boton 3</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </th:block>
                 </div>
-            </div>            
+            </div>
         </div>
     </main>
 

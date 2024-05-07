@@ -335,6 +335,7 @@ nav ul li a:hover {
     border-radius: 18px;
     border: 1px solid #93674E;
     width: 70%;
+    margin-top: 3%;
 }
 
 .p-md-5 {
@@ -365,7 +366,8 @@ nav ul li a:hover {
 
 .enlace-perfil{
     background-color: #E8D6C6;
-    width: 20%;
+    width: 100%;
+    margin-bottom: 2%;
 }
 
 .mb-0{
