@@ -41,21 +41,18 @@ public class UserController {
 
     @PostMapping("/loginUser")
     public String loginUser(@ModelAttribute User user, HttpSession session, RedirectAttributes redirectAttributes) {
-        System.out.println("Intento de inicio de sesión con usuario: " + user.getUsername());
+        User existingUser = userService.getUserByUsername(user.getUsername());
 
-        System.out.println("Usuario recibido del formulario: " + user);
-
-        User existingUser = userService.getUser(user.getUsername());
-
-        System.out.println("Usuario recuperado de la base de datos: " + existingUser);
-
-        if (existingUser != null && Encriptation.validatePassword(user.getPassword(), existingUser.getPassword())) {
-            session.setAttribute("email", existingUser.getEmail());
-            session.setAttribute("username", existingUser.getUsername());
-            System.out.println("Usuario registrado correctamente");
-            return "redirect:/home";
+        if (existingUser != null) {
+            if (Encriptation.validatePassword(user.getPassword(), existingUser.getPassword())) {
+                session.setAttribute("username", existingUser.getUsername());
+                return "redirect:/perfil"; 
+            } else {
+                redirectAttributes.addFlashAttribute("loginError", "Contraseña incorrecta");
+                return "redirect:/login";
+            }
         } else {
-            redirectAttributes.addFlashAttribute("error", "Nombre de usuario o contraseña incorrectos.");
+            redirectAttributes.addFlashAttribute("loginError", "Usuario no encontrado");
             return "redirect:/login";
         }
     }
