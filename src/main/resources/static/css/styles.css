@@ -326,22 +326,32 @@ nav ul li a:hover {
 /* PAGINA PERFIL */
 
 .textoPerfil{
-    font-size: 2.6rem;
-    font-weight: 200;
+    font-size: 2rem;
+    font-weight: 200rem;
+    text-align: center;
     line-height: 1.2;
     background-color: #E8D6C6;
     color: #93674E;
     border-radius: 18px;
-    padding-left: 20px;
-    padding-right: 0px;
-    width: 34%;
+    width: 25%;
     cursor: pointer;
+    margin-top: 2%;
+    border: 1px solid #93674E;
 }
 
 .p-md-5 {
     padding: 0px;
+    margin-left: 5%;
 }
 
+.mb-2{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.perfil img{
+    width: 25%;
+}
 /* Media queries */
 
 @media only screen and (max-width: 768px) {
