@@ -117,4 +117,18 @@ public class UserController {
         }
         return "home";
     }
+
+    @GetMapping("/myBooks")
+    public String myBookPage(HttpSession hSession, Model model) {
+        if (hSession.getAttribute("username") != null) {
+            String username = hSession.getAttribute("username").toString();
+            User user = userService.getUser(username);
+            model.addAttribute("user", user);
+            return "myBooks";
+        }
+        return "redirect:/perfil";
+    }
+
+
+
 }
