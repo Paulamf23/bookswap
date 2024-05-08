@@ -19,29 +19,28 @@
 <body>
     <div th:replace="plantillas/header :: header"></div>
     <main class="perfil_container">
-        <div class="grid grid-cols-4 grid-rows-4 gap-3">
-            <div class="row-span-3">
-                <img src="../../images/perfil.webp" class="perfil" alt="Perfil">
-            </div>
-            <div class="col-start-1 row-start-4 textoPerfil">
-                <div>
-                    <h1 th:text="${user.username}"></h1>
-                    <p class="user-email"><span th:text="${user.email}"></span></p>
-                </div>
-            </div>
-            <div class="col-span-2 row-span-2 col-start-2 row-start-2">
-
-                <div class="col-md-6 d-flex flex-column justify-content-between">
-                    <a class="enlace-perfil mt-auto" href="#">
-                        <div class="col p-4 d-flex flex-column position-static">
-                            <h3 class="mb-0">Mis Favoritos</h3>
+        <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary row">
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="../../images/perfil.webp" class="perfil" alt="Perfil">
+                        <div class="textoPerfil">
+                            <h1 th:text="${user.username}"></h1>
+                            <p class="user-email"><span th:text="${user.email}"></span></p>
                         </div>
-                    </a>
-                    <a class="enlace-perfil mb-auto" href="/myBooks">
-                        <div class="col p-4 d-flex flex-column position-static">
-                            <h3 class="mb-0">Mis Libros</h3>
-                        </div>
-                    </a>
+                    </div>
+                    <div class="col-md-6 d-flex flex-column justify-content-between">
+                        <a class="enlace-perfil mt-auto" href="#">
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <h3 class="mb-0">Mis Favoritos</h3>
+                            </div>
+                        </a>
+                        <a class="enlace-perfil mb-auto" href="/myBooks">
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <h3 class="mb-0">Mis Libros</h3>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
