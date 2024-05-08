@@ -469,6 +469,28 @@ h2.textoSinLibros {
     background-image:url("../images/formBook.png");
 }
 
+.button_form {
+    text-decoration: none;
+    background-color: #7a503b;
+    outline: none;
+    border: solid 2px #E8D6C6;
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: #E8D6C6;
+    cursor: pointer;
+    transition: background-color .3s ease;
+    margin-left: 90%;
+}
+
+.button_form:hover {
+    text-decoration: none;
+    background-color: #E8D6C6;
+    border: solid 2px #7a503b;
+    color: #7a503b;
+    margin-left: 90%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+}
+
 .newBookForm{
     width: 90%;
 }
