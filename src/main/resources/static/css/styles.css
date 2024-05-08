@@ -428,19 +428,30 @@ h2.textoSinLibros {
 /* PAGINA NEWBOOK */
 
 .newBook {
-    width: 50%;
+    width: 100%;
     margin: auto;
-    border: 3px solid #E8D6C6;
     padding: 2%;
-    border-radius: 9%;
 }
 
 .label_newBook{
-
+    border: none;
+    width: max-content;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    color: #7a503b;
+    font-weight: bold;
 }
 
 .input_newBook{
+    border-color: #7a503b;
+    margin-bottom: 2%;
+}
 
+.container_newBook{
+    margin: auto;
+    max-width: 900px;
+    height: 450px;
 }
 
 .titulo_formulario{
@@ -456,4 +467,8 @@ h2.textoSinLibros {
 
 .img_newBook{
     background-image:url("../images/formBook.png");
+}
+
+.newBookForm{
+    width: 90%;
 }
