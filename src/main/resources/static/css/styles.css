@@ -385,9 +385,9 @@ nav ul li a:hover {
 /* PAGINA MYBOOKS */
 
 .botonNuevoLibro {
-    width: 15%;
-    margin-right: 10%;
-    margin-top: 10%;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 .button_newBook {
@@ -400,6 +400,7 @@ nav ul li a:hover {
     color: #E8D6C6;
     cursor: pointer;
     transition: background-color .3s ease;
+    margin-left: 90%;
 }
 
 .button_newBook:hover {
@@ -407,5 +408,19 @@ nav ul li a:hover {
     background-color: #E8D6C6;
     border: solid 2px #7a503b;
     color: #7a503b;
+    margin-left: 90%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+}
+
+.sinLibros {
+    text-align: center;
+    color: #7a503b;
+    max-width: 50%;
+    margin-left: 25%;
+}
+
+h2.textoSinLibros {
+    font-weight: 600;
+    border: 3px solid;
+    width: 100%;
 }
