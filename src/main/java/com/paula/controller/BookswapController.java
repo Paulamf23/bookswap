@@ -130,9 +130,10 @@ public class BookswapController {
         String username = (String) session.getAttribute("username");
         if (username != null) {
             User user = userService.getUserByUsername(username);
-            List<Book> books = bookService.getBooksByUser(user); // Obtener libros del usuario
+            List<Book> books = bookService.getBooksByUser(user); 
             model.addAttribute("user", user);
-            model.addAttribute("books", books); // Pasar la lista de libros al modelo
+            model.addAttribute("books", books); 
+            System.out.println("Libros con titulo: "+ books);
             return "myBooks";
         } else {
             return "redirect:/login";
@@ -162,6 +163,7 @@ public class BookswapController {
             return "newBookForm";
         } else {
             bookService.createBook(book);
+            System.out.println("Libro publicado");
             redirectAttributes.addFlashAttribute("successMessage", "Libro publicado exitosamente");
             return "redirect:/myBooks";
         }
