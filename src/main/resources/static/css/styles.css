@@ -325,6 +325,29 @@ nav ul li a:hover {
 
 /* PAGINA PERFIL */
 
+.perfil_container{
+    max-width: 100%;
+    margin: 15px 15px;
+    width: 100%;
+    padding: 0;
+    margin-top: 0;
+}
+
+.row-span-3 {
+    max-width: 20%;
+    margin-left: 10%;
+    margin-bottom: 1%;
+}
+
+.col-start-1.row-start-4 {
+    max-width: 10.5%;
+    margin-left: 10%;
+}
+
+.col-span-2.row-span-2.col-start-2.row-start-2 {
+    max-width: 50%;
+}
+
 .textoPerfil{
     font-size: 1rem;
     font-weight: 200rem;
@@ -334,34 +357,11 @@ nav ul li a:hover {
     color: #93674E;
     border-radius: 18px;
     border: 1px solid #93674E;
-    width: 70%;
-    margin-top: 3%;
-}
-
-.p-md-5 {
-    padding: 0px;
-    margin-left: 5%;
-    margin-right: 5%;
-}
-
-.mb-2{
-    margin-left:auto;
-    margin-right: auto;
 }
 
 .perfil{
     width: 100%; 
     max-width: 200px;
-}
-
-.col-md-6{
-    align-content: center;
-}
-
-.flex-column{
-    text-align:center;
-    text-decoration: none;
-    
 }
 
 .enlace-perfil{
@@ -379,27 +379,3 @@ nav ul li a:hover {
     text-decoration: none;
 }
 
-
-/* Media queries */
-
-@media only screen and (max-width: 768px) {
-    .container-form {
-        flex-direction: column;
-        height: auto;
-    }
-    .information,
-    .information-register {
-        width: 100%;
-        border-radius: 0;
-    }
-    .form-information,
-    .form-information-register {
-        width: 100%;
-        border-radius: 0;
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
-    }
-    .form-input {
-        width: 80%;
-    }
-}
