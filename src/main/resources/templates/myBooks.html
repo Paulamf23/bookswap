@@ -24,10 +24,10 @@
                 <i class="fa fa-plus-circle" aria-hidden="true"></i>
             </a>
         </div>
-        <div th:if="${#lists.isEmpty(user.books)}" class="sinLibros">
+        <div class="sinLibros">
             <h2 class="textoSinLibros">Ahora mismo no hay ningun libro publicado</h2>
         </div>
-        <div th:if="${not #lists.isEmpty(user.books)}">
+        <!-- <div th:if="${not #lists.isEmpty(user.books)}"> -->
             <div class="row">
                 <div class="col">
                     <ul>
@@ -37,7 +37,7 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        <!-- </div> -->
 
 
     </main>
