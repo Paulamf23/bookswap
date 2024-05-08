@@ -30,16 +30,16 @@
                     <form th:action="@{/createBook}" method="post" th:object="${book}">
                         <div class="form newBook">
                             <label class="label_newBook" for="title">Título:</label>
-                            <input class="input_newBook" type="text" class="form-control" id="title" name="title"
+                            <input class="input_newBook form-control" type="text" id="title" name="title"
                                 th:field="*{title}" required>
                             <label class="label_newBook" for="year">Año de publicación:</label>
-                            <input class="input_newBook" type="year" class="form-control" id="year" name="year"
+                            <input class="input_newBook form-control" type="year" id="year" name="year"
                                 th:field="*{year}" required>
                             <label class="label_newBook" for="author">Autor del libro:</label>
-                            <input class="input_newBook" type="text" class="form-control" id="author" name="author"
+                            <input class="input_newBook form-control" type="text" id="author" name="author"
                                 th:field="*{author}" required>
                             <label class="label_newBook" for="isbn">ISBN:</label>
-                            <input class="input_newBook" type="integer" class="form-control" id="isbn" name="isbn"
+                            <input class="input_newBook form-control" type="integer" id="isbn" name="isbn"
                                 th:field="*{ISBN}" required>
                         </div>
 
