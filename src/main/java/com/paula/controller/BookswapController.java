@@ -138,11 +138,13 @@ public class BookswapController {
     @GetMapping("/newBook")
     public String newBookForm(Model model, HttpSession session) {
         String username = (String) session.getAttribute("username");
+        System.out.println("Entra en el metodo");
         if (username != null) {
             User user = userService.getUserByUsername(username);
             Book book = new Book();
             book.setUser(user);
             model.addAttribute("book", book);
+            System.out.println("Coge al usuario para ponerle el libro");
             return "newBookForm"; 
         } else {
             return "redirect:/login";

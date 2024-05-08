@@ -27,19 +27,6 @@
         <div class="sinLibros">
             <h2 class="textoSinLibros">Ahora mismo no hay ningun libro publicado</h2>
         </div>
-        <!-- <div th:if="${not #lists.isEmpty(user.books)}"> -->
-            <div class="row">
-                <div class="col">
-                    <ul>
-                        <li th:each="book : ${user.books}">
-                            <span th:text="${book.title}"></span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        <!-- </div> -->
-
-
     </main>
 
     <div th:replace="plantillas/footer :: footer"></div>
