@@ -14,6 +14,16 @@ footer {
     margin: 0;
 }
 
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 20px; 
+    text-align: center;
+}
+
+
 .container {
     max-width: 100%;
     margin: 10px 0;
@@ -479,7 +489,6 @@ h2.textoSinLibros {
     color: #E8D6C6;
     cursor: pointer;
     transition: background-color .3s ease;
-    margin-left: 90%;
 }
 
 .button_form:hover {
@@ -487,7 +496,6 @@ h2.textoSinLibros {
     background-color: #E8D6C6;
     border: solid 2px #7a503b;
     color: #7a503b;
-    margin-left: 90%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
 }
 
