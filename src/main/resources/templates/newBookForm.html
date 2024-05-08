@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="auto">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BookSwap</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+    <div th:replace="plantillas/header :: header"></div>
+    <main class="container">
+        <form action="/createBook" method="post" th:object="${book}">
+            <div class="form-group">
+                <label for="title">Título:</label>
+                <input type="text" class="form-control" id="title" name="title" th:field="*{title}" required>
+                <label for="year">Año de publicación:</label>
+                <input type="year" class="form-control" id="year" name="year" th:field="*{year}" required>
+                <label for="author">Autor del libro:</label>
+                <input type="text" class="form-control" id="author" name="author" th:field="*{author}" required>
+                <label for="isbn">ISBN:</label>
+                <input type="integer" class="form-control" id="isbn" name="isbn" th:field="*{isbn}" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Publicar Libro</button>
+        </form>
+    </main>
+
+    <div th:replace="plantillas/footer :: footer"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script th:src="@{/js/bootstrap_home.js}"></script>
+</body>
+
+</html>

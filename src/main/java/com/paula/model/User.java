@@ -35,9 +35,6 @@ public class User implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
-    // @OneToMany(mappedBy = "user")
-    // private List<Book> book;
-
     public User(String email) {
 		this.email = email;
 	}
@@ -63,13 +60,5 @@ public class User implements Serializable{
 		this.userId = userId;
 		this.username = username;
 	}
-
-    // public List<Book> getBook() {
-    //     return book;
-    // }
-
-    // public void setBook(List<Book> book) {
-    //     this.book = book;
-    // }
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.paula.model.Book;
 import com.paula.model.Role;
 import com.paula.model.User;
 import com.paula.services.BookService;
@@ -131,6 +132,31 @@ public class BookswapController {
             return "myBooks"; 
         } else {
             return "redirect:/login"; 
+        }
+    }
+
+    @GetMapping("/newBook")
+    public String newBookForm(Model model, HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            User user = userService.getUserByUsername(username);
+            Book book = new Book();
+            book.setUser(user);
+            model.addAttribute("book", book);
+            return "newBookForm"; 
+        } else {
+            return "redirect:/login";
+        }
+    }
+
+    @PostMapping("/createBook")
+    public String createBook(@Valid @ModelAttribute Book book, BindingResult bindingResult, HttpSession session, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            return "newBookForm";
+        } else {
+            bookService.createBook(book);
+            redirectAttributes.addFlashAttribute("successMessage", "Libro publicado exitosamente");
+            return "redirect:/myBooks";
         }
     }
 
