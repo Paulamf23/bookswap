@@ -1,5 +1,7 @@
 package com.paula.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -128,10 +130,12 @@ public class BookswapController {
         String username = (String) session.getAttribute("username");
         if (username != null) {
             User user = userService.getUserByUsername(username);
+            List<Book> books = bookService.getBooksByUser(user); // Obtener libros del usuario
             model.addAttribute("user", user);
-            return "myBooks"; 
+            model.addAttribute("books", books); // Pasar la lista de libros al modelo
+            return "myBooks";
         } else {
-            return "redirect:/login"; 
+            return "redirect:/login";
         }
     }
 
@@ -145,14 +149,15 @@ public class BookswapController {
             book.setUser(user);
             model.addAttribute("book", book);
             System.out.println("Coge al usuario para ponerle el libro");
-            return "newBookForm"; 
+            return "newBookForm";
         } else {
             return "redirect:/login";
         }
     }
 
     @PostMapping("/createBook")
-    public String createBook(@Valid @ModelAttribute Book book, BindingResult bindingResult, HttpSession session, RedirectAttributes redirectAttributes) {
+    public String createBook(@Valid @ModelAttribute Book book, BindingResult bindingResult, HttpSession session,
+            RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "newBookForm";
         } else {

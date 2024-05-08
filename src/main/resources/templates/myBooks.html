@@ -24,8 +24,19 @@
                 <i class="fa fa-plus-circle" aria-hidden="true"></i>
             </a>
         </div>
-        <div class="sinLibros">
-            <h2 class="textoSinLibros">Ahora mismo no hay ningun libro publicado</h2>
+        <div th:if="${#lists.isEmpty(books)}" class="sinLibros">
+            <h2 class="textoSinLibros">Ahora mismo no hay ningún libro publicado</h2>
+        </div>
+        <div th:if="${not #lists.isEmpty(books)}">
+            <div class="row">
+                <div class="col">
+                    <ul>
+                        <li th:each="book : ${books}">
+                            <span th:text="${book.title}"></span> 
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </main>
 
