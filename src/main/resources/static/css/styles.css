@@ -368,6 +368,7 @@ nav ul li a:hover {
     background-color: #E8D6C6;
     width: 100%;
     margin-bottom: 2%;
+    border-radius: 20%;
 }
 
 .mb-0{
@@ -379,27 +380,10 @@ nav ul li a:hover {
     text-decoration: none;
 }
 
+/* PAGINA MYBOOKS */
 
-/* Media queries */
-
-@media only screen and (max-width: 768px) {
-    .container-form {
-        flex-direction: column;
-        height: auto;
-    }
-    .information,
-    .information-register {
-        width: 100%;
-        border-radius: 0;
-    }
-    .form-information,
-    .form-information-register {
-        width: 100%;
-        border-radius: 0;
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
-    }
-    .form-input {
-        width: 80%;
-    }
+.botonNuevoLibro {
+    width: 30%;
+    margin-right: 10%;
+    margin-top: 10%;
 }
