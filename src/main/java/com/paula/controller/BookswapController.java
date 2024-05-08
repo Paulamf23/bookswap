@@ -16,15 +16,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.paula.model.Role;
 import com.paula.model.User;
+import com.paula.services.BookService;
 import com.paula.services.UserService;
 import com.paula.util.Encriptation;
 
 @Controller
 @RequestMapping("/")
-public class UserController {
+public class BookswapController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BookService bookService;
 
     @GetMapping("/")
     public String home(HttpSession session) {
