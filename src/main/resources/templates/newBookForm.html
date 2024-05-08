@@ -19,20 +19,35 @@
 <body>
     <div th:replace="plantillas/header :: header"></div>
     <main class="container">
-        <form th:action="@{/createBook}" method="post" th:object="${book}">
-            <div class="form-group">
-                <label for="title">Título:</label>
-                <input type="text" class="form-control" id="title" name="title" th:field="*{title}" required>
-                <label for="year">Año de publicación:</label>
-                <input type="year" class="form-control" id="year" name="year" th:field="*{year}" required>
-                <label for="author">Autor del libro:</label>
-                <input type="text" class="form-control" id="author" name="author" th:field="*{author}" required>
-                <label for="isbn">ISBN:</label>
-                <input type="integer" class="form-control" id="isbn" name="isbn" th:field="*{ISBN}" required>
+        <h3 class="titulo_formulario">Publica un libro</h3>
+        <div class="container-form">
+            <div class="information">
+                <div class="info-childs img_newBook">
+                </div>
             </div>
-            
-            <button type="submit" class="btn btn-primary">Publicar Libro</button>
-        </form>
+            <div class="form-information">
+                <div class="form-information-childs">
+                    <form th:action="@{/createBook}" method="post" th:object="${book}">
+                        <div class="form newBook">
+                            <label class="label_newBook" for="title">Título:</label>
+                            <input class="input_newBook" type="text" class="form-control" id="title" name="title"
+                                th:field="*{title}" required>
+                            <label class="label_newBook" for="year">Año de publicación:</label>
+                            <input class="input_newBook" type="year" class="form-control" id="year" name="year"
+                                th:field="*{year}" required>
+                            <label class="label_newBook" for="author">Autor del libro:</label>
+                            <input class="input_newBook" type="text" class="form-control" id="author" name="author"
+                                th:field="*{author}" required>
+                            <label class="label_newBook" for="isbn">ISBN:</label>
+                            <input class="input_newBook" type="integer" class="form-control" id="isbn" name="isbn"
+                                th:field="*{ISBN}" required>
+                        </div>
+
+                        <button type="submit">Publicar Libro</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </main>
 
     <div th:replace="plantillas/footer :: footer"></div>

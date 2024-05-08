@@ -424,3 +424,36 @@ h2.textoSinLibros {
     border: 3px solid;
     width: 100%;
 }
+
+/* PAGINA NEWBOOK */
+
+.newBook {
+    width: 50%;
+    margin: auto;
+    border: 3px solid #E8D6C6;
+    padding: 2%;
+    border-radius: 9%;
+}
+
+.label_newBook{
+
+}
+
+.input_newBook{
+
+}
+
+.titulo_formulario{
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    font-weight: 600;
+    font-family: auto;
+    color: #7a503b
+}
+
+.img_newBook{
+    background-image:url("../images/formBook.png");
+}
