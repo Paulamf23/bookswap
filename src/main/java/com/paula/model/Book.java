@@ -23,9 +23,7 @@ public class Book {
     @Column(name = "year")
     private Integer year;
 
-    // @JoinColumn(name = "id_genre")
-    // private Genre genre;
-
+    @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
 
