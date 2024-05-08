@@ -19,7 +19,7 @@
 <body>
     <div th:replace="plantillas/header :: header"></div>
     <main class="container">
-        <form action="/createBook" method="post" th:object="${book}">
+        <form th:action="@{/createBook}" method="post" th:object="${book}">
             <div class="form-group">
                 <label for="title">Título:</label>
                 <input type="text" class="form-control" id="title" name="title" th:field="*{title}" required>
