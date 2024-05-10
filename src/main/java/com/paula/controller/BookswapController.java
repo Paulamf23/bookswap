@@ -130,10 +130,10 @@ public class BookswapController {
         String username = (String) session.getAttribute("username");
         if (username != null) {
             User user = userService.getUserByUsername(username);
-            List<Book> books = bookService.getBooksByUser(user); 
+            List<Book> books = bookService.getBooksByUser(user);
             model.addAttribute("user", user);
-            model.addAttribute("books", books); 
-            System.out.println("Libros con titulo: "+ books);
+            model.addAttribute("books", books);
+            System.out.println("Libros con titulo: " + books);
             return "myBooks";
         } else {
             return "redirect:/login";
@@ -142,14 +142,11 @@ public class BookswapController {
 
     @GetMapping("/newBook")
     public String newBookForm(Model model, HttpSession session) {
-        String username = (String) session.getAttribute("username");
-        System.out.println("Entra en el metodo");
-        if (username != null) {
-            User user = userService.getUserByUsername(username);
+        User user = getUserFromSession(session);
+        if (user != null) {
             Book book = new Book();
             book.setUser(user);
             model.addAttribute("book", book);
-            System.out.println("Coge al usuario para ponerle el libro");
             return "newBookForm";
         } else {
             return "redirect:/login";
@@ -157,16 +154,29 @@ public class BookswapController {
     }
 
     @PostMapping("/createBook")
-    public String createBook(@Valid @ModelAttribute Book book, BindingResult bindingResult, HttpSession session,
-            RedirectAttributes redirectAttributes) {
+    public String createBook(@Valid @ModelAttribute Book book, BindingResult bindingResult, Model model,
+            RedirectAttributes redirectAttributes, HttpSession session) {
         if (bindingResult.hasErrors()) {
             return "newBookForm";
         } else {
-            bookService.createBook(book);
-            System.out.println("Libro publicado");
-            redirectAttributes.addFlashAttribute("successMessage", "Libro publicado exitosamente");
-            return "redirect:/myBooks";
+            User user = getUserFromSession(session);
+            if (user != null) {
+                book.setUser(user); // Asociar el libro al usuario actual
+                bookService.createBook(book);
+                return "redirect:/myBooks"; // Redirigir a la página de libros del usuario
+            } else {
+                redirectAttributes.addFlashAttribute("error", "Usuario no autenticado");
+                return "redirect:/login";
+            }
         }
+    }
+
+    private User getUserFromSession(HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            return userService.getUserByUsername(username);
+        }
+        return null;
     }
 
 }
