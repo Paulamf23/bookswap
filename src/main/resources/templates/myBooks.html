@@ -24,24 +24,26 @@
                 <i class="fa fa-plus-circle" aria-hidden="true"></i>
             </a>
         </div>
-        <div th:if="${#lists.isEmpty(books)}" class="sinLibros">
-            <h2 class="textoSinLibros">Ahora mismo no hay ningún libro publicado</h2>
-        </div>
         <div th:if="${not #lists.isEmpty(books)}">
             <div class="row">
                 <div class="col">
                     <h2>Tus libros:</h2>
                     <ul>
                         <li th:each="book : ${books}">
-                            <span th:text="${book.title}"></span> 
+                            <span><strong>Título:</strong> <span th:text="${book.title}"></span></span><br>
+                            <span><strong>Autor:</strong> <span th:text="${book.author}"></span></span><br>
+                            <span><strong>Año de publicación:</strong> <span th:text="${book.year}"></span></span><br>
+                            <span><strong>ISBN:</strong> <span th:text="${book.ISBN}"></span></span><br>
+                            <span><strong>Propietario:</strong> <span th:text="${book.user.username}"></span></span><br><br>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
+        
     </main>
 
-    <div th:replace="plantillas/footer :: footer"></div>
+    <!-- <div th:replace="plantillas/footer :: footer"></div> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
