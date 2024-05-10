@@ -26,20 +26,27 @@
         </div>
         <div th:if="${not #lists.isEmpty(books)}">
             <div class="row">
-                <div class="col">
-                    <h2>Tus libros:</h2>
-                    <ul>
-                        <li th:each="book : ${books}">
-                            <span><strong>Título:</strong> <span th:text="${book.title}"></span></span><br>
-                            <span><strong>Autor:</strong> <span th:text="${book.author}"></span></span><br>
-                            <span><strong>Año de publicación:</strong> <span th:text="${book.year}"></span></span><br>
-                            <span><strong>ISBN:</strong> <span th:text="${book.ISBN}"></span></span><br>
-                            <span><strong>Propietario:</strong> <span th:text="${book.user.username}"></span></span><br><br>
-                        </li>
-                    </ul>
+                <div class="col-md-6">
+                    <div th:each="book : ${books}" class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <h3 class="mb-0" th:text="${book.title}"></h3>
+                            <div class="mb-1 text-body-secondary" th:text="${book.year}"></div>
+                            <p class="card-text mb-auto" th:text="${book.author}"></p>
+                            <p class="icon-link gap-1 icon-link-hover stretched-link">
+                                <span th:text="${book.ISBN}"></span>
+                            </p>
+                        </div>
+                        <div class="col-auto d-none d-lg-block">
+                            <img src="..." class="bd-placeholder-img" width="200" height="250" />
+                            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <rect width="100%" height="100%" fill="#55595c"></rect>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        
         
     </main>
 
