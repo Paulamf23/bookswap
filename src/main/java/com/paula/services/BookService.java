@@ -23,4 +23,9 @@ public class BookService {
     public List<Book> getBooksByUser(User user) {
         return bookRepository.findByUser(user);
     }
+
+    public void deleteBookById(Integer bookId) {
+        bookRepository.deleteById(bookId);
+    }
+    
 }
