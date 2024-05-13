@@ -54,13 +54,13 @@
                                 <span th:text="${'ISBN: ' + book.ISBN}"></span>
                             </p>
                         </div>
-                        <a th:href="@{/deleteBook/{bookId}(bookId=${book.bookId})}" class="btn btn-danger button_delete">Eliminar <i class="fa fa-trash"></i></a>
-<!-- 
-                        <div class="col-auto d-none d-lg-block">
-                            <img src="..." class="bd-placeholder-img" width="200" height="250" />
-                        </div> -->
+                        <div class="col-auto">
+                            <a th:href="@{/deleteBook/{bookId}(bookId=${book.bookId})}" class="btn btn-danger button_delete">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </div>
                     </div>
-                </div>
+                </div>                
             </div>
         </div>
         <h3 class="titulo-apartado">MIS FAVORITOS</h3>
