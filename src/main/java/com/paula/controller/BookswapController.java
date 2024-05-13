@@ -161,9 +161,9 @@ public class BookswapController {
         } else {
             User user = getUserFromSession(session);
             if (user != null) {
-                book.setUser(user); // Asociar el libro al usuario actual
+                book.setUser(user); 
                 bookService.createBook(book);
-                return "redirect:/myBooks"; // Redirigir a la página de libros del usuario
+                return "redirect:/myBooks";
             } else {
                 redirectAttributes.addFlashAttribute("error", "Usuario no autenticado");
                 return "redirect:/login";
