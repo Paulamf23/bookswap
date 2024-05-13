@@ -6,18 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BookSwap</title>
 
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <!-- Bootstrap Icons CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
+    <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 
+    <!-- Custom Styles -->
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 
 <body>
+    <!-- Header -->
     <div th:replace="plantillas/header :: header"></div>
+
+    <!-- Main Content -->
     <main class="perfil_container">
         <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary row">
             <div class="col-lg-6">
@@ -34,7 +41,7 @@
         <h3 class="titulo-apartado">MIS LIBROS PUBLICADOS</h3>
         <div class="botonNuevoLibro">
             <a href="/newBook" class="button_newBook" role="button">
-                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                <i class="fa fa-plus-circle" aria-hidden="true"></i> Añadir
             </a>
         </div>
         <div th:if="${#lists.isEmpty(books)}" class="sinLibros">
@@ -54,8 +61,11 @@
                             <p class="isbn icon-link gap-1 icon-link-hover stretched-link">
                                 <span th:text="${'ISBN: ' + book.ISBN}"></span>
                             </p>
-                            <button type="button" class="btn btn-danger"
-                                onclick="confirmDelete('${book.bookId}')">Eliminar</button>
+                            <!-- Botón para eliminar el libro -->
+                            <button type="button" class="btn btn-danger" onclick="confirmDelete('${book.bookId}')">
+
+                                <i class="bi bi-trash"></i> Eliminar
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -65,10 +75,13 @@
     </main>
 
     <!-- <div th:replace="plantillas/footer :: footer"></div> -->
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
+    <!-- Confirmación para eliminar el libro -->
     <script>
         function confirmDelete(bookId) {
             if (confirm("¿Estás seguro de que quieres eliminar este libro?")) {
