@@ -41,10 +41,7 @@
                             <p class="isbn icon-link gap-1 icon-link-hover stretched-link">
                                 <span th:text="${'ISBN: ' + book.ISBN}"></span>
                             </p>
-                            <form th:action="@{/deleteBook}" method="post">
-                                <input type="hidden" name="bookId" th:value="${book.bookId}" />
-                                <button type="submit" class="btn btn-danger">Eliminar</button>
-                            </form>
+                            <a th:href="@{'/deleteBook?bookId=' + ${book.bookId}}" class="btn btn-danger">Eliminar</a>
                         </div>
                         <div class="col-auto d-none d-lg-block">
                             <img src="..." class="bd-placeholder-img" width="200" height="250" />

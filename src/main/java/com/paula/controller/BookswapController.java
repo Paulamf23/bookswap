@@ -161,7 +161,7 @@ public class BookswapController {
         } else {
             User user = getUserFromSession(session);
             if (user != null) {
-                book.setUser(user); 
+                book.setUser(user);
                 bookService.createBook(book);
                 return "redirect:/myBooks";
             } else {
@@ -175,7 +175,7 @@ public class BookswapController {
     public String deleteBook(@RequestParam("bookId") Integer bookId) {
         bookService.deleteBookById(bookId);
         return "redirect:/myBooks";
-    }    
+    }
 
     private User getUserFromSession(HttpSession session) {
         String username = (String) session.getAttribute("username");
