@@ -71,7 +71,9 @@ public class BookswapController {
         if (hSession.getAttribute("username") != null) {
             String username = hSession.getAttribute("username").toString();
             User user = userService.getUser(username);
+            List<Book> books = bookService.getBooksByUser(user);
             model.addAttribute("user", user);
+            model.addAttribute("books", books);
             return "perfil";
         }
         return "redirect:/";
@@ -125,21 +127,6 @@ public class BookswapController {
             return "home";
         }
         return "home";
-    }
-
-    @GetMapping("/perfil")
-    public String perfilPage(Model model, HttpSession session) {
-        String username = (String) session.getAttribute("username");
-        if (username != null) {
-            User user = userService.getUserByUsername(username);
-            List<Book> books = bookService.getBooksByUser(user);
-            model.addAttribute("user", user);
-            model.addAttribute("books", books);
-            System.out.println("Libros con titulo: " + books);
-            return "perfil";
-        } else {
-            return "redirect:/login";
-        }
     }
 
     @GetMapping("/newBook")
