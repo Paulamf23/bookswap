@@ -455,19 +455,6 @@ h2.textoSinLibros {
     font-weight: bold;
 }
 
-.button_delete {
-    background-color: #dc3545; /* Color de fondo rojo */
-    color: #fff; /* Color de texto blanco */
-    border: none; /* Sin borde */
-    border-radius: 5px; /* Borde redondeado */
-    padding: 8px 16px; /* Espaciado interno */
-    cursor: pointer; /* Cursor apuntando */
-}
-
-.button_delete:hover {
-    background-color: #c82333; /* Color de fondo rojo más oscuro al pasar el mouse */
-}
-
 .titulo-apartado{
     color: #7a503b;
     font-weight: 700;
