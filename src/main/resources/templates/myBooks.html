@@ -28,27 +28,31 @@
             <h2 class="textoSinLibros">Ahora mismo no hay ningún libro publicado</h2>
         </div> -->
         <!-- <div th:if="${not #lists.isEmpty(books)}"> -->
-            <div class="row">
-                <div class="col-md-6" th:each="book : ${books}">
-                    <div
-                        class="card-libro-myBooks row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                        <div class="col p-4 d-flex flex-column position-static">
-                            <h3 class="titulo-libro mb-0" th:text="${book.title}"></h3>
-                            <div class="border rounded p-2 mb-1">
-                                <div class="text-body-secondary" th:text="${book.year}"></div>
-                                <div class="text-body-secondary" th:text="${book.author}"></div>
-                            </div>
-                            <p class="isbn icon-link gap-1 icon-link-hover stretched-link">
-                                <span th:text="${'ISBN: ' + book.ISBN}"></span>
-                            </p>
-                            <a th:href="@{/deleteBook/{bookId}(bookId=${book.bookId})}" class="btn btn-danger">Eliminar</a>
+        <div class="row">
+            <div class="col-md-6" th:each="book : ${books}">
+                <div
+                    class="card-libro-myBooks row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h3 class="titulo-libro mb-0" th:text="${book.title}"></h3>
+                        <div class="border rounded p-2 mb-1">
+                            <div class="text-body-secondary" th:text="${book.year}"></div>
+                            <div class="text-body-secondary" th:text="${book.author}"></div>
                         </div>
-                        <div class="col-auto d-none d-lg-block">
-                            <img src="..." class="bd-placeholder-img" width="200" height="250" />
-                        </div>
+                        <p class="isbn icon-link gap-1 icon-link-hover stretched-link">
+                            <span th:text="${'ISBN: ' + book.ISBN}"></span>
+                        </p>
+                        <form th:action="@{/deleteBook/{bookId}(bookId=${book.bookId})}" method="post">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </div>
+
+                    <div class="col-auto d-none d-lg-block">
+                        <img src="..." class="bd-placeholder-img" width="200" height="250" />
                     </div>
                 </div>
             </div>
+        </div>
         <!-- </div> -->
     </main>
 

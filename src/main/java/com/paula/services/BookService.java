@@ -28,15 +28,7 @@ public class BookService {
         return bookRepository.findByUser(user);
     }
     
-	@Transactional
     public void deleteBookById(Integer bookId) {
-        
-        Optional<Book> book = bookRepository.findById(bookId);
-		if (book.isPresent()) {
-			bookRepository.deleteById(bookId);
-		} else {
-			throw new RuntimeException("¡Error! El libro con id " + bookId + " no se encuentra en la base de datos.");
-		}
+        bookRepository.deleteById(bookId);
     }
-    
 }

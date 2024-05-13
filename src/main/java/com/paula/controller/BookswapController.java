@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -172,10 +173,12 @@ public class BookswapController {
         }
     }
 
-    @PostMapping("/deleteBook/{bookId}")
-    public String deleteBook(@PathVariable Integer bookId, RedirectAttributes redirectAttributes) {
-        bookService.deleteBookById(bookId);
-        redirectAttributes.addFlashAttribute("exito", "El libro con id " + bookId + " ha sido eliminado exitosamente.");
+    @DeleteMapping("/deleteBook/{bookId}")
+    public String deleteBook(@PathVariable("bookId") Integer bookId, HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            bookService.deleteBookById(bookId);
+        }
         return "redirect:/myBooks";
     }
 
