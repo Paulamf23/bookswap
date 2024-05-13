@@ -392,8 +392,6 @@ nav ul li a:hover {
     text-decoration: none;
 }
 
-/* PAGINA MYBOOKS */
-
 .botonNuevoLibro {
     width: 100%;
     margin-top: 2%;
@@ -437,6 +435,8 @@ h2.textoSinLibros {
 
 .card-libro-myBooks{
     margin: 5%;
+    margin-right: 0%;
+    width: 90%;
 }
 
 .titulo-libro{
@@ -468,6 +468,14 @@ h2.textoSinLibros {
     background-color: #c82333; /* Color de fondo rojo más oscuro al pasar el mouse */
 }
 
+.titulo-apartado{
+    color: #7a503b;
+    font-weight: 700;
+    text-align: center;
+    background-color: #E8D6C6;
+    padding: 1%;
+    font-size: 30px;
+}
 /* PAGINA NEWBOOK */
 
 .newBook {

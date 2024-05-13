@@ -166,7 +166,7 @@ public class BookswapController {
         if (username != null) {
             bookService.deleteBookById(bookId);
         }
-        return "redirect:/myBooks";
+        return "redirect:/perfil";
     }
 
     private User getUserFromSession(HttpSession session) {

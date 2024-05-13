@@ -31,7 +31,12 @@
                 </div>
             </div>
         </div>
-        <h3>MIS LIBROS PUBLICADOS</h3>
+        <h3 class="titulo-apartado">MIS LIBROS PUBLICADOS</h3>
+        <div class="botonNuevoLibro">
+            <a href="/newBook" class="button_newBook" role="button">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+            </a>
+        </div>
         <div th:if="${#lists.isEmpty(books)}" class="sinLibros">
             <h2 class="textoSinLibros">Ahora mismo no hay ningún libro publicado</h2>
         </div>
@@ -52,17 +57,17 @@
                             <form th:action="@{/deleteBook/{bookId}(bookId=${book.bookId})}" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button type="submit" class="btn btn-danger button_delete">Eliminar</button>
-
                             </form>
                         </div>
-
+<!-- 
                         <div class="col-auto d-none d-lg-block">
                             <img src="..." class="bd-placeholder-img" width="200" height="250" />
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
         </div>
+        <h3 class="titulo-apartado">MIS FAVORITOS</h3>
     </main>
 
     <!-- <div th:replace="plantillas/footer :: footer"></div> -->
