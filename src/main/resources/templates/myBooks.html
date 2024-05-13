@@ -41,12 +41,10 @@
                             <p class="isbn icon-link gap-1 icon-link-hover stretched-link">
                                 <span th:text="${'ISBN: ' + book.ISBN}"></span>
                             </p>
-                            <div class="d-flex align-items-center">
-                                <form action="/deleteBook" method="post">
-                                    <input name="bookId" th:value="${book.bookId}" />
-                                    <button type="submit" class="btn btn-danger ml-2">Eliminar</button>
-                                </form>
-                            </div>
+                            <form th:action="@{/deleteBook}" method="post">
+                                <input type="hidden" name="bookId" th:value="${book.id}" />
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
                         </div>
                         <div class="col-auto d-none d-lg-block">
                             <img src="..." class="bd-placeholder-img" width="200" height="250" />

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.paula.model.Book;
 import com.paula.model.User;
 import com.paula.repository.BookRepository;
@@ -23,7 +24,7 @@ public class BookService {
     public List<Book> getBooksByUser(User user) {
         return bookRepository.findByUser(user);
     }
-
+    
     public void deleteBookById(Integer bookId) {
         bookRepository.deleteById(bookId);
     }

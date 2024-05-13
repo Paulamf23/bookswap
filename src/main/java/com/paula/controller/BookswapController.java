@@ -175,7 +175,7 @@ public class BookswapController {
     public String deleteBook(@RequestParam("bookId") Integer bookId) {
         bookService.deleteBookById(bookId);
         return "redirect:/myBooks";
-    }  
+    }    
 
     private User getUserFromSession(HttpSession session) {
         String username = (String) session.getAttribute("username");
