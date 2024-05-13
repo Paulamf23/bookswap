@@ -13,4 +13,6 @@ import com.paula.model.User;
 public interface BookRepository extends JpaRepository<Book, Integer>{
 
     List<Book> findByUser(User user);
+
+    public void deleteById(Integer bookId);
 }
