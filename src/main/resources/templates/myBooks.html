@@ -42,7 +42,7 @@
                                 <span th:text="${'ISBN: ' + book.ISBN}"></span>
                             </p>
                             <form th:action="@{/deleteBook}" method="post">
-                                <input type="hidden" name="bookId" th:value="${book.id}" />
+                                <input type="hidden" name="bookId" th:value="${book.bookId}" />
                                 <button type="submit" class="btn btn-danger">Eliminar</button>
                             </form>
                         </div>
