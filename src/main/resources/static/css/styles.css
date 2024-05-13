@@ -435,6 +435,25 @@ h2.textoSinLibros {
     width: 100%;
 }
 
+.card-libro-myBooks{
+    margin: 5%;
+}
+
+.titulo-libro{
+    font-weight: 700;
+}
+
+.p-2 {
+    margin: 2%;
+    width: 50%;
+    align-self: center;
+}
+
+.isbn {
+    margin-top: 10%;
+    align-self: baseline;
+    font-weight: bold;
+}
 /* PAGINA NEWBOOK */
 
 .newBook {
