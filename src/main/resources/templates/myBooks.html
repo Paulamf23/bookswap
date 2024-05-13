@@ -43,7 +43,8 @@
                         </p>
                         <form th:action="@{/deleteBook/{bookId}(bookId=${book.bookId})}" method="post">
                             <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                            <button type="submit" class="btn btn-danger button_delete">Eliminar</button>
+
                         </form>
                     </div>
 
