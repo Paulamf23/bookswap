@@ -127,8 +127,8 @@ public class BookswapController {
         return "home";
     }
 
-    @GetMapping("/myBooks")
-    public String myBooksPage(Model model, HttpSession session) {
+    @GetMapping("/perfil")
+    public String perfilPage(Model model, HttpSession session) {
         String username = (String) session.getAttribute("username");
         if (username != null) {
             User user = userService.getUserByUsername(username);
@@ -136,7 +136,7 @@ public class BookswapController {
             model.addAttribute("user", user);
             model.addAttribute("books", books);
             System.out.println("Libros con titulo: " + books);
-            return "myBooks";
+            return "perfil";
         } else {
             return "redirect:/login";
         }

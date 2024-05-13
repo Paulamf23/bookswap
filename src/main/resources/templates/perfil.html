@@ -23,23 +23,42 @@
             <div class="col-lg-6">
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="../../images/perfil.webp" class="perfil" alt="Perfil">
                         <div class="textoPerfil">
                             <h1 th:text="${user.username}"></h1>
                             <p class="user-email"><span th:text="${user.email}"></span></p>
                         </div>
                     </div>
-                    <div class="col-md-6 d-flex flex-column justify-content-between">
-                        <a class="enlace-perfil mt-auto" href="#">
-                            <div class="col p-4 d-flex flex-column position-static">
-                                <h3 class="mb-0">Mis Favoritos</h3>
+                </div>
+            </div>
+        </div>
+        <h3>MIS LIBROS PUBLICADOS</h3>
+        <div th:if="${#lists.isEmpty(books)}" class="sinLibros">
+            <h2 class="textoSinLibros">Ahora mismo no hay ningún libro publicado</h2>
+        </div>
+        <div th:if="${not #lists.isEmpty(books)}">
+            <div class="row">
+                <div class="col-md-6" th:each="book : ${books}">
+                    <div
+                        class="card-libro-myBooks row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <h3 class="titulo-libro mb-0" th:text="${book.title}"></h3>
+                            <div class="border rounded p-2 mb-1">
+                                <div class="text-body-secondary" th:text="${book.year}"></div>
+                                <div class="text-body-secondary" th:text="${book.author}"></div>
                             </div>
-                        </a>
-                        <a class="enlace-perfil mb-auto" href="/myBooks">
-                            <div class="col p-4 d-flex flex-column position-static">
-                                <h3 class="mb-0">Mis Libros</h3>
-                            </div>
-                        </a>
+                            <p class="isbn icon-link gap-1 icon-link-hover stretched-link">
+                                <span th:text="${'ISBN: ' + book.ISBN}"></span>
+                            </p>
+                            <form th:action="@{/deleteBook/{bookId}(bookId=${book.bookId})}" method="post">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger button_delete">Eliminar</button>
+
+                            </form>
+                        </div>
+
+                        <div class="col-auto d-none d-lg-block">
+                            <img src="..." class="bd-placeholder-img" width="200" height="250" />
+                        </div>
                     </div>
                 </div>
             </div>
