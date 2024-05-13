@@ -53,16 +53,14 @@
                             <p class="isbn icon-link gap-1 icon-link-hover stretched-link">
                                 <span th:text="${'ISBN: ' + book.ISBN}"></span>
                             </p>
-                        </div>
-                        <div class="col-auto">
-                            <a th:href="@{/deleteBook/{bookId}(bookId=${book.bookId})}" class="btn btn-danger button_delete">
-                                <i class="bi bi-trash"></i>
-                            </a>
+                            <form th:action="@{/deleteBook/{bookId}(bookId=${book.bookId})}" method="post">
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
                         </div>
                     </div>
                 </div>                
             </div>
-        </div>
+        </div>        
         <h3 class="titulo-apartado">MIS FAVORITOS</h3>
     </main>
 

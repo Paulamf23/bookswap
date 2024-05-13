@@ -12,6 +12,7 @@ import com.paula.model.User;
 import com.paula.repository.BookRepository;
 
 
+
 @Service
 public class BookService {
 
@@ -25,14 +26,14 @@ public class BookService {
     public List<Book> getBooksByUser(User user) {
         return bookRepository.findByUser(user);
     }
-    
-    public void deleteBookById(Integer bookId) {
-        Optional<Book> book = bookRepository.findById(bookId);
 
-        if (book.isPresent()) {
-			bookRepository.deleteById(bookId);
-		} else {
-			throw new RuntimeException("¡Error! El libro con id " + bookId + " no está en la base de datos.");
-		}
+    public void deleteBook(Integer bookId) {
+        bookRepository.deleteById(bookId);
     }
+    
+    public Book getBookById(Integer bookId) {
+        Optional<Book> optionalBook = bookRepository.findById(bookId);
+        return optionalBook.orElse(null);
+    }
+    
 }
