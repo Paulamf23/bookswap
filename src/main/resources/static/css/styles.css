@@ -455,9 +455,7 @@ h2.textoSinLibros {
 }
 
 .boton_eliminar button {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    display: block;
 }
 
 .boton_eliminar {
