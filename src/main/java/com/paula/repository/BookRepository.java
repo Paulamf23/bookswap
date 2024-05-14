@@ -15,4 +15,6 @@ public interface BookRepository extends JpaRepository<Book, Integer>{
     List<Book> findByUser(User user);
 
     public void deleteById(Integer bookId);
+
+    List<Book> findAll();
 }

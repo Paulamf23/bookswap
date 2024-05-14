@@ -35,9 +35,11 @@ public class BookswapController {
     private BookService bookService;
 
     @GetMapping("/")
-    public String home(HttpSession session) {
+    public String home(HttpSession session, Model model) {
         String userUsername = (String) session.getAttribute("username");
         System.out.println("Usuario registrado: " + userUsername);
+        List<Book> books = bookService.getAllBooks(); 
+        model.addAttribute("books", books); 
         return "home";
     }
 

@@ -33,5 +33,9 @@ public class BookService {
 			throw new RuntimeException("¡Error! El libro con id " + bookId + " no está en la base de datos.");
 		}
     }
+
+    public List<Book> getAllBooks() {
+        return bookRepository.findAll();
+    }
     
 }

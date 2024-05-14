@@ -21,9 +21,6 @@
 <body class="login">
     <div class="container-wrapper">
         <div class="container-form">
-            <div th:if="${param.error}" class="alert alert-danger" role="alert">
-                <p th:text="${param.error}"></p>
-            </div>
             <div class="information">
                 <div class="info-childs">
                     <h2>Bienvenido</h2>
@@ -53,36 +50,6 @@
             <a href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
         </footer>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-    <script th:if="${param.error eq 'El usuario introducido no se encuentra en la base de datos'}">
-        toastr.error("El usuario introducido no se encuentra en la base de datos", "Usuario Incorrecto");
-    </script>
-
-    <script th:if="${param.error eq 'La contraseña no se corresponde con el usuario introducido'}">
-        toastr.error("La contraseña no se corresponde con el usuario introducido", "Contraseña incorrecta");
-    </script>
-
-    <script>
-        toastr.options = {
-            "closeButton": false,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": false,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        };
-    </script>
 </body>
 
 </html>
