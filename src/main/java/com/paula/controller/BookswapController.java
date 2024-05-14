@@ -167,19 +167,12 @@ public class BookswapController {
         return null;
     }
 
-    @PostMapping("/deleteBook/{bookId}")
-    public String deleteBook(@PathVariable("bookId") Integer bookId, HttpSession session, RedirectAttributes redirectAttributes) {
-        User user = getUserFromSession(session);
-        if (user != null) {
-            Book book = bookService.getBookById(bookId);
-            if (book != null && book.getUser().getUsername().equals(user.getUsername())) {
-                bookService.deleteBook(bookId);
-                redirectAttributes.addFlashAttribute("successMessage", "Libro eliminado exitosamente");
-            } else {
-                redirectAttributes.addFlashAttribute("errorMessage", "Error al eliminar el libro");
-            }
-        }
-        return "redirect:/perfil";
-    }
+    @GetMapping("/deleteBook/{bookId}")
+	public String deleteBook(@PathVariable Integer bookId, RedirectAttributes redirectAttributes) {
+		bookService.deleteBook(bookId);
+		redirectAttributes.addFlashAttribute("exito", "El libro con id " + bookId + " ha sido eliminado exitosamente.");
+		return "redirect:/perfil";
+
+	}
 
 }

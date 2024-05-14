@@ -28,12 +28,13 @@ public class BookService {
     }
 
     public void deleteBook(Integer bookId) {
-        bookRepository.deleteById(bookId);
-    }
-    
-    public Book getBookById(Integer bookId) {
-        Optional<Book> optionalBook = bookRepository.findById(bookId);
-        return optionalBook.orElse(null);
+        Optional<Book> book = bookRepository.findById(bookId);
+
+		if (book.isPresent()) {
+			bookRepository.deleteById(bookId);
+		} else {
+			throw new RuntimeException("¡Error! El libro con id " + bookId + " no está en la base de datos.");
+		}
     }
     
 }
