@@ -497,6 +497,20 @@ a.btn.btn-danger{
     padding: 1%;
     font-size: 30px;
 }
+
+.boton_eliminar .btn:hover i.fa-trash {
+    display: none; 
+}
+
+.boton_eliminar .btn:hover::before {
+    content: "\f014"; 
+    font-family: 'Font Awesome 5 Free'; 
+    display: inline-block; 
+    font-size: inherit; 
+    margin-right: 5px;
+}
+
+
 /* PAGINA NEWBOOK */
 
 .newBook {
