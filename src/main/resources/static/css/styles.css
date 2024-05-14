@@ -479,6 +479,10 @@ h2.textoSinLibros {
     display: inline-block;
 }
 
+a.btn.btn-danger{
+    display: block;
+}
+
 .isbn {
     margin-top: 2%;
     align-self: baseline;
