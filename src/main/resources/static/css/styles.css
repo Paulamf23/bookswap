@@ -454,7 +454,7 @@ h2.textoSinLibros {
     justify-content: space-between;
 }
 
-.bajo button {
+.boton_eliminar button {
     display: flex;
     flex-direction: row;
     align-items: center;
