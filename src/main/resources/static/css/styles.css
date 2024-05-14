@@ -484,11 +484,11 @@ h2.textoSinLibros {
 .boton_eliminar a:hover {
     background-color: #ba2531;
 }
-
-/* 
-a.btn.btn-danger{
+ 
+a.btn.btn-danger {
     display: block;
-} */
+    padding: 10px;
+}
 
 .isbn {
     margin-top: 2%;
@@ -505,6 +505,9 @@ a.btn.btn-danger{
     font-size: 30px;
 }
 
+.d-none{
+    padding: 0%;
+}
 /* PAGINA NEWBOOK */
 
 .newBook {
