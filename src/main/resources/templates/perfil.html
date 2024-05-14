@@ -62,7 +62,7 @@
                                     <span th:text="${'ISBN: ' + book.ISBN}"></span>
                                 </p>
                                 <div class="boton_eliminar">
-                                    <a role="button" th:href="@{/deleteBook/{bookId}(bookId=${book.bookId})}" class="btn btn-danger">
+                                    <a th:href="@{/deleteBook/{bookId}(bookId=${book.bookId})}" class="btn btn-danger">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </a>
                                 </div>                                
