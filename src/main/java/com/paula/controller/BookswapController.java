@@ -48,20 +48,20 @@ public class BookswapController {
     }
 
     @PostMapping("/loginUser")
-    public String loginUser(@ModelAttribute User user, HttpSession session, RedirectAttributes redirectAttributes, Model model) {
+    public String loginUser(@ModelAttribute User user, HttpSession session, RedirectAttributes redirectAttributes) {
         User existingUser = userService.getUserByUsername(user.getUsername());
-    
+
         if (existingUser != null) {
             if (Encriptation.validatePassword(user.getPassword(), existingUser.getPassword())) {
                 session.setAttribute("username", existingUser.getUsername());
                 return "redirect:/";
             } else {
-                model.addAttribute("toastErrorPassword", true);
-                return "login";
+                redirectAttributes.addAttribute("error", "La contraseña no se corresponde con el usuario introducido");
+                return "redirect:/login";
             }
         } else {
-            model.addAttribute("toastErrorUser", true);
-            return "login";
+            redirectAttributes.addAttribute("error", "El usuario introducido no se encuentra en la base de datos");
+            return "redirect:/login";
         }
     }
 
@@ -168,11 +168,11 @@ public class BookswapController {
     }
 
     @GetMapping("/deleteBook/{bookId}")
-	public String deleteBook(@PathVariable Integer bookId, RedirectAttributes redirectAttributes) {
-		bookService.deleteBook(bookId);
-		redirectAttributes.addFlashAttribute("exito", "El libro con id " + bookId + " ha sido eliminado exitosamente.");
-		return "redirect:/perfil";
+    public String deleteBook(@PathVariable Integer bookId, RedirectAttributes redirectAttributes) {
+        bookService.deleteBook(bookId);
+        redirectAttributes.addFlashAttribute("exito", "El libro con id " + bookId + " ha sido eliminado exitosamente.");
+        return "redirect:/perfil";
 
-	}
+    }
 
 }

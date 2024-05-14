@@ -52,17 +52,12 @@
             <a href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
         </footer>
     </div>
-    <!-- Agrega este código al final del body -->
-    <!-- Agrega este código en el header o en un lugar apropiado dentro del body -->
-    <script th:if="${toastErrorUser}">
+    <script th:if="${param.error eq 'El usuario introducido no se encuentra en la base de datos'}">
         toastr.error("El usuario introducido no se encuentra en la base de datos", "Usuario Incorrecto");
     </script>
 
-    <script th:if="${toastErrorPassword}">
+    <script th:if="${param.error eq 'La contraseña no se corresponde con el usuario introducido'}">
         toastr.error("La contraseña no se corresponde con el usuario introducido", "Contraseña incorrecta");
     </script>
-
-
 </body>
-
 </html>
