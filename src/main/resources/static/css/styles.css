@@ -454,8 +454,9 @@ h2.textoSinLibros {
     justify-content: space-between;
 }
 
-.boton_eliminar .btn {
-    display: block;
+.boton_eliminar a {
+    display: inline-block;
+    color: white;
 }
 
 .boton_eliminar {
@@ -463,7 +464,7 @@ h2.textoSinLibros {
 }
 
 .isbn {
-    margin-top: 10%;
+    margin-top: 2%;
     align-self: baseline;
     font-weight: bold;
 }
