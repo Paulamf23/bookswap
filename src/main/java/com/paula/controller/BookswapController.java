@@ -48,7 +48,7 @@ public class BookswapController {
     }
 
     @PostMapping("/loginUser")
-    public String loginUser(@ModelAttribute User user, HttpSession session, RedirectAttributes redirectAttributes) {
+    public String loginUser(@ModelAttribute User user, HttpSession session, RedirectAttributes redirectAttributes, Model model) {
         User existingUser = userService.getUserByUsername(user.getUsername());
     
         if (existingUser != null) {
@@ -56,14 +56,14 @@ public class BookswapController {
                 session.setAttribute("username", existingUser.getUsername());
                 return "redirect:/";
             } else {
-                redirectAttributes.addFlashAttribute("error", "Contraseña incorrecta");
-                return "redirect:/login";
+                model.addAttribute("toastErrorPassword", true);
+                return "login";
             }
         } else {
-            redirectAttributes.addFlashAttribute("error", "Usuario no encontrado");
-            return "redirect:/login";
+            model.addAttribute("toastErrorUser", true);
+            return "login";
         }
-    }    
+    }
 
     @GetMapping("/perfil")
     public String perfilPage(HttpSession hSession, Model model) {
