@@ -356,8 +356,16 @@ nav ul li a:hover {
     color: #93674E;
     border-radius: 18px;
     border: 1px solid #93674E;
-    width: 70%;
+    width: 100%;
     margin-top: 3%;
+}
+
+.perfil_container .row{
+    display: flex;
+}
+
+.perfil_container .col-md-6{
+    flex: 1;
 }
 
 .p-md-5 {
@@ -365,41 +373,20 @@ nav ul li a:hover {
     margin-left: 5%;
     margin-right: 5%;
 }
-
-.mb-2 {
-    margin-left: auto;
-    margin-right: auto;
-}
-
+/* 
 .perfil {
     width: 100%;
     max-width: 200px;
-}
+} */
 
-.col-md-6 {
+/* .col-md-6 {
     align-content: center;
-}
+} */
 
 .flex-column {
     text-align: center;
     text-decoration: none;
 
-}
-
-.enlace-perfil {
-    background-color: #E8D6C6;
-    width: 100%;
-    margin-bottom: 2%;
-    border-radius: 35%;
-}
-
-.mb-0 {
-    color: #7a503b;
-}
-
-.enlace-perfil:hover {
-    color: #7a503b;
-    text-decoration: none;
 }
 
 .botonNuevoLibro {
@@ -427,15 +414,6 @@ nav ul li a:hover {
     color: #7a503b;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
 }
-
-/* .button_newBook:hover {
-    text-decoration: none;
-    background-color: #E8D6C6;
-    border: solid 2px #7a503b;
-    color: #7a503b;
-    margin-left: 90%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
-} */
 
 .sinLibros {
     text-align: center;
@@ -489,11 +467,6 @@ h2.textoSinLibros {
     text-decoration: none;
 }
  
-/* a.btn.btn-danger {
-    display: block;
-    padding: 10px;
-} */
-
 .isbn {
     margin-top: 2%;
     align-self: baseline;
@@ -512,6 +485,7 @@ h2.textoSinLibros {
 .d-none{
     padding: 0%;
 }
+
 /* PAGINA NEWBOOK */
 
 .newBook {
