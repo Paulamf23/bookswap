@@ -474,6 +474,8 @@ h2.textoSinLibros {
 
 .boton_eliminar a {
     color: white;
+    display: block;
+    padding: 10px;
 }
 
 .boton_eliminar {
@@ -483,12 +485,13 @@ h2.textoSinLibros {
 
 .boton_eliminar a:hover {
     background-color: #ba2531;
+    text-decoration: none;
 }
  
-a.btn.btn-danger {
+/* a.btn.btn-danger {
     display: block;
     padding: 10px;
-}
+} */
 
 .isbn {
     margin-top: 2%;
