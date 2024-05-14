@@ -19,7 +19,7 @@ footer {
     left: 0;
     bottom: 0;
     width: 100%;
-    padding: 20px; 
+    padding: 20px;
     text-align: center;
 }
 
@@ -356,37 +356,24 @@ nav ul li a:hover {
     color: #93674E;
     border-radius: 18px;
     border: 1px solid #93674E;
-    width: 100%;
-    margin-top: 3%;
 }
 
-.perfil_container .row{
+.perfil_container .row {
     display: flex;
 }
 
-.perfil_container .col-md-6{
+.perfil_container .col-md-6 {
     flex: 1;
+    align-content: center;
 }
 
 .p-md-5 {
-    padding: 0px;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin: auto;
 }
-/* 
-.perfil {
-    width: 100%;
-    max-width: 200px;
-} */
-
-/* .col-md-6 {
-    align-content: center;
-} */
 
 .flex-column {
     text-align: center;
     text-decoration: none;
-
 }
 
 .botonNuevoLibro {
@@ -428,13 +415,13 @@ h2.textoSinLibros {
     width: 100%;
 }
 
-.card-libro-myBooks{
+.card-libro-myBooks {
     margin: 5%;
     margin-right: 0%;
     width: 90%;
 }
 
-.titulo-libro{
+.titulo-libro {
     font-weight: 700;
 }
 
@@ -444,7 +431,7 @@ h2.textoSinLibros {
     align-self: center;
 }
 
-.bajo{
+.bajo {
     display: flex;
     justify-content: space-between;
     margin-top: auto;
@@ -457,23 +444,23 @@ h2.textoSinLibros {
 }
 
 .boton_eliminar {
-    position: relative; 
+    position: relative;
     z-index: 9999;
-    cursor: pointer; 
+    cursor: pointer;
 }
 
 .boton_eliminar a:hover {
     background-color: #ba2531;
     text-decoration: none;
 }
- 
+
 .isbn {
     margin-top: 2%;
     align-self: baseline;
     font-weight: bold;
 }
 
-.titulo-apartado{
+.titulo-apartado {
     color: #7a503b;
     font-weight: 700;
     text-align: center;
@@ -482,7 +469,7 @@ h2.textoSinLibros {
     font-size: 30px;
 }
 
-.d-none{
+.d-none {
     padding: 0%;
 }
 
@@ -494,7 +481,7 @@ h2.textoSinLibros {
     padding: 2%;
 }
 
-.label_newBook{
+.label_newBook {
     border: none;
     width: max-content;
     display: flex;
@@ -504,18 +491,18 @@ h2.textoSinLibros {
     font-weight: bold;
 }
 
-.input_newBook{
+.input_newBook {
     border-color: #7a503b;
     margin-bottom: 2%;
 }
 
-.container_newBook{
+.container_newBook {
     margin: auto;
     max-width: 900px;
     height: 450px;
 }
 
-.titulo_formulario{
+.titulo_formulario {
     margin: auto;
     width: 50%;
     text-align: center;
@@ -526,8 +513,8 @@ h2.textoSinLibros {
     color: #7a503b
 }
 
-.img_newBook{
-    background-image:url("../images/formBook.png");
+.img_newBook {
+    background-image: url("../images/formBook.png");
 }
 
 .button_form {
@@ -550,6 +537,6 @@ h2.textoSinLibros {
     box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
 }
 
-.newBookForm{
+.newBookForm {
     width: 90%;
 }
