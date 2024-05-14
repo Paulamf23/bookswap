@@ -50,20 +50,20 @@ public class BookswapController {
     @PostMapping("/loginUser")
     public String loginUser(@ModelAttribute User user, HttpSession session, RedirectAttributes redirectAttributes) {
         User existingUser = userService.getUserByUsername(user.getUsername());
-
+    
         if (existingUser != null) {
             if (Encriptation.validatePassword(user.getPassword(), existingUser.getPassword())) {
                 session.setAttribute("username", existingUser.getUsername());
                 return "redirect:/";
             } else {
-                redirectAttributes.addFlashAttribute("loginError", "Contraseña incorrecta");
+                redirectAttributes.addFlashAttribute("error", "Contraseña incorrecta");
                 return "redirect:/login";
             }
         } else {
-            redirectAttributes.addFlashAttribute("loginError", "Usuario no encontrado");
+            redirectAttributes.addFlashAttribute("error", "Usuario no encontrado");
             return "redirect:/login";
         }
-    }
+    }    
 
     @GetMapping("/perfil")
     public String perfilPage(HttpSession hSession, Model model) {
