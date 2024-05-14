@@ -21,6 +21,9 @@
 <body class="login">
     <div class="container-wrapper">
         <div class="container-form">
+            <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                <p th:text="${param.error}"></p>
+            </div>
             <div class="information">
                 <div class="info-childs">
                     <h2>Bienvenido</h2>
@@ -50,7 +53,7 @@
             <a href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
         </footer>
     </div>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script th:if="${param.error eq 'El usuario introducido no se encuentra en la base de datos'}">
@@ -81,4 +84,5 @@
         };
     </script>
 </body>
+
 </html>

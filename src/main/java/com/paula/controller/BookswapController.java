@@ -56,11 +56,12 @@ public class BookswapController {
                 session.setAttribute("username", existingUser.getUsername());
                 return "redirect:/";
             } else {
-                redirectAttributes.addAttribute("error", "La contraseña no se corresponde con el usuario introducido");
+                redirectAttributes.addFlashAttribute("error",
+                        "La contraseña no se corresponde con el usuario introducido");
                 return "redirect:/login";
             }
         } else {
-            redirectAttributes.addAttribute("error", "El usuario introducido no se encuentra en la base de datos");
+            redirectAttributes.addFlashAttribute("error", "El usuario introducido no se encuentra en la base de datos");
             return "redirect:/login";
         }
     }
