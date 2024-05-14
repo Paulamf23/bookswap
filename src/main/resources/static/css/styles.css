@@ -79,6 +79,16 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
+/* nav ul li a:hover {
+    text-decoration: none;
+    font-size: 1.1rem;
+    letter-spacing: 2.5px;
+    color: #7a503b;
+    padding: 0.7rem 1rem;
+    font-weight: 100rem;
+    text-decoration: underline;
+} */
+
 .btn {
     font-size: 1.3rem;
     color: #93674E;
@@ -412,13 +422,20 @@ nav ul li a:hover {
 }
 
 .button_newBook:hover {
+    background-color: #E8D6C6;
+    border: solid 2px #7a503b;
+    color: #7a503b;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+}
+
+/* .button_newBook:hover {
     text-decoration: none;
     background-color: #E8D6C6;
     border: solid 2px #7a503b;
     color: #7a503b;
     margin-left: 90%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
-}
+} */
 
 .sinLibros {
     text-align: center;
@@ -455,12 +472,11 @@ h2.textoSinLibros {
 }
 
 .boton_eliminar a {
-    display: inline-block;
     color: white;
 }
 
 .boton_eliminar {
-    align-self: baseline;
+    display: inline-block;
 }
 
 .isbn {
