@@ -454,7 +454,7 @@ h2.textoSinLibros {
     justify-content: space-between;
 }
 
-.boton_eliminar button {
+.boton_eliminar .btn {
     display: block;
 }
 
