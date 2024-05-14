@@ -469,6 +469,7 @@ h2.textoSinLibros {
 .bajo{
     display: flex;
     justify-content: space-between;
+    margin-top: auto;
 }
 
 .boton_eliminar a {
@@ -510,6 +511,9 @@ a.btn.btn-danger{
     margin-right: 5px;
 }
 
+.d-none {
+    padding: 0%;
+}
 
 /* PAGINA NEWBOOK */
 

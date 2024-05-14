@@ -6,12 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import com.paula.model.Book;
 import com.paula.model.User;
 import com.paula.repository.BookRepository;
-
-
 
 @Service
 public class BookService {
