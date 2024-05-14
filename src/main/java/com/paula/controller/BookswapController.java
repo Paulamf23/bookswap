@@ -151,7 +151,7 @@ public class BookswapController {
             if (user != null) {
                 book.setUser(user);
                 bookService.createBook(book);
-                return "redirect:/myBooks";
+                return "redirect:/perfil";
             } else {
                 redirectAttributes.addFlashAttribute("error", "Usuario no autenticado");
                 return "redirect:/login";

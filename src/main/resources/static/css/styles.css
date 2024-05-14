@@ -449,6 +449,21 @@ h2.textoSinLibros {
     align-self: center;
 }
 
+.bajo{
+    display: flex;
+    justify-content: space-between;
+}
+
+.bajo button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.boton_eliminar {
+    align-self: baseline;
+}
+
 .isbn {
     margin-top: 10%;
     align-self: baseline;
