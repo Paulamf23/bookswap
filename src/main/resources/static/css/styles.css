@@ -479,7 +479,8 @@ h2.textoSinLibros {
 }
 
 .boton_eliminar {
-    display: inline-block;
+    position: relative; 
+    z-index: 9999;
     cursor: pointer; 
 }
 
