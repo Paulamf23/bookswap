@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <body class="login">
@@ -28,10 +30,6 @@
                 </div>
             </div>
             <div class="form-information">
-                <div th:if="${param.error}" class="alert alert-danger" role="alert">
-                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                    <span th:text="${param.error}"></span>
-                </div>
                 <div class="form-information-childs">
                     <h2>Iniciar Sesión</h2>
                     <form class="form" th:action="@{/loginUser}" th:object="${user}" method="post">
@@ -52,12 +50,35 @@
             <a href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
         </footer>
     </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     <script th:if="${param.error eq 'El usuario introducido no se encuentra en la base de datos'}">
         toastr.error("El usuario introducido no se encuentra en la base de datos", "Usuario Incorrecto");
     </script>
 
     <script th:if="${param.error eq 'La contraseña no se corresponde con el usuario introducido'}">
         toastr.error("La contraseña no se corresponde con el usuario introducido", "Contraseña incorrecta");
+    </script>
+
+    <script>
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
     </script>
 </body>
 </html>
