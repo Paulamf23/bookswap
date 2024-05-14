@@ -33,10 +33,9 @@
 		</div>
 		<div class="album py-5 bg-body-tertiary">
 			<div class="container">
-				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-					<div th:each="book : ${books}" class="col">
+				<div class="row row-cols-1 row-cols-md-4 g-4">
+					<div th:if="${not #lists.isEmpty(books)}" th:each="book : ${books}" class="col">
 						<div class="card shadow-sm">
-							<!-- Aquí puedes insertar la imagen del libro si tienes una -->
 							<div class="card-body">
 								<h5 class="card-title" th:text="${book.title}"></h5>
 								<p class="card-text" th:text="'@' + ${book.user.username}"></p>
@@ -48,6 +47,9 @@
 								</div>
 							</div>
 						</div>
+					</div>
+					<div th:if="${#lists.isEmpty(books)}" class="col text-center">
+						<p>No hay libros publicados.</p>
 					</div>
 				</div>
 			</div>
