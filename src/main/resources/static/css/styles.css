@@ -166,6 +166,21 @@ nav ul li a:hover {
     height: 280px;
 }
 
+/* HOME */
+
+.cincoLibros {
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
+
+.datosLibro{
+    border: 1px solid #7a503b;
+    text-align: center;
+    display: grid;
+    padding: 2%;
+}
+
 /* LOGIN */
 
 .login {
@@ -358,15 +373,6 @@ nav ul li a:hover {
     border: 1px solid #93674E;
 }
 
-.perfil_container .row {
-    display: flex;
-}
-
-.perfil_container .col-md-6 {
-    flex: 1;
-    align-content: center;
-}
-
 .p-md-5 {
     margin: auto;
 }
@@ -423,6 +429,7 @@ h2.textoSinLibros {
 
 .titulo-libro {
     font-weight: 700;
+    color: #7a503b;
 }
 
 .p-2 {

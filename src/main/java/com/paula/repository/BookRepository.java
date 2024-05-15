@@ -17,5 +17,4 @@ public interface BookRepository extends JpaRepository<Book, Integer>{
     public void deleteById(Integer bookId);
 
     List<Book> findTop10ByOrderByBookIdDesc();
-
 }

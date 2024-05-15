@@ -21,10 +21,8 @@
 </head>
 
 <body>
-    <!-- Header -->
     <div th:replace="plantillas/header :: header"></div>
 
-    <!-- Main Content -->
     <main class="perfil_container">
         <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary row justify-content-center">
             <div class="col-md-6">
@@ -40,12 +38,12 @@
                 <i class="fa fa-plus-circle" aria-hidden="true"></i> Añadir
             </a>
         </div>
-        <div th:if="${#lists.isEmpty(books)}" class="sinLibros">
-            <h2 class="textoSinLibros">Ahora mismo no hay ningún libro publicado</h2>
+        <div th:if="${#lists.isEmpty(books)}" class="col text-center">
+            <p>No hay libros publicados.</p>
         </div>
         <div th:if="${not #lists.isEmpty(books)}">
-            <div class="row">
-                <div class="col-md-6" th:each="book : ${books}">
+            <div class="row mb-2">
+                <div class="col-md-6 mb-4" th:each="book : ${books}">
                     <div class="card-libro-myBooks row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                         <div class="col p-4 d-flex flex-column position-static">
                             <h3 class="titulo-libro mb-0" th:text="${book.title}"></h3>
@@ -65,8 +63,9 @@
                             </div>
                         </div>
                         <div class="col-auto d-none d-lg-block">
-                            <img src="..." class="bd-placeholder-img" width="200" height="250" />
+                            <img th:if="${book.imageData != null}" th:src="@{/image/{bookId}}" class="bd-placeholder-img" width="200" height="250" />
                         </div>
+                        
                     </div>
                 </div>
             </div>

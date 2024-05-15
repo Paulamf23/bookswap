@@ -24,6 +24,10 @@ public class BookService {
         return bookRepository.findByUser(user);
     }
 
+    public Book getBookById(Integer bookId) {
+        return bookRepository.findById(bookId).orElse(null);
+    }
+    
     public void deleteBook(Integer bookId) {
         Optional<Book> book = bookRepository.findById(bookId);
 
@@ -34,9 +38,16 @@ public class BookService {
 		}
     }
 
-    public List<Book> getAllBooks() {
+    public List<Book> getRecentBooks() {
         return bookRepository.findTop10ByOrderByBookIdDesc();
-    }
+    }   
     
+    public byte[] getImageData(Integer bookId) {
+        Book book = bookRepository.findById(bookId).orElse(null);
+        if (book != null) {
+            return book.getImageData(); 
+        }
+        return null;
+    }
     
 }
