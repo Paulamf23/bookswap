@@ -40,14 +40,6 @@ public class BookService {
 
     public List<Book> getRecentBooks() {
         return bookRepository.findTop10ByOrderByBookIdDesc();
-    }   
-    
-    public byte[] getImageData(Integer bookId) {
-        Book book = bookRepository.findById(bookId).orElse(null);
-        if (book != null) {
-            return book.getImageData(); 
-        }
-        return null;
-    }
+    }  
     
 }
