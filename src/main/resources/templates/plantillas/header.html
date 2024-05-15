@@ -5,9 +5,6 @@
                 <img src="../../images/BOOKSWAP.png" alt="Logo">
             </div>
             <ul>
-                <div class="btn">
-                    <i class="fas fa-times close-btn"></i>
-                </div>
                 <li><a href="/">Inicio</a></li>
                 <li><a href="#">Libros</a></li>
                 <th:block th:if="${session.username != null}">
@@ -20,9 +17,6 @@
                     <li><a class="button_header" role="button" href="/login">Entrar</a></li>
                 </th:block>
             </ul>
-            <div class="btn">
-                <i class="fas fa-bars menu-btn"></i>
-            </div>
         </nav>
     </div>
 </header>

@@ -1,5 +1,6 @@
 package com.paula.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -36,10 +37,10 @@ public class BookswapController {
 
     @GetMapping("/")
     public String home(HttpSession session, Model model) {
-        String userUsername = (String) session.getAttribute("username");
-        System.out.println("Usuario registrado: " + userUsername);
         List<Book> books = bookService.getRecentBooks();
         model.addAttribute("books", books);
+        String userUsername = (String) session.getAttribute("username");
+        System.out.println("Usuario registrado: " + userUsername);
         return "home";
     }
 
@@ -126,7 +127,7 @@ public class BookswapController {
     public String logOut(Model model, HttpSession hSession) {
         if (hSession.getAttribute("username") != null) {
             hSession.setAttribute("username", null);
-            return "home";
+            return "redirect:/";
         }
         return "home";
     }
@@ -177,5 +178,4 @@ public class BookswapController {
         return "redirect:/perfil";
 
     }
-
 }

@@ -23,10 +23,8 @@ footer {
     text-align: center;
 }
 
-
 .container {
     max-width: 100%;
-    margin: 10px 0;
     width: 100%;
     padding: 0;
     margin-top: 0;
@@ -179,6 +177,30 @@ nav ul li a:hover {
     text-align: center;
     display: grid;
     padding: 2%;
+}
+
+.botonesDeLibros {
+    font-size: 1rem;
+    color: #93674E;
+    cursor: pointer;
+    display: inline-block;
+    background-color:#E8D6C6;
+    width: 50%;
+}
+
+h5.card-title{
+    font-weight: 700;
+    margin-bottom: .05rem;
+    padding-top: 2%;
+}
+
+.botonesDeLibros:hover{
+    color: #E8D6C6;
+    background-color: #93674E;
+}
+
+.btn-group{
+    width: 100%;
 }
 
 /* LOGIN */
