@@ -70,6 +70,37 @@
             </div>
         </div>
         <h3 class="titulo-apartado">MIS FAVORITOS</h3>
+        <div th:if="${#lists.isEmpty(favoriteBooks)}" class="col text-center">
+            <p>No hay libros en favoritos.</p>
+        </div>
+        <div th:if="${not #lists.isEmpty(favoriteBooks)}">
+            <div class="row mb-2">
+                <div class="col-md-6 mb-4" th:each="book : ${favoriteBooks}">
+                    <div class="card-libro-favoritos row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <h3 class="titulo-libro mb-0" th:text="${book.title}"></h3>
+                            <div class="border rounded p-2 mb-1">
+                                <div class="text-body-secondary" th:text="${book.year}"></div>
+                                <div class="text-body-secondary" th:text="${book.author}"></div>
+                            </div>
+                            <div class="bajo">
+                                <p class="isbn icon-link gap-1 icon-link-hover stretched-link">
+                                    <span th:text="${'ISBN: ' + book.ISBN}"></span>
+                                </p>
+                                <div class="boton_eliminar_favorito">
+                                    <a th:href="@{/removeFavorite/{bookId}(bookId=${book.bookId})}" class="btn btn-warning">
+                                        <i class="fa fa-heart-broken" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto d-none d-lg-block">
+                            <!-- <img th:src="@{'/images/' + ${book.image}}" class="bd-placeholder-img" width="200" height="250" alt="Imagen del libro" /> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- <div th:replace="plantillas/footer :: footer"></div> -->

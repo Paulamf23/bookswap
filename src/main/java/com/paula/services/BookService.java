@@ -41,5 +41,9 @@ public class BookService {
     public List<Book> getRecentBooks() {
         return bookRepository.findTop10ByOrderByBookIdDesc();
     }  
+
+    public List<Book> getRecentBooksExcludingUser(String username) {
+        return bookRepository.findTop10ByOrderByBookIdDescExcludingUser(username);
+    }
     
 }

@@ -1,7 +1,7 @@
 package com.paula.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.paula.model.Book;
-import com.paula.model.Role;
-import com.paula.model.User;
+import com.paula.model.*;
 import com.paula.services.BookService;
 import com.paula.services.UserService;
 import com.paula.util.Encriptation;
@@ -37,9 +35,14 @@ public class BookswapController {
 
     @GetMapping("/")
     public String home(HttpSession session, Model model) {
-        List<Book> books = bookService.getRecentBooks();
-        model.addAttribute("books", books);
         String userUsername = (String) session.getAttribute("username");
+        List<Book> books;
+        if (userUsername != null) {
+            books = bookService.getRecentBooksExcludingUser(userUsername);
+        } else {
+            books = bookService.getRecentBooks();
+        }
+        model.addAttribute("books", books);
         System.out.println("Usuario registrado: " + userUsername);
         return "home";
     }
@@ -75,8 +78,12 @@ public class BookswapController {
             String username = hSession.getAttribute("username").toString();
             User user = userService.getUser(username);
             List<Book> books = bookService.getBooksByUser(user);
+            List<Book> favoriteBooks = user.getFavorites().stream()
+                    .map(FavouriteBooks::getBook)
+                    .collect(Collectors.toList());
             model.addAttribute("user", user);
             model.addAttribute("books", books);
+            model.addAttribute("favoriteBooks", favoriteBooks);
             return "perfil";
         }
         return "redirect:/";
@@ -178,4 +185,33 @@ public class BookswapController {
         return "redirect:/perfil";
 
     }
+
+    @GetMapping("/addFavorite/{bookId}")
+    public String addFavorite(@PathVariable Integer bookId, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            User user = userService.getUserByUsername(username);
+            Book book = bookService.getBookById(bookId);
+            if (user != null && book != null) {
+                if (user.getFavorites().stream().noneMatch(fav -> fav.getBook().getId().equals(bookId))) {
+                    FavouriteBooks favorite = new FavouriteBooks();
+                    favorite.setUser(user);
+                    favorite.setBook(book);
+                    user.getFavorites().add(favorite);
+                    userService.updateUser(user);
+                    redirectAttributes.addFlashAttribute("success", "Libro agregado a favoritos correctamente.");
+                } else {
+                    redirectAttributes.addFlashAttribute("info", "El libro ya está en tus favoritos.");
+                }
+            } else {
+                redirectAttributes.addFlashAttribute("error", "No se pudo agregar el libro a favoritos.");
+            }
+            return "redirect:/perfil"; // Redirigir siempre a la página de perfil
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Debes iniciar sesión para agregar a favoritos.");
+            return "redirect:/login";
+        }
+    }
+
 }

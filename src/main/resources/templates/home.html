@@ -50,9 +50,11 @@
 									</div>
 									<div class="btn-group">
 										<a href="#" class="btn botonesDeLibros btn-secondary my-2">Ver libro</a>
-										<a href="#" class="btn botonesDeLibros btn-secondary my-2">
-											<i class="fa fa-heart" aria-hidden="true"></i>
-										</a>
+										<form th:action="@{/addFavorite/__${book.bookId}__}" method="get" style="display:inline;">
+											<button type="submit" class="btn botonesDeLibros btn-secondary my-2">
+												<i class="fa fa-heart" aria-hidden="true"></i>
+											</button>
+										</form>																			
 									</div>
 								</div>
 							</div>
@@ -73,8 +75,12 @@
 										data-toggle="tooltip" th:attr="title=${book.title}"></h5>
 									<p class="card-text" th:text="'@' + ${book.user?.username}"></p>
 									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-										<button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
+										<a href="#" class="btn botonesDeLibros btn-secondary my-2">Ver libro</a>
+										<form th:action="@{/addFavorite/__${book.bookId}__}" method="get" style="display:inline;">
+											<button type="submit" class="btn botonesDeLibros btn-secondary my-2">
+												<i class="fa fa-heart" aria-hidden="true"></i>
+											</button>
+										</form>									
 									</div>
 								</div>
 							</div>

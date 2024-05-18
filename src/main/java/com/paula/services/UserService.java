@@ -54,4 +54,8 @@ public class UserService {
     public List<User> getUsersRoles(Role role) {
         return userRepository.findAllByRole(role);
     }
+    
+    public void updateUser(User user) {
+        userRepository.save(user);
+    }
 }

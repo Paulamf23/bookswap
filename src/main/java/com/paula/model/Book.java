@@ -32,4 +32,8 @@ public class Book {
 
     @Column(name = "ISBN")
     private String ISBN;
+
+    public Integer getId() {
+        return bookId;
+    }
 }
