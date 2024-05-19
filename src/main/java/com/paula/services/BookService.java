@@ -45,5 +45,4 @@ public class BookService {
     public List<Book> getRecentBooksExcludingUser(String username) {
         return bookRepository.findTop10ByOrderByBookIdDescExcludingUser(username);
     }
-    
 }

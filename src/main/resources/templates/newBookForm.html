@@ -24,7 +24,7 @@
             <div class="information img_newBook"></div>
             <div class="form-information">
                 <div class="form-information-childs newBookForm">
-                    <form th:action="@{/createBook}" method="post" th:object="${book}">
+                    <form th:action="@{/createBook}" method="post" th:object="${book}" enctype="multipart/form-data">
                         <div class="newBook">
                             <label class="label_newBook" for="title">Título:</label>
                             <input class="input_newBook form-control" type="text" id="title" name="title"
@@ -52,7 +52,6 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
-    <script th:src="@{/js/bootstrap_home.js}"></script>
 </body>
 
 </html>

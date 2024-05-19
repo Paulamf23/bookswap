@@ -161,6 +161,8 @@ public class BookswapController {
             User user = getUserFromSession(session);
             if (user != null) {
                 book.setUser(user);
+                // No establecer bookId manualmente, dejar que la base de datos lo genere
+                // automáticamente
                 bookService.createBook(book);
                 return "redirect:/perfil";
             } else {
