@@ -49,7 +49,7 @@
 										<p class="card-text" th:text="'@' + ${book.user?.username}"></p>
 									</div>
 									<div class="btn-group">
-										<a href="#" class="btn botonesDeLibros btn-secondary my-2">Ver libro</a>
+										<a th:href="@{/bookDetail/{bookId}(bookId=${book.bookId})}" class="btn botonesDeLibros btn-secondary my-2">Ver libro</a>
 										<form th:action="@{/addFavorite/__${book.bookId}__}" method="get" style="display:inline;">
 											<button type="submit" class="btn botonesDeLibros btn-secondary my-2">
 												<i class="fa fa-heart" aria-hidden="true"></i>
@@ -75,7 +75,7 @@
 										data-toggle="tooltip" th:attr="title=${book.title}"></h5>
 									<p class="card-text" th:text="'@' + ${book.user?.username}"></p>
 									<div class="btn-group">
-										<a href="#" class="btn botonesDeLibros btn-secondary my-2">Ver libro</a>
+										<a th:href="@{/bookDetail/{bookId}(bookId=${book.bookId})}" class="btn botonesDeLibros btn-secondary my-2">Ver libro</a>
 										<form th:action="@{/addFavorite/__${book.bookId}__}" method="get" style="display:inline;">
 											<button type="submit" class="btn botonesDeLibros btn-secondary my-2">
 												<i class="fa fa-heart" aria-hidden="true"></i>

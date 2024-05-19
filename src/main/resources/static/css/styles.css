@@ -501,6 +501,43 @@ h2.textoSinLibros {
     padding: 0%;
 }
 
+.quitarFav a {
+    color: #7a503b;
+    display: block;
+    padding: 10px;
+}
+
+.quitarFav {
+    position: relative;
+    z-index: 9999;
+    cursor: pointer;
+}
+
+.quitarFav a:hover {
+    background-color: #7a503b;
+    text-decoration: none;
+}
+
+.boton_verLibro a {
+    color: #7a503b;
+    display: block;
+    padding: 10px;
+}
+
+.boton_verLibro {
+    position: relative;
+    z-index: 9999;
+    cursor: pointer;
+}
+
+.boton_verLibro a:hover {
+    background-color: #7a503b;
+    text-decoration: none;
+}
+
+.botonesTarjetas {
+    display: ruby;
+}
 /* PAGINA NEWBOOK */
 
 .newBook {
@@ -569,3 +606,70 @@ h2.textoSinLibros {
     width: 90%;
 }
 
+/* BOOK DETAIL */
+
+.detail-title{
+    font-size: 2rem;
+    text-align: center;
+    color: #7a503b;
+}
+
+.card {
+    margin-bottom: 30px;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid transparent;
+    border-radius: 0;
+}
+
+.card .card-subtitle {
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+.table-product.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f3f8fa !important;
+}
+
+.table-product td {
+    border-top: 0px solid #dee2e6 !important;
+    color: #728299 !important;
+}
+
+.botonComprarDetalle {
+    background-color: #d90000;
+    border-radius: 0px;
+    border: none;
+    width: 150px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.botonComprarDetalle:hover {
+    border: none;
+    background-color: rgb(205, 16, 16);
+}
+
+.table-container {
+    display: flex;
+    justify-content: center;
+}
+
+.table-responsive {
+    max-width: 80%;
+}
+
+.info-title {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    max-width: 80%;
+}

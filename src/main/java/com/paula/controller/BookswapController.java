@@ -207,11 +207,21 @@ public class BookswapController {
             } else {
                 redirectAttributes.addFlashAttribute("error", "No se pudo agregar el libro a favoritos.");
             }
-            return "redirect:/perfil"; // Redirigir siempre a la página de perfil
+            return "redirect:/perfil";
         } else {
             redirectAttributes.addFlashAttribute("error", "Debes iniciar sesión para agregar a favoritos.");
             return "redirect:/login";
         }
+    }
+
+    @GetMapping("/bookDetail/{bookId}")
+    public String bookDetail(@PathVariable Integer bookId, Model model) {
+        Book book = bookService.getBookById(bookId);
+        if (book != null) {
+            model.addAttribute("book", book);
+            return "bookDetail";
+        }
+        return "redirect:/"; // O redirigir a una página de error personalizada
     }
 
 }
