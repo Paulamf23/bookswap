@@ -214,13 +214,32 @@ public class BookswapController {
         }
     }
 
-    @GetMapping("/deleteBook/{bookId}")
-	public String deleteBook(@PathVariable Integer bookId, RedirectAttributes redirectAttributes) {
-		bookService.deleteBook(bookId);
-		redirectAttributes.addFlashAttribute("exito", "El libro con id " + bookId + " ha sido eliminado exitosamente.");
-		return "redirect:/perfil";
+    @GetMapping("/deleteFavorite/{userId}/{bookId}")
+    public String deleteFavorite(@PathVariable Integer userId, @PathVariable Integer bookId, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            User user = userService.getUserByUsername(username);
+            if (user != null && user.getId().equals(userId)) {
+                bookService.deleteFavoriteBook(userId, bookId);
+                redirectAttributes.addFlashAttribute("success", "Libro eliminado de favoritos correctamente.");
+            } else {
+                redirectAttributes.addFlashAttribute("error",
+                        "No se pudo encontrar al usuario o el usuario no coincide.");
+            }
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Debes iniciar sesión para realizar esta acción.");
+        }
+        return "redirect:/perfil";
+    }
 
-	}
+    @GetMapping("/deleteBook/{bookId}")
+    public String deleteBook(@PathVariable Integer bookId, RedirectAttributes redirectAttributes) {
+        bookService.deleteBook(bookId);
+        redirectAttributes.addFlashAttribute("exito", "El libro con id " + bookId + " ha sido eliminado exitosamente.");
+        return "redirect:/perfil";
+
+    }
 
     @GetMapping("/uploadImage/{bookId}")
     public String showUploadImageForm(@PathVariable Integer bookId, Model model, HttpSession session) {

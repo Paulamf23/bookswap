@@ -106,9 +106,10 @@
                                         </a>
                                     </div>
                                     <div class="quitarFav">
-                                        <a href="" class="botonesDeLibros btn">
+                                        <a th:href="@{/deleteFavorite/{userId}/{bookId}(userId=${user.id}, bookId=${book.id})}" class="botonesDeLibros btn">
                                             <i class="fas fa-heart-broken"></i>
-                                        </a>                                       
+                                        </a>
+                                                                              
                                     </div>
                                 </div>
                             </div>

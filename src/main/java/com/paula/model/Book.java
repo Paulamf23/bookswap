@@ -36,9 +36,6 @@ public class Book {
     @Column(name = "genre")
     private Genre genre;
 
-    @Column(name = "delete_flag")
-    private Boolean delete = false;
-
     @Lob
     @Column(name = "image", columnDefinition = "LONGBLOB")
     private byte[] image;

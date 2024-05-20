@@ -30,4 +30,9 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     @Modifying
     @Query("DELETE FROM FavouriteBooks fb WHERE fb.book.id = :bookId")
     void deleteFavouriteBooksByBookId(Integer bookId);
+
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM FavouriteBooks fb WHERE fb.user.id = :userId AND fb.book.id = :bookId")
+    void deleteByUserIdAndBookId(@Param("userId") Integer userId, @Param("bookId") Integer bookId);
 }

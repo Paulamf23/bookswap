@@ -42,6 +42,11 @@ public class BookService {
 		}
     }
 
+    @Transactional
+    public void deleteFavoriteBook(Integer userId, Integer bookId) {
+        bookRepository.deleteByUserIdAndBookId(userId, bookId);
+    }
+
     public List<Book> getRecentBooks() {
         return bookRepository.findTop10ByOrderByBookIdDesc();
     }  
