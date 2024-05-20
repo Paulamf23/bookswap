@@ -15,17 +15,17 @@ footer {
 }
 
 footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
     width: 100%;
     padding: 20px;
     text-align: center;
 }
 
+.container-footer {
+    width: 100%;
+}
+
 .container {
     max-width: 100%;
-    width: 100%;
     padding: 0;
     margin-top: 0;
 }
@@ -77,21 +77,10 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
-/* nav ul li a:hover {
-    text-decoration: none;
-    font-size: 1.1rem;
-    letter-spacing: 2.5px;
-    color: #7a503b;
-    padding: 0.7rem 1rem;
-    font-weight: 100rem;
-    text-decoration: underline;
-} */
-
 .btn {
     font-size: 1.3rem;
     color: #93674E;
     cursor: pointer;
-    display: none;
 }
 
 .button_header {
@@ -117,6 +106,10 @@ nav ul li a:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
 }
 
+.container-newBook{
+    background-color: #E8D6C6;
+    margin-top: 8%;
+}
 /* BANNER */
 
 .home {
@@ -166,6 +159,18 @@ nav ul li a:hover {
 
 /* HOME */
 
+.card-home{
+    padding-top: 0.7rem;
+}
+
+.card-home-grande{
+    max-width: 341px;
+}
+
+.row-home{
+margin-top: 2%;
+}
+
 .cincoLibros {
     margin-left: 2%;
     margin-right: 2%;
@@ -202,6 +207,10 @@ h5.card-title{
     width: 100%;
 }
 
+.card-img-top {
+    width: 50%;
+    margin: auto;
+}
 /* LOGIN */
 
 .login {
@@ -396,6 +405,11 @@ h5.card-title{
 
 .p-md-5 {
     margin: auto;
+}
+
+.img-fluid {
+    height: auto;
+    width: 30%;
 }
 
 .flex-column {
@@ -607,15 +621,15 @@ h2.textoSinLibros {
 }
 
 /* BOOK DETAIL */
+.botonAñadir:hover{
+    background-color: #93674E;
+    color: #E8D6C6;
+}
 
 .detail-title{
     font-size: 2rem;
     text-align: center;
     color: #7a503b;
-}
-
-.card {
-    margin-bottom: 30px;
 }
 
 .card {
@@ -628,6 +642,7 @@ h2.textoSinLibros {
     background-clip: border-box;
     border: 0 solid transparent;
     border-radius: 0;
+    margin-bottom: 30px;
 }
 
 .card .card-subtitle {
@@ -645,17 +660,17 @@ h2.textoSinLibros {
 }
 
 .botonComprarDetalle {
-    background-color: #d90000;
-    border-radius: 0px;
-    border: none;
+    background-color: #93674E;
     width: 150px;
     font-weight: bold;
     font-size: 18px;
+    color: white;
 }
 
 .botonComprarDetalle:hover {
     border: none;
-    background-color: rgb(205, 16, 16);
+    background-color: #E8D6C6;
+    color: #93674E;
 }
 
 .table-container {
@@ -672,4 +687,8 @@ h2.textoSinLibros {
     margin-right: auto;
     text-align: left;
     max-width: 80%;
+}
+
+input.selectImg {
+    margin-bottom: 5%;
 }

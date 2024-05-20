@@ -33,6 +33,10 @@ public class Book {
     @Column(name = "ISBN")
     private String ISBN;
 
+    @Lob 
+    @Column(name = "image", columnDefinition = "LONGBLOB")
+    private byte[] image;
+
     public Integer getId() {
         return bookId;
     }

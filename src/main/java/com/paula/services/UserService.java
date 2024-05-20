@@ -1,10 +1,12 @@
 package com.paula.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.paula.model.Book;
 import com.paula.model.Role;
 import com.paula.model.User;
 import com.paula.repository.UserRepository;
@@ -13,6 +15,9 @@ import com.paula.repository.UserRepository;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private BookService bookService;
         
     public void createUser(User user) {
         userRepository.save(user);
@@ -57,5 +62,19 @@ public class UserService {
     
     public void updateUser(User user) {
         userRepository.save(user);
+    }
+
+     public void deleteUser(Integer userId) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            List<Book> userBooks = bookService.getBooksByUser(user);
+            for (Book book : userBooks) {
+                bookService.deleteBook(book.getId());
+            }
+            userRepository.deleteById(userId);
+        } else {
+            throw new RuntimeException("El usuario con ID " + userId + " no fue encontrado");
+        }
     }
 }

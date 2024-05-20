@@ -1,12 +1,16 @@
 package com.paula.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,12 +20,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.paula.model.*;
 import com.paula.services.BookService;
 import com.paula.services.UserService;
 import com.paula.util.Encriptation;
+
+import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 @RequestMapping("/")
@@ -161,8 +168,6 @@ public class BookswapController {
             User user = getUserFromSession(session);
             if (user != null) {
                 book.setUser(user);
-                // No establecer bookId manualmente, dejar que la base de datos lo genere
-                // automáticamente
                 bookService.createBook(book);
                 return "redirect:/perfil";
             } else {
@@ -182,10 +187,15 @@ public class BookswapController {
 
     @GetMapping("/deleteBook/{bookId}")
     public String deleteBook(@PathVariable Integer bookId, RedirectAttributes redirectAttributes) {
-        bookService.deleteBook(bookId);
-        redirectAttributes.addFlashAttribute("exito", "El libro con id " + bookId + " ha sido eliminado exitosamente.");
-        return "redirect:/perfil";
+        try {
+            bookService.deleteBook(bookId);
 
+            redirectAttributes.addFlashAttribute("exito",
+                    "El libro con id " + bookId + " ha sido eliminado exitosamente.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Se produjo un error al intentar eliminar el libro.");
+        }
+        return "redirect:/perfil";
     }
 
     @GetMapping("/addFavorite/{bookId}")
@@ -216,6 +226,49 @@ public class BookswapController {
         }
     }
 
+    @GetMapping("/uploadImage/{bookId}")
+    public String showUploadImageForm(@PathVariable Integer bookId, Model model, HttpSession session) {
+        Book book = bookService.getBookById(bookId);
+        String username = (String) session.getAttribute("username");
+        if (book != null && book.getUser().getUsername().equals(username)) {
+            model.addAttribute("book", book);
+            return "uploadBookImage";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @PostMapping("/books/{bookId}/image")
+    public String uploadImage(@PathVariable Integer bookId, @RequestParam("image") MultipartFile image,
+            RedirectAttributes redirectAttributes) {
+        try {
+            Book book = bookService.getBookById(bookId);
+
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            Thumbnails.of(image.getInputStream()).size(200, 200).outputFormat("jpg").outputQuality(0.5)
+                    .toOutputStream(outputStream);
+            book.setImage(outputStream.toByteArray());
+
+            bookService.updateBook(book);
+
+            redirectAttributes.addFlashAttribute("success", "Imagen subida correctamente.");
+            return "redirect:/perfil";
+        } catch (IOException e) {
+            redirectAttributes.addFlashAttribute("error", "Error al subir la imagen.");
+            return "redirect:/perfil";
+        }
+    }
+
+    @GetMapping(value = "/books/{bookId}/image", produces = { MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE })
+    public ResponseEntity<byte[]> getImage(@PathVariable Integer bookId) {
+        Book book = bookService.getBookById(bookId);
+        if (book != null && book.getImage() != null) {
+            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(book.getImage());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping("/bookDetail/{bookId}")
     public String bookDetail(@PathVariable Integer bookId, Model model) {
         Book book = bookService.getBookById(bookId);
@@ -223,7 +276,7 @@ public class BookswapController {
             model.addAttribute("book", book);
             return "bookDetail";
         }
-        return "redirect:/"; // O redirigir a una página de error personalizada
+        return "redirect:/";
     }
 
 }

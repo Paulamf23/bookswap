@@ -12,7 +12,7 @@ import com.paula.model.Book;
 import com.paula.model.User;
 
 @Repository
-public interface BookRepository extends JpaRepository<Book, Integer>{
+public interface BookRepository extends JpaRepository<Book, Integer> {
 
     List<Book> findByUser(User user);
 

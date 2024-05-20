@@ -73,4 +73,7 @@ public class User implements Serializable {
 		this.username = username;
 	}
 
+	public Integer getId() {
+        return userId;
+    }
 }
