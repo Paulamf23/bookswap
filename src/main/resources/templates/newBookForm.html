@@ -37,6 +37,15 @@
                             <label class="label_newBook" for="isbn">ISBN:</label>
                             <input class="input_newBook form-control" type="text" id="isbn" name="isbn"
                                 th:field="*{ISBN}" required>
+                            <label class="label_newBook" for="genre">Género:</label>
+                            <select class="input_newBook form-control" id="genre" name="genre" required>
+                                <option value="" disabled selected>Selecciona un género</option>
+                                <th:block th:each="genre : ${T(com.paula.model.Genre).values()}">
+                                    <option th:value="${genre}"
+                                        th:text="${#strings.capitalize(genre.name().replaceAll('([A-Z])', ' $1').toLowerCase())}">
+                                    </option>
+                                </th:block>
+                            </select>
                         </div>
                         <button class="button_form" type="submit">Publicar Libro</button>
                     </form>

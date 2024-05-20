@@ -33,11 +33,19 @@ public class Book {
     @Column(name = "ISBN")
     private String ISBN;
 
-    @Lob 
+    @Column(name = "genre")
+    private Genre genre;
+
+    @Column(name = "delete_flag")
+    private Boolean delete = false;
+
+    @Lob
     @Column(name = "image", columnDefinition = "LONGBLOB")
     private byte[] image;
 
     public Integer getId() {
         return bookId;
     }
+
+
 }

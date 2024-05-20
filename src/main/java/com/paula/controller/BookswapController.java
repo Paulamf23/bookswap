@@ -161,13 +161,14 @@ public class BookswapController {
 
     @PostMapping("/createBook")
     public String createBook(@Valid @ModelAttribute Book book, BindingResult bindingResult, Model model,
-            RedirectAttributes redirectAttributes, HttpSession session) {
+            RedirectAttributes redirectAttributes, HttpSession session, @RequestParam("genre") Genre genre) {
         if (bindingResult.hasErrors()) {
             return "newBookForm";
         } else {
             User user = getUserFromSession(session);
             if (user != null) {
                 book.setUser(user);
+                book.setGenre(genre);
                 bookService.createBook(book);
                 return "redirect:/perfil";
             } else {
@@ -183,19 +184,6 @@ public class BookswapController {
             return userService.getUserByUsername(username);
         }
         return null;
-    }
-
-    @GetMapping("/deleteBook/{bookId}")
-    public String deleteBook(@PathVariable Integer bookId, RedirectAttributes redirectAttributes) {
-        try {
-            bookService.deleteBook(bookId);
-
-            redirectAttributes.addFlashAttribute("exito",
-                    "El libro con id " + bookId + " ha sido eliminado exitosamente.");
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "Se produjo un error al intentar eliminar el libro.");
-        }
-        return "redirect:/perfil";
     }
 
     @GetMapping("/addFavorite/{bookId}")
@@ -225,6 +213,14 @@ public class BookswapController {
             return "redirect:/login";
         }
     }
+
+    @GetMapping("/deleteBook/{bookId}")
+	public String deleteBook(@PathVariable Integer bookId, RedirectAttributes redirectAttributes) {
+		bookService.deleteBook(bookId);
+		redirectAttributes.addFlashAttribute("exito", "El libro con id " + bookId + " ha sido eliminado exitosamente.");
+		return "redirect:/perfil";
+
+	}
 
     @GetMapping("/uploadImage/{bookId}")
     public String showUploadImageForm(@PathVariable Integer bookId, Model model, HttpSession session) {
