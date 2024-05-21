@@ -832,3 +832,10 @@ input.selectImg {
         max-width: 100%;
     }
 }
+
+.container-community {
+    max-width: 80%;
+    border: 1px solid #7a503b;
+    margin: auto;
+    margin-top: 20px;
+}

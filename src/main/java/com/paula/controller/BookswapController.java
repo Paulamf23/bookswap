@@ -199,6 +199,10 @@ public class BookswapController {
         List<Book> books = bookService.searchBooksByTitle(title);
         model.addAttribute("books", books);
         model.addAttribute("searchQuery", title);
+
+        List<Genre> genres = Arrays.asList(Genre.values());
+        model.addAttribute("genres", genres);
+
         return "books";
     }
 
@@ -235,7 +239,7 @@ public class BookswapController {
             return "perfil";
         }
         return "redirect:/";
-    }    
+    }
 
     @GetMapping("/newBook")
     public String newBookForm(Model model, HttpSession session) {
@@ -267,7 +271,7 @@ public class BookswapController {
                 return "redirect:/login";
             }
         }
-    }    
+    }
 
     @GetMapping("/deleteFavorite/{userId}/{bookId}")
     public String deleteFavorite(@PathVariable Integer userId, @PathVariable Integer bookId, HttpSession session,
@@ -336,5 +340,31 @@ public class BookswapController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/community")
+    public String communityPage(HttpSession session, Model model) {
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            List<Community> messages = userService.getAllMessages();
+            model.addAttribute("messages", messages);
+            return "community";
+        } else {
+
+            return "redirect:/login";
+        }
+    }
+
+    @PostMapping("/sendMessage")
+    public String sendMessage(@RequestParam String content, HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        if (username != null && !content.isEmpty()) {
+            User sender = userService.getUserByUsername(username);
+            Community message = new Community();
+            message.setContent(content);
+            message.setSender(sender);
+            userService.saveMessage(message);
+        }
+        return "redirect:/community";
     }
 }
