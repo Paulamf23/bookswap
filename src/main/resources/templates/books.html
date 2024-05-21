@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="auto">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BookSwap</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+    <div th:replace="plantillas/header :: header"></div>
+
+    <main class="books">
+        <div class="col-md-4">
+            <div class="position-sticky" style="top: 2rem;">
+                <div class="p-4">
+                    <h4>Géneros</h4>
+                    <ul class="list-unstyled mb-0">
+                        <li><a th:href="@{/books}">Todos</a></li>
+                        <li th:each="genre : ${genres}">
+                            <a th:href="@{/books/__${genre}__}" th:text="${genre}"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="buscar">
+                <input type="text" placeholder="Buscar libro">
+                <div class="btn_buscar">
+                    <i class="fa fa-search"></i>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row row-home">
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4 mb-4-books" th:each="book, iterStat : ${books}">
+                        <div class="card card-book card-home-grande shadow-sm">
+                            <img th:src="@{'/books/' + ${book.bookId} + '/image'}"
+                                class="bd-placeholder-img card-img-top" width="100%" height="225" alt="Book Image">
+                            <div class="card-body card-home">
+                                <div class="datosLibro">
+                                    <h5 class="card-title"
+                                        th:text="${#strings.length(book.title) gt 15 ? #strings.substring(book.title, 0, 15) + '...' : book.title}"
+                                        data-toggle="tooltip" th:attr="title=${book.title}"></h5>
+                                    <p class="card-text" th:text="'@' + ${book.user?.username}"></p>
+                                </div>
+                                <div class="btn-group">
+                                    <a th:href="@{/bookDetail/{bookId}(bookId=${book.bookId})}"
+                                        class="btn botonesDeLibros btn-secondary my-2">Ver libro</a>
+                                    <form th:action="@{/addFavorite/__${book.bookId}__}" method="get"
+                                        style="display:inline;">
+                                        <button type="submit" class="btn botonesDeLibros btn-secondary my-2">
+                                            <i class="fa fa-heart" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${#lists.isEmpty(books)}" class="col text-center">
+                    <p>No hay libros publicados.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+</body>
+
+</html>

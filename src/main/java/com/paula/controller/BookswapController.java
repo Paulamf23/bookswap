@@ -1,6 +1,7 @@
 package com.paula.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,6 +55,67 @@ public class BookswapController {
         return "home";
     }
 
+    @GetMapping("/bookDetail/{bookId}")
+    public String bookDetail(@PathVariable Integer bookId, Model model) {
+        Book book = bookService.getBookById(bookId);
+        if (book != null) {
+            model.addAttribute("book", book);
+            return "bookDetail";
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping("/addFavorite/{bookId}")
+    public String addFavorite(@PathVariable Integer bookId, HttpSession session,
+            RedirectAttributes redirectAttributes) {
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            User user = userService.getUserByUsername(username);
+            Book book = bookService.getBookById(bookId);
+            if (user != null && book != null) {
+                if (user.getFavorites().stream().noneMatch(fav -> fav.getBook().getId().equals(bookId))) {
+                    FavouriteBooks favorite = new FavouriteBooks();
+                    favorite.setUser(user);
+                    favorite.setBook(book);
+                    user.getFavorites().add(favorite);
+                    userService.updateUser(user);
+                    redirectAttributes.addFlashAttribute("success", "Libro agregado a favoritos correctamente.");
+                } else {
+                    redirectAttributes.addFlashAttribute("info", "El libro ya está en tus favoritos.");
+                }
+            } else {
+                redirectAttributes.addFlashAttribute("error", "No se pudo agregar el libro a favoritos.");
+            }
+            return "redirect:/perfil";
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Debes iniciar sesión para agregar a favoritos.");
+            return "redirect:/login";
+        }
+    }
+
+    @GetMapping("/logOut")
+    public String logOut(Model model, HttpSession hSession) {
+        if (hSession.getAttribute("username") != null) {
+            hSession.setAttribute("username", null);
+            return "redirect:/";
+        }
+        return "home";
+    }
+
+    private User getUserFromSession(HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            return userService.getUserByUsername(username);
+        }
+        return null;
+    }
+
+    @GetMapping("/register")
+    public String registerPage(Model model) {
+        model.addAttribute("user", new User());
+        return "register";
+    }
+
     @GetMapping("/login")
     public String loginPage(Model model) {
         model.addAttribute("user", new User());
@@ -77,29 +139,6 @@ public class BookswapController {
             redirectAttributes.addFlashAttribute("error", "El usuario introducido no se encuentra en la base de datos");
             return "redirect:/login";
         }
-    }
-
-    @GetMapping("/perfil")
-    public String perfilPage(HttpSession hSession, Model model) {
-        if (hSession.getAttribute("username") != null) {
-            String username = hSession.getAttribute("username").toString();
-            User user = userService.getUser(username);
-            List<Book> books = bookService.getBooksByUser(user);
-            List<Book> favoriteBooks = user.getFavorites().stream()
-                    .map(FavouriteBooks::getBook)
-                    .collect(Collectors.toList());
-            model.addAttribute("user", user);
-            model.addAttribute("books", books);
-            model.addAttribute("favoriteBooks", favoriteBooks);
-            return "perfil";
-        }
-        return "redirect:/";
-    }
-
-    @GetMapping("/register")
-    public String registerPage(Model model) {
-        model.addAttribute("user", new User());
-        return "register";
     }
 
     @PostMapping("/newUser")
@@ -137,14 +176,66 @@ public class BookswapController {
         }
     }
 
-    @GetMapping("/logOut")
-    public String logOut(Model model, HttpSession hSession) {
-        if (hSession.getAttribute("username") != null) {
-            hSession.setAttribute("username", null);
-            return "redirect:/";
+    @GetMapping("/books")
+    public String paginaBooks(HttpSession session, Model model) {
+        String userUsername = (String) session.getAttribute("username");
+        List<Book> books;
+        if (userUsername != null) {
+            books = bookService.getRecentBooksExcludingUser(userUsername);
+        } else {
+            books = bookService.getRecentBooks();
         }
-        return "home";
+        model.addAttribute("books", books);
+
+        List<Genre> genres = Arrays.asList(Genre.values());
+        model.addAttribute("genres", genres);
+
+        return "books";
     }
+
+    @GetMapping("/searchBooks")
+    public String searchBooks(@RequestParam("title") String title, HttpSession session, Model model) {
+        String userUsername = (String) session.getAttribute("username");
+        List<Book> books = bookService.searchBooksByTitle(title);
+        model.addAttribute("books", books);
+        model.addAttribute("searchQuery", title);
+        return "books";
+    }
+
+    @GetMapping("/books/{genre}")
+    public String filterBooksByGenre(@PathVariable String genre, HttpSession session, Model model) {
+        String userUsername = (String) session.getAttribute("username");
+        List<Book> books;
+        if (userUsername != null) {
+            books = bookService.getBooksByGenreExcludingUser(genre, userUsername);
+        } else {
+            books = bookService.getBooksByGenre(genre);
+        }
+        model.addAttribute("books", books);
+
+        // Obtener todos los géneros disponibles
+        List<Genre> genres = Arrays.asList(Genre.values());
+        model.addAttribute("genres", genres);
+
+        return "books";
+    }
+
+    @GetMapping("/perfil")
+    public String perfilPage(HttpSession hSession, Model model) {
+        if (hSession.getAttribute("username") != null) {
+            String username = hSession.getAttribute("username").toString();
+            User user = userService.getUser(username);
+            List<Book> books = bookService.getBooksByUser(user);
+            List<Book> favoriteBooks = user.getFavorites().stream()
+                    .map(FavouriteBooks::getBook)
+                    .collect(Collectors.toList());
+            model.addAttribute("user", user);
+            model.addAttribute("books", books);
+            model.addAttribute("favoriteBooks", favoriteBooks);
+            return "perfil";
+        }
+        return "redirect:/";
+    }    
 
     @GetMapping("/newBook")
     public String newBookForm(Model model, HttpSession session) {
@@ -176,43 +267,7 @@ public class BookswapController {
                 return "redirect:/login";
             }
         }
-    }
-
-    private User getUserFromSession(HttpSession session) {
-        String username = (String) session.getAttribute("username");
-        if (username != null) {
-            return userService.getUserByUsername(username);
-        }
-        return null;
-    }
-
-    @GetMapping("/addFavorite/{bookId}")
-    public String addFavorite(@PathVariable Integer bookId, HttpSession session,
-            RedirectAttributes redirectAttributes) {
-        String username = (String) session.getAttribute("username");
-        if (username != null) {
-            User user = userService.getUserByUsername(username);
-            Book book = bookService.getBookById(bookId);
-            if (user != null && book != null) {
-                if (user.getFavorites().stream().noneMatch(fav -> fav.getBook().getId().equals(bookId))) {
-                    FavouriteBooks favorite = new FavouriteBooks();
-                    favorite.setUser(user);
-                    favorite.setBook(book);
-                    user.getFavorites().add(favorite);
-                    userService.updateUser(user);
-                    redirectAttributes.addFlashAttribute("success", "Libro agregado a favoritos correctamente.");
-                } else {
-                    redirectAttributes.addFlashAttribute("info", "El libro ya está en tus favoritos.");
-                }
-            } else {
-                redirectAttributes.addFlashAttribute("error", "No se pudo agregar el libro a favoritos.");
-            }
-            return "redirect:/perfil";
-        } else {
-            redirectAttributes.addFlashAttribute("error", "Debes iniciar sesión para agregar a favoritos.");
-            return "redirect:/login";
-        }
-    }
+    }    
 
     @GetMapping("/deleteFavorite/{userId}/{bookId}")
     public String deleteFavorite(@PathVariable Integer userId, @PathVariable Integer bookId, HttpSession session,
@@ -238,7 +293,6 @@ public class BookswapController {
         bookService.deleteBook(bookId);
         redirectAttributes.addFlashAttribute("exito", "El libro con id " + bookId + " ha sido eliminado exitosamente.");
         return "redirect:/perfil";
-
     }
 
     @GetMapping("/uploadImage/{bookId}")
@@ -283,15 +337,4 @@ public class BookswapController {
             return ResponseEntity.notFound().build();
         }
     }
-
-    @GetMapping("/bookDetail/{bookId}")
-    public String bookDetail(@PathVariable Integer bookId, Model model) {
-        Book book = bookService.getBookById(bookId);
-        if (book != null) {
-            model.addAttribute("book", book);
-            return "bookDetail";
-        }
-        return "redirect:/";
-    }
-
 }

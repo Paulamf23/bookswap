@@ -11,8 +11,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.paula.model.Book;
-import com.paula.model.User;
+import com.paula.model.*;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer> {
@@ -35,4 +34,12 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     @Modifying
     @Query("DELETE FROM FavouriteBooks fb WHERE fb.user.id = :userId AND fb.book.id = :bookId")
     void deleteByUserIdAndBookId(@Param("userId") Integer userId, @Param("bookId") Integer bookId);
+
+    @Query("SELECT b FROM Book b WHERE LOWER(b.title) LIKE LOWER(CONCAT('%', :title, '%'))")
+    List<Book> findByTitleIgnoreCase(@Param("title") String title);
+
+    List<Book> findByGenre(Genre genre);
+
+    @Query("SELECT b FROM Book b WHERE b.genre = :genre AND b.user.username <> :username")
+    List<Book> findByGenreExcludingUser(@Param("genre") Genre genre, @Param("username") String username);
 }
