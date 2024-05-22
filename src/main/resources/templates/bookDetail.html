@@ -30,10 +30,9 @@
                         </div>
                         <div class="col-lg-7 col-md-7 col-sm-6">
                             <p class="card-text" th:text="'Publicado por: @' + ${book.user.username}"></p>
-                            <div th:if="${session.username != book.user.username}">
+                            <div th:if="${session.username != book.user.username and !isAdmin}">
                                 <a><button class="btn btn-rounded botonComprarDetalle">Intercambiar</button></a>
-                            </div>
-                            <!-- Botón Subir Imagen que aparece si está vacío -->
+                            </div>                                                       
                             <div th:if="${book.image == null} and ${session.username == book.user.username}">
                                 <a th:href="@{/uploadImage/{bookId}(bookId=${book.id})}" class="botonComprarDetalle btn btn-rounded mt-3">Subir imagen</a>
                             </div>

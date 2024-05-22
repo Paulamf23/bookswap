@@ -67,10 +67,8 @@
                 const hours = String(date.getHours()).padStart(2, '0');
                 const minutes = String(date.getMinutes()).padStart(2, '0');
 
-                // Update timestamp text to show only hours and minutes
                 timestamp.textContent = `${hours}:${minutes}`;
 
-                // Insert date divider if the date is different from the last one
                 if (formattedDate !== lastDate) {
                     const dateDivider = document.createElement('div');
                     dateDivider.className = 'date-divider';
@@ -85,7 +83,6 @@
             location.reload();
         }
 
-        // Llamar a la función reloadPage cada 60 segundos
         setInterval(reloadPage, 60000);
     </script>
 </body>

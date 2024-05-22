@@ -61,10 +61,23 @@ public class BookswapController {
     }
 
     @GetMapping("/bookDetail/{bookId}")
-    public String bookDetail(@PathVariable Integer bookId, Model model) {
+    public String bookDetail(@PathVariable Integer bookId, Model model, HttpSession session) {
         Book book = bookService.getBookById(bookId);
         if (book != null) {
             model.addAttribute("book", book);
+
+            String username = (String) session.getAttribute("username");
+            if (username != null) {
+                User user = userService.getUserByUsername(username);
+                if (user != null && user.getRole() == Role.admin) {
+                    model.addAttribute("isAdmin", true);
+                } else {
+                    model.addAttribute("isAdmin", false);
+                }
+            } else {
+                model.addAttribute("isAdmin", false);
+            }
+
             return "bookDetail";
         }
         return "redirect:/";
