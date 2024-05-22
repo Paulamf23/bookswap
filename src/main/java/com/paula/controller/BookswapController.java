@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.paula.model.*;
+import com.paula.services.AdminService;
 import com.paula.services.BookService;
 import com.paula.services.UserService;
 import com.paula.util.Encriptation;
@@ -42,6 +42,9 @@ public class BookswapController {
 
     @Autowired
     private BookService bookService;
+
+    @Autowired
+    private AdminService adminService;
 
     @GetMapping("/")
     public String home(HttpSession session, Model model) {
@@ -131,7 +134,7 @@ public class BookswapController {
         if (existingUser != null) {
             if (Encriptation.validatePassword(user.getPassword(), existingUser.getPassword())) {
                 session.setAttribute("username", existingUser.getUsername());
-                return "redirect:/perfil";
+                return "redirect:/";
             } else {
                 redirectAttributes.addFlashAttribute("error",
                         "La contraseña no se corresponde con el usuario introducido");
@@ -170,7 +173,7 @@ public class BookswapController {
                     session.setAttribute("email", user.getEmail());
                     session.setAttribute("name", user.getName());
                     session.setAttribute("username", user.getUsername());
-                    return "perfil";
+                    return "/";
                 }
             }
             redirectAttributes.addFlashAttribute("errorUsuarioExiste", "El nombre de usuario ya existe.");
@@ -191,6 +194,10 @@ public class BookswapController {
 
         List<Genre> genres = Arrays.asList(Genre.values());
         model.addAttribute("genres", genres);
+
+        User user = getUserFromSession(session);
+        if (user != null && user.getRole() == Role.admin) {
+        }
 
         return "books";
     }
@@ -219,7 +226,6 @@ public class BookswapController {
         }
         model.addAttribute("books", books);
 
-        // Obtener todos los géneros disponibles
         List<Genre> genres = Arrays.asList(Genre.values());
         model.addAttribute("genres", genres);
 
@@ -238,6 +244,16 @@ public class BookswapController {
             model.addAttribute("user", user);
             model.addAttribute("books", books);
             model.addAttribute("favoriteBooks", favoriteBooks);
+
+            List<User> allUsers = adminService.getAllUsers();
+            model.addAttribute("allUsers", allUsers);
+
+            if (user.getRole() == Role.admin) {
+                model.addAttribute("isAdmin", true);
+            } else {
+                model.addAttribute("isAdmin", false);
+            }
+
             return "perfil";
         }
         return "redirect:/";
@@ -350,8 +366,13 @@ public class BookswapController {
         if (username != null) {
             model.addAttribute("username", username);
             List<Community> messages = userService.getAllMessages();
-            Collections.reverse(messages); // Reverse the messages list
+            Collections.reverse(messages);
             model.addAttribute("messages", messages);
+
+            User user = userService.getUserByUsername(username);
+            if (user != null && user.getRole() == Role.admin) {
+            }
+
             return "community";
         } else {
             return "redirect:/login";
@@ -371,10 +392,14 @@ public class BookswapController {
         return "redirect:/community";
     }
 
-    @GetMapping("/getNewMessages")
-    @ResponseBody
-    public List<Community> getNewMessages() {
-        return userService.getNewMessages();
+    @GetMapping("/deleteUser/{userId}")
+    public String deleteUser(@PathVariable Integer userId, RedirectAttributes redirectAttributes) {
+        try {
+            adminService.deleteUser(userId);
+            redirectAttributes.addFlashAttribute("success", "Usuario eliminado correctamente.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Error al eliminar el usuario.");
+        }
+        return "redirect:/perfil";
     }
-
 }

@@ -2,7 +2,6 @@ package com.paula.services;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,15 +9,10 @@ import org.springframework.stereotype.Service;
 import com.paula.model.*;
 import com.paula.repository.*;
 
-
-
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private BookService bookService;
 
     @Autowired
         private CommunityRepository communityRepository;
@@ -56,30 +50,12 @@ public class UserService {
         return -1;
     }
 
-    public void removeUser(User user) {
-        userRepository.delete(user);
-    }
-
     public List<User> getUsersRoles(Role role) {
         return userRepository.findAllByRole(role);
     }
 
     public void updateUser(User user) {
         userRepository.save(user);
-    }
-
-    public void deleteUser(Integer userId) {
-        Optional<User> userOptional = userRepository.findById(userId);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            List<Book> userBooks = bookService.getBooksByUser(user);
-            for (Book book : userBooks) {
-                bookService.deleteBook(book.getId());
-            }
-            userRepository.deleteById(userId);
-        } else {
-            throw new RuntimeException("El usuario con ID " + userId + " no fue encontrado");
-        }
     }
 
     public List<Community> getAllMessages() {
@@ -91,7 +67,8 @@ public class UserService {
         communityRepository.save(message);
     }
 
-    public List<Community> getNewMessages() {
-        return communityRepository.findTop10ByOrderByTimestampDesc();
+    public void deleteUser(int userId) {
+        userRepository.deleteById(userId);
     }
+
 }

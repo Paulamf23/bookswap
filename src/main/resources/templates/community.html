@@ -35,7 +35,7 @@
         <div class="col-mess">
             <form action="/sendMessage" method="post">
                 <div class="input-group">
-                    <input type="text" name="content" class="form-control" placeholder="Type your message here"
+                    <input type="text" name="content" class="form-control" placeholder="Tu mensaje"
                         required>
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary">
@@ -75,20 +75,12 @@
             });
         });
 
-        function cargarMensajes() {
-            fetch('/getNewMessages')
-                .then(response => response.json())
-                .then(data => {
-                    data.forEach(message => {
-                        const messageElement = document.createElement('div');
-                        messageElement.textContent = message.content;
-                        document.getElementById('chat-messages').appendChild(messageElement);
-                    });
-                })
-                .catch(error => console.error('Error al cargar mensajes:', error));
+        function reloadPage() {
+            location.reload();
         }
 
-        setInterval(cargarMensajes, 50000); 
+        // Llamar a la función reloadPage cada 60 segundos
+        setInterval(reloadPage, 60000);
     </script>
 </body>
 

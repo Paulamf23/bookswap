@@ -32,92 +32,133 @@
                 </div>
             </div>
         </div>
-        <h3 class="titulo-apartado">MIS LIBROS PUBLICADOS</h3>
-        <div class="botonNuevoLibro">
-            <a href="/newBook" class="button_newBook" role="button">
-                <i class="fa fa-plus-circle" aria-hidden="true"></i> Añadir
-            </a>
-        </div>
-        <div th:if="${#lists.isEmpty(books)}" class="col text-center">
-            <p>No hay libros publicados.</p>
-        </div>
-        <div th:if="${not #lists.isEmpty(books)}">
-            <div class="row mb-2">
-                <div class="col-md-6 mb-4" th:each="book : ${books}">
-                    <div
-                        class="card-libro-myBooks row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                        <div class="col p-4 d-flex flex-column position-static">
-                            <h3 class="titulo-libro mb-0" th:text="${book.title}"></h3>
-                            <div class="border rounded p-2 mb-1">
-                                <div class="text-body-secondary" th:text="${book.year}"></div>
-                                <div class="text-body-secondary" th:text="${book.author}"></div>
-                            </div>
-                            <div class="bajo">
-                                <p class="isbn icon-link gap-1 icon-link-hover stretched-link">
-                                    <span th:text="${'ISBN: ' + book.ISBN}"></span>
-                                </p>
-                                <div class="botonesTarjetas">
-                                    <div class="boton_verLibro">
-                                        <a th:href="@{/bookDetail/{bookId}(bookId=${book.bookId})}"
-                                            class="botonesDeLibros btn">
-                                            <i class="fa fa-eye" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                    <div class="boton_eliminar">
-                                        <a th:href="@{/deleteBook/{bookId}(bookId=${book.bookId})}"
-                                            class="btn btn-danger">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </a>
+        <div th:if="${isAdmin == false}">
+            <h3 class="titulo-apartado">MIS LIBROS PUBLICADOS</h3>
+            <div class="botonNuevoLibro">
+                <a href="/newBook" class="button_newBook" role="button">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i> Añadir
+                </a>
+            </div>
+            <div th:if="${#lists.isEmpty(books)}" class="col text-center">
+                <p>No hay libros publicados.</p>
+            </div>
+            <div th:if="${not #lists.isEmpty(books)}">
+                <div class="row mb-2">
+                    <div class="col-md-6 mb-4" th:each="book : ${books}">
+                        <div
+                            class="card-libro-myBooks row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <h3 class="titulo-libro mb-0" th:text="${book.title}"></h3>
+                                <div class="border rounded p-2 mb-1">
+                                    <div class="text-body-secondary" th:text="${book.year}"></div>
+                                    <div class="text-body-secondary" th:text="${book.author}"></div>
+                                </div>
+                                <div class="bajo">
+                                    <p class="isbn icon-link gap-1 icon-link-hover stretched-link">
+                                        <span th:text="${'ISBN: ' + book.ISBN}"></span>
+                                    </p>
+                                    <div class="botonesTarjetas">
+                                        <div class="boton_verLibro">
+                                            <a th:href="@{/bookDetail/{bookId}(bookId=${book.bookId})}"
+                                                class="botonesDeLibros btn">
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                        <div class="boton_eliminar">
+                                            <a th:href="@{/deleteBook/{bookId}(bookId=${book.bookId})}"
+                                                class="btn btn-danger">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-auto d-none d-lg-block">
+                                <img th:src="@{'/books/' + ${book.bookId} + '/image'}" class="bd-placeholder-img"
+                                    width="200" height="250" />
+                            </div>
                         </div>
-                        <div class="col-auto d-none d-lg-block">
-                            <img th:src="@{'/books/' + ${book.bookId} + '/image'}" class="bd-placeholder-img" width="200" height="250" />
+                    </div>
+                </div>
+            </div>
+            <h3 class="titulo-apartado">MIS FAVORITOS</h3>
+            <div th:if="${#lists.isEmpty(favoriteBooks)}" class="col text-center">
+                <p>No hay libros en favoritos.</p>
+            </div>
+            <div th:if="${not #lists.isEmpty(favoriteBooks)}">
+                <div class="row mb-2">
+                    <div class="col-md-6 mb-4" th:each="book : ${favoriteBooks}">
+                        <div
+                            class="card-libro-myBooks row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <h3 class="titulo-libro mb-0" th:text="${book.title}"></h3>
+                                <div class="border rounded p-2 mb-1">
+                                    <div class="text-body-secondary" th:text="${book.year}"></div>
+                                    <div class="text-body-secondary" th:text="${book.author}"></div>
+                                </div>
+                                <div class="bajo">
+                                    <p class="isbn icon-link gap-1 icon-link-hover stretched-link">
+                                        <span th:text="${'ISBN: ' + book.ISBN}"></span>
+                                    </p>
+                                    <div class="botonesTarjetas">
+                                        <div class="boton_verLibro">
+                                            <a th:href="@{/bookDetail/{bookId}(bookId=${book.bookId})}"
+                                                class="botonesDeLibros btn">
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                        <div class="quitarFav">
+                                            <a th:href="@{/deleteFavorite/{userId}/{bookId}(userId=${user.id}, bookId=${book.id})}"
+                                                class="botonesDeLibros btn">
+                                                <i class="fas fa-heart-broken"></i>
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto d-none d-lg-block">
+                                <img th:src="@{'/books/' + ${book.bookId} + '/image'}" class="bd-placeholder-img"
+                                    width="200" height="250" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <h3 class="titulo-apartado">MIS FAVORITOS</h3>
-        <div th:if="${#lists.isEmpty(favoriteBooks)}" class="col text-center">
-            <p>No hay libros en favoritos.</p>
-        </div>
-        <div th:if="${not #lists.isEmpty(favoriteBooks)}">
-            <div class="row mb-2">
-                <div class="col-md-6 mb-4" th:each="book : ${favoriteBooks}">
-                    <div
-                        class="card-libro-myBooks row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                        <div class="col p-4 d-flex flex-column position-static">
-                            <h3 class="titulo-libro mb-0" th:text="${book.title}"></h3>
-                            <div class="border rounded p-2 mb-1">
-                                <div class="text-body-secondary" th:text="${book.year}"></div>
-                                <div class="text-body-secondary" th:text="${book.author}"></div>
-                            </div>
-                            <div class="bajo">
-                                <p class="isbn icon-link gap-1 icon-link-hover stretched-link">
-                                    <span th:text="${'ISBN: ' + book.ISBN}"></span>
-                                </p>
-                                <div class="botonesTarjetas">
-                                    <div class="boton_verLibro">
-                                        <a th:href="@{/bookDetail/{bookId}(bookId=${book.bookId})}"
-                                            class="botonesDeLibros btn">
-                                            <i class="fa fa-eye" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                    <div class="quitarFav">
-                                        <a th:href="@{/deleteFavorite/{userId}/{bookId}(userId=${user.id}, bookId=${book.id})}" class="botonesDeLibros btn">
-                                            <i class="fas fa-heart-broken"></i>
-                                        </a>
-                                                                              
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-auto d-none d-lg-block">
-                            <img th:src="@{'/books/' + ${book.bookId} + '/image'}" class="bd-placeholder-img" width="200" height="250" />
-                        </div>
-                    </div>
+        <div th:if="${isAdmin}">
+            <h3 class="titulo-apartado">USUARIOS REGISTRADOS</h3>
+            <div th:if="${#lists.isEmpty(allUsers)}" class="col text-center">
+                <p>No hay usuarios registrados.</p>
+            </div>
+            <div th:if="${not #lists.isEmpty(allUsers)}">
+                <div class="tbl-header">
+                    <table cellpadding="0" cellspacing="0" border="0">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th class="email">Email</th>
+                                <th class="username">Nombre de Usuario</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="tbl-content">
+                    <table cellpadding="0" cellspacing="0" border="0">
+                        <tbody>
+                            <tr th:each="user : ${allUsers}">
+                                <td th:text="${user.name}"></td>
+                                <td th:text="${user.email}"></td>
+                                <td th:text="${user.username}"></td>
+                                <td>
+                                    <a th:href="@{'/deleteUser/' + ${user.id}}" class="btn boton_delete">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -125,6 +166,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <script>
+        $(window).on("load resize ", function () {
+            var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+            $('.tbl-header').css({ 'padding-right': scrollWidth });
+        }).resize();
+    </script>
 </body>
 
 </html>
