@@ -24,19 +24,25 @@
                             <b><span th:text="${'@' + message.sender.username}"></span></b>
                             <br>
                             <span th:text="${message.content}"></span>
-                            <div class="horaPub">
-                                <span class="timestamp" th:text="${message.timestamp}"></span>
+                            <div class="esquina">
+                                <div th:if="${isAdmin}" class="del_message">
+                                    <a th:href="@{/deleteMessage/{id}(id=${message.id})}" class="delete_message btn">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                <div class="horaPub">
+                                    <span class="timestamp" th:text="${message.timestamp}"></span>
+                                </div>
                             </div>
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="col-mess">
+        <div th:if="${isAdmin == false}" class="col-mess">
             <form action="/sendMessage" method="post">
                 <div class="input-group">
-                    <input type="text" name="content" class="form-control" placeholder="Tu mensaje"
-                        required>
+                    <input type="text" name="content" class="form-control" placeholder="Tu mensaje" required>
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary">
                             <i class="fa fa-paper-plane" aria-hidden="true"></i>
@@ -75,12 +81,12 @@
             });
         });
 
-        function reloadPage() {
-            location.reload();
-        }
+        // function reloadPage() {
+        //     location.reload();
+        // }
 
-        // Llamar a la función reloadPage cada 60 segundos
-        setInterval(reloadPage, 60000);
+        // // Llamar a la función reloadPage cada 60 segundos
+        // setInterval(reloadPage, 60000);
     </script>
 </body>
 

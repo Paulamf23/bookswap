@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.paula.model.Book;
+import com.paula.model.Community;
 import com.paula.model.User;
 import com.paula.repository.UserRepository;
 
@@ -37,4 +38,5 @@ public class AdminService {
             userService.deleteUser(userId);
         }
     }
+
 }

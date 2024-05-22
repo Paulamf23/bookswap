@@ -373,6 +373,12 @@ public class BookswapController {
             if (user != null && user.getRole() == Role.admin) {
             }
 
+            if (user.getRole() == Role.admin) {
+                model.addAttribute("isAdmin", true);
+            } else {
+                model.addAttribute("isAdmin", false);
+            }
+
             return "community";
         } else {
             return "redirect:/login";
@@ -401,5 +407,24 @@ public class BookswapController {
             redirectAttributes.addFlashAttribute("error", "Error al eliminar el usuario.");
         }
         return "redirect:/perfil";
+    }
+
+    @GetMapping("/deleteMessage/{id}")
+    public String deleteMessage(@PathVariable Integer id, HttpSession session, RedirectAttributes redirectAttributes) {
+        String username = (String) session.getAttribute("username");
+        User user = userService.getUserByUsername(username);
+        Community message = userService.getMessageById(id);
+
+        if (user != null && message != null) {
+            if (user.getRole() == Role.admin || user.getUsername().equals(message.getSender().getUsername())) {
+                userService.deleteMessage(id);
+                redirectAttributes.addFlashAttribute("success", "Mensaje eliminado correctamente.");
+            } else {
+                redirectAttributes.addFlashAttribute("error", "No tienes permiso para eliminar este mensaje.");
+            }
+        } else {
+            redirectAttributes.addFlashAttribute("error", "No se pudo encontrar el mensaje o usuario.");
+        }
+        return "redirect:/community";
     }
 }

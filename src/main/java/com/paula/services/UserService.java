@@ -71,4 +71,11 @@ public class UserService {
         userRepository.deleteById(userId);
     }
 
+    public Community getMessageById(Integer id) {
+        return communityRepository.findById(id).orElse(null);
+    }
+
+    public void deleteMessage(Integer id) {
+        communityRepository.deleteById(id);
+    }
 }

@@ -1012,3 +1012,21 @@ ul {
 .user-message {
     background-color: #949b6c;
 }
+
+.esquina {
+    display: flex;
+    align-items: baseline;
+}
+
+.del_message{
+    margin-left: 850px;
+}
+
+.delete_message:hover {
+    color: red;
+}
+
+.delete_message {
+    color: white;
+    font-size: 17px;
+}
