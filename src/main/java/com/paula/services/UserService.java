@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.paula.model.*;
 import com.paula.repository.*;
-import com.paula.repository.CommunityRepository;
 
 
 
@@ -90,5 +89,9 @@ public class UserService {
     public void saveMessage(Community message) {
         message.setTimestamp(LocalDateTime.now());
         communityRepository.save(message);
+    }
+
+    public List<Community> getNewMessages() {
+        return communityRepository.findTop10ByOrderByTimestampDesc();
     }
 }

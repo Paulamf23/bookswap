@@ -833,9 +833,118 @@ input.selectImg {
     }
 }
 
+/* COMMUNITY */
+
 .container-community {
     max-width: 80%;
     border: 1px solid #7a503b;
     margin: auto;
     margin-top: 20px;
+}
+
+.community{
+    display: flex;;
+}
+
+.col-comm {
+    max-width: 1000px;
+    margin-left: 3%;
+    border: 3px solid #7a503b;
+    top: 40px;
+    padding: 1%;
+    background-color: #E8D6C6;
+    border-radius: 20px;
+    overflow: auto;
+    max-height: 700px;
+}
+
+ul {
+    list-style: none;
+}
+
+.col-mess {
+    margin-left: 3%;
+    font-size: 16px;
+    margin-top: 60px;
+    width: 40%;
+}
+
+.col-mess button {
+    background-color: #7a503b;
+    color: white;
+    border: none;
+}
+
+.col-mess button:hover {
+    background-color: #93674E;
+    color: white;
+    border: none;
+}
+
+.col-mess input.form-control {
+    height: auto;
+    border: 2px solid #7a503b;
+}
+
+.message {
+    margin-bottom: 1%;
+    background-color: #7a503b;
+    color: white;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.horaPub {
+    max-width: fit-content;
+    max-height: 25px;
+    display: flex;
+    margin-left: auto;
+}
+
+.col-comm::-webkit-scrollbar {
+    display: none;
+}
+
+.date-divider {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.date-divider hr {
+    flex-grow: 1;
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 0 10px;
+}
+
+.date-divider span {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.date-divider {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.date-divider hr {
+    flex-grow: 1;
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 0 10px;
+}
+
+.date-divider span {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.current-user-message {
+    background-color: #575C3D; 
+}
+
+.user-message {
+    background-color: #949b6c; 
 }

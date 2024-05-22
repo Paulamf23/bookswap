@@ -2,6 +2,7 @@ package com.paula.controller;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -346,11 +348,12 @@ public class BookswapController {
     public String communityPage(HttpSession session, Model model) {
         String username = (String) session.getAttribute("username");
         if (username != null) {
+            model.addAttribute("username", username);
             List<Community> messages = userService.getAllMessages();
+            Collections.reverse(messages); // Reverse the messages list
             model.addAttribute("messages", messages);
             return "community";
         } else {
-
             return "redirect:/login";
         }
     }
@@ -367,4 +370,11 @@ public class BookswapController {
         }
         return "redirect:/community";
     }
+
+    @GetMapping("/getNewMessages")
+    @ResponseBody
+    public List<Community> getNewMessages() {
+        return userService.getNewMessages();
+    }
+
 }
