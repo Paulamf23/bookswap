@@ -543,7 +543,7 @@ h2.textoSinLibros {
 
 .boton_verLibro {
     position: relative;
-    z-index: 9999;
+    z-index: 1;
     cursor: pointer;
 }
 
@@ -606,18 +606,43 @@ td {
     border-bottom: solid 1px #93674E;
 }
 
-section{
-  margin: 50px;
+section {
+    margin: 50px;
 }
 
 .tbl-content::-webkit-scrollbar {
     width: 6px;
-} 
+}
+
 .tbl-content::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-} 
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
 .tbl-content::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.principal-perfil{
+    display: flex;
+    width: 100%;
+
+}
+
+.intercambios {
+    max-width: 19%;
+    border: 2px solid #7a503b;
+    background-color: #E8D6C6;
+    color: #7a503b;
+    padding: 0;
+    height: 150px;
+    margin-bottom: 2%;
+    border-radius: 20px;
+    margin-left: auto;
+}
+
+.intercambios a{
+    text-decoration: none;
+    color: #7a503b;
 }
 /* PAGINA NEWBOOK */
 
@@ -645,7 +670,7 @@ section{
 .container_newBook {
     margin: auto;
     max-width: 900px;
-    height: 450px;
+    height: 550px;
 }
 
 .titulo_formulario {
@@ -760,6 +785,14 @@ input.selectImg {
     margin-bottom: 5%;
 }
 
+.usuario {
+    display: grid;
+    gap: 5%;
+}
+
+.btnFavDetail {
+    width: auto;
+}
 /* BOOKS */
 
 .books {
@@ -907,7 +940,7 @@ input.selectImg {
 
 .community {
     display: flex;
-    ;
+    gap: 2%;
 }
 
 .col-comm {
@@ -930,7 +963,8 @@ ul {
     margin-left: 3%;
     font-size: 16px;
     margin-top: 60px;
-    width: 40%;
+    width: 100%;
+    margin-bottom: 100px;
 }
 
 .col-mess button {
@@ -1018,7 +1052,7 @@ ul {
     align-items: baseline;
 }
 
-.del_message{
+.del_message {
     margin-left: 850px;
 }
 
@@ -1029,4 +1063,117 @@ ul {
 .delete_message {
     color: white;
     font-size: 17px;
+}
+
+.normas{
+    border: 2px solid #E8D6C6;
+    width: 100%;
+    padding: 3%;
+    background-color: #575C3D;
+    color: #E8D6C6;
+    border-radius: 30px
+}
+
+.lateral-derecho {
+    width: 40%;
+}
+/* INTERCAMBIOS */
+
+.tituloIntercambio {
+    margin-top: 10px;
+}
+
+.col-intercambio-libro {
+    max-width: 50%;
+    margin: auto;
+}
+
+i.fa.fa-exchange {
+    font-size: 60px;
+    margin-top: 120px;
+    color: #7a503b;
+}
+
+.intercambio{
+    display: flex;
+}
+
+.noLibroIntercambio {
+    border: 3px solid #7a503b;
+    max-width: fit-content;
+    margin: auto;
+    padding: 20px;
+    border-radius: 25px;
+    background-color: #E8D6C6;
+    color: #93674E;
+    font-weight: bold;
+}
+
+.botonCancel {
+    background-color: #93674E;
+    color: #E8D6C6;
+    margin: auto;
+}
+
+.botonCancel:hover{
+    background-color: #E8D6C6;
+    color: #93674E;
+    border: 2px solid #7a503b;
+}
+
+.cancel {
+    margin-top: 20px;
+    display: flex;
+}
+
+.p-4 {
+    padding: 1.4rem !important;
+}
+
+.img_detail{
+    background-image: url("../images/intercambio.png");
+}
+
+.container_detail {
+    max-height: 350px;
+    color: #7a503b;
+}
+
+.container_detail span{
+    color: black;
+}
+
+.container_detail a{
+    margin-top: 10px;
+}
+
+.titulo_exchange {
+    font-size: 50px;
+}
+
+.detailIntercambio{
+    background-color: #E8D6C6;
+}
+
+/* INTERCAMBIOS */
+
+.interName{
+    font-weight: bold;
+    text-align: center;
+    line-height: 1;
+    background-color: #E8D6C6;
+    color: #93674E;
+    border-radius: 18px;
+    border: 1px solid #93674E;
+    max-width: 50%;
+    padding: 1%;
+    margin: auto;
+}
+
+.librosPerfil{
+    width: 100%;
+}
+
+.botonesTabla{
+    display: flex;
 }

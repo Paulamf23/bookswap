@@ -1,33 +1,28 @@
 package com.paula.controller;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
+// import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.paula.model.*;
 import com.paula.services.AdminService;
 import com.paula.services.BookService;
+import com.paula.services.ExchangeService;
+// import com.paula.services.MessageService;
 import com.paula.services.UserService;
 import com.paula.util.Encriptation;
 
@@ -45,6 +40,12 @@ public class BookswapController {
 
     @Autowired
     private AdminService adminService;
+
+    // @Autowired
+    // private MessageService messageService;
+
+    @Autowired
+    private ExchangeService exchangeService;
 
     @GetMapping("/")
     public String home(HttpSession session, Model model) {
@@ -186,7 +187,7 @@ public class BookswapController {
                     session.setAttribute("email", user.getEmail());
                     session.setAttribute("name", user.getName());
                     session.setAttribute("username", user.getUsername());
-                    return "/";
+                    return "/perfil";
                 }
             }
             redirectAttributes.addFlashAttribute("errorUsuarioExiste", "El nombre de usuario ya existe.");
@@ -287,7 +288,9 @@ public class BookswapController {
 
     @PostMapping("/createBook")
     public String createBook(@Valid @ModelAttribute Book book, BindingResult bindingResult, Model model,
-            RedirectAttributes redirectAttributes, HttpSession session, @RequestParam("genre") Genre genre) {
+            RedirectAttributes redirectAttributes, HttpSession session,
+            @RequestParam("genre") Genre genre,
+            @RequestParam("condition") BookCondition condition) {
         if (bindingResult.hasErrors()) {
             return "newBookForm";
         } else {
@@ -295,6 +298,8 @@ public class BookswapController {
             if (user != null) {
                 book.setUser(user);
                 book.setGenre(genre);
+                book.setCondition(condition);
+
                 bookService.createBook(book);
                 return "redirect:/perfil";
             } else {
@@ -440,4 +445,108 @@ public class BookswapController {
         }
         return "redirect:/community";
     }
+
+    @GetMapping("/elegirIntercambio/{bookId}")
+    public String elegirIntercambio(@PathVariable Integer bookId, Model model, HttpSession session) {
+        Book book = bookService.getBookById(bookId);
+        if (book != null) {
+            model.addAttribute("book", book);
+            String username = (String) session.getAttribute("username");
+            if (username != null) {
+                User user = userService.getUserByUsername(username);
+                if (user != null) {
+                    List<Book> userBooks = bookService.getBooksByUser(user);
+                    List<Book> userBooksSameCondition = userBooks.stream()
+                            .filter(b -> b.getCondition().equals(book.getCondition()))
+                            .collect(Collectors.toList());
+                    model.addAttribute("userBooksSameCondition", userBooksSameCondition);
+                    model.addAttribute("selectedBook", null);
+                }
+            }
+            return "elegirIntercambio";
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping("/solicitarIntercambio/{bookId}/{userBookId}")
+    public String solicitarIntercambio(@PathVariable Integer bookId, @PathVariable Integer userBookId,
+            HttpSession session, RedirectAttributes redirectAttributes) {
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            User loggedUser = userService.getUserByUsername(username);
+            Book bookToExchange = bookService.getBookById(bookId);
+            Book userBook = bookService.getBookById(userBookId);
+
+            if (loggedUser != null && bookToExchange != null && userBook != null) {
+                bookService.updateBook(bookToExchange);
+                bookService.updateBook(userBook);
+
+                Exchange exchange = new Exchange();
+                exchange.setUsuarioPublicador(bookToExchange.getUser());
+                exchange.setUsuarioSolicitante(loggedUser);
+                exchange.setLibroSolicitado(bookToExchange);
+                exchange.setLibroPorIntercambiar(userBook);
+                exchange.setEstado(ExchangeCondition.EnEspera);
+
+                exchangeService.createExchange(exchange);
+
+                // Message message = new Message();
+                // message.setReceptor(bookToExchange.getUser());
+                // message.setContenido("El usuario @" + loggedUser.getUsername() +
+                // " quiere cambiar tu libro '" + bookToExchange.getTitle() +
+                // "' por su libro '" + userBook.getTitle() + "'. ¿Quieres aceptar el
+                // intercambio?");
+                // message.setMessageType(MessageType.propuesta);
+                // messageService.sendNotification(message);
+
+                redirectAttributes.addFlashAttribute("success", "Intercambio solicitado correctamente.");
+                return "redirect:/exchangedetail/" + exchange.getId();
+            }
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Debe iniciar sesión para solicitar un intercambio.");
+        }
+        return "redirect:/elegirIntercambio/" + bookId;
+    }
+
+    @GetMapping("/exchangedetail/{exchangeId}")
+    public String exchangeDetail(@PathVariable Integer exchangeId, Model model) {
+        Exchange exchange = exchangeService.getExchangeById(exchangeId);
+        if (exchange != null) {
+            model.addAttribute("exchange", exchange);
+            return "exchangeDetail";
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping("/exchanges")
+    public String exchangesPage(HttpSession hSession, Model model) {
+        if (hSession.getAttribute("username") != null) {
+            String username = hSession.getAttribute("username").toString();
+            User user = userService.getUser(username);
+            List<Exchange> propuestaExchanges = exchangeService.getExchangesByUser(user);
+            List<Exchange> accept = exchangeService.getAcceptedExchangesByUser(user);
+            List<Exchange> denied = exchangeService.getDeniedExchangesByUser(user);
+            model.addAttribute("user", user);
+            model.addAttribute("propuestaExchanges", propuestaExchanges);
+            model.addAttribute("accept", accept);
+            model.addAttribute("denied", denied);
+            model.addAttribute("currentUsername", username);
+
+            return "exchanges";
+        }
+        return "redirect:/";
+    }
+
+    @PostMapping("/accept/{id}")
+    public String acceptExchange(@PathVariable Integer id) {
+        exchangeService.acceptExchange(id);
+        return "redirect:/exchanges";
+    }
+
+    @PostMapping("/reject/{id}")
+    public String rejectExchange(@PathVariable Integer id) {
+        exchangeService.rejectExchange(id);
+        return "redirect:/exchanges";
+    }
+
 }

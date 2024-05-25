@@ -2,51 +2,32 @@ package com.paula.model;
 
 import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "exchange")
 public class Exchange {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "exchangeId")
-    private Integer exchangeId;
+    private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "id_user_bidder")
-    private User bidder;
+    @JoinColumn(name = "usuario_publicador_id", referencedColumnName = "userId")
+    private User usuarioPublicador;
 
     @ManyToOne
-    @JoinColumn(name = "id_user_applicant")
-    private User applicant;
+    @JoinColumn(name = "usuario_solicitante_id", referencedColumnName = "userId")
+    private User usuarioSolicitante;
 
     @OneToOne
-    @JoinColumn(name = "book_id_bidder")
-    private Book bookBidder;
+    @JoinColumn(name = "libro_solicitado_id", referencedColumnName = "bookId")
+    private Book libroSolicitado;
 
     @OneToOne
-    @JoinColumn(name = "book_id_applicant")
-    private Book bookApplicant;
+    @JoinColumn(name = "libro_por_intercambiar_id", referencedColumnName = "bookId")
+    private Book libroPorIntercambiar;
 
-    @Column(name = "exchange_condition")
-	@Enumerated(EnumType.STRING)
-	private ExchangeCondition exchange_condition;
-
-    public Exchange(ExchangeCondition exchange_condition, int exchangeId) {
-		this.exchange_condition = exchange_condition;
-		this.exchangeId = exchangeId;
-	}
-	
-	public Exchange(User bidder, User applicant, ExchangeCondition exchangeCondition, Book bookBidder, Book bookAplicant) {
-		this.bidder = bidder;
-        this.applicant = applicant;
-		this.exchange_condition = exchangeCondition;
-		this.bookBidder = bookBidder;
-		this.bookApplicant = bookAplicant;
-	}
+    @Enumerated(EnumType.STRING)
+    private ExchangeCondition estado;
 }

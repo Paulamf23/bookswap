@@ -40,9 +40,20 @@ public class Book {
     @Column(name = "image", columnDefinition = "LONGBLOB")
     private byte[] image;
 
+    private boolean disponible = false;
+    
+    @Column(name = "bookCondition")
+    private BookCondition condition;
+
     public Integer getId() {
         return bookId;
     }
 
+    public boolean isDisponible() {
+        return disponible;
+    }
 
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
 }

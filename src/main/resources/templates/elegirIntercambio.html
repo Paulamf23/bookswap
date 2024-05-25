@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="auto">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BookSwap</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+    <div th:replace="plantillas/header :: header"></div>
+
+    <main class="perfil_container">
+        <h3 class="tituloIntercambio titulo-apartado">ELIGE UN LIBRO PARA INTERCAMBIAR</h3>
+        <div class="col-intercambio-libro text-center">
+            <div th:if="${book != null}">
+                <div
+                    class="card-libro-myBooks row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h3 class="titulo-libro mb-0" th:text="${book.title}"></h3>
+                        <div class="border rounded p-2 mb-1">
+                            <div class="text-body-secondary" th:text="${book.year}"></div>
+                            <div class="text-body-secondary" th:text="${book.author}"></div>
+                        </div>
+                        <p class="isbn icon-link gap-1 icon-link-hover stretched-link">
+                            <span th:text="${'ISBN: ' + book.ISBN}"></span>
+                        </p>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                        <img th:src="@{'/books/' + ${book.bookId} + '/image'}" class="bd-placeholder-img" width="200"
+                            height="250" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <a th:href="@{'/solicitarIntercambio/' + ${book.bookId}}" class="btn btn-primary"
+                    th:if="${selectedBook != null}">Solicitar
+                    Intercambio</a>
+            </div>
+        </div>
+        <div th:if="${#lists.isEmpty(userBooksSameCondition)}" class="col text-center">
+            <h4 class="noLibroIntercambio">No tienes libros en la misma condición para intercambiar.</h4>
+        </div>
+        <div th:if="${not #lists.isEmpty(userBooksSameCondition)}">
+            <h4 class="noLibroIntercambio">Estos libros tienen la misma condición que el libro que quieres intercambiar.
+                Elige 1</h4>
+            <div class="row mb-2">
+                <div class="col-md-6 mb-4" th:each="userBook : ${userBooksSameCondition}" th:if="${book.disponible==false}">
+                    <div
+                        class="card-libro-myBooks row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <h3 class="titulo-libro mb-0" th:text="${userBook.title}"></h3>
+                            <div class="border rounded p-2 mb-1">
+                                <div class="text-body-secondary" th:text="${userBook.year}"></div>
+                                <div class="text-body-secondary" th:text="${userBook.author}"></div>
+                            </div>
+                            <div class="zonaBaja">
+                                <p class="isbn icon-link gap-1 icon-link-hover stretched-link">
+                                    <span th:text="${'ISBN: ' + userBook.ISBN}"></span>
+                                </p>
+                                <div class="botonesTarjetas">
+                                    <div class="boton_verLibro">
+                                        <form
+                                            th:action="@{'/solicitarIntercambio/' + ${book.bookId} + '/' + ${userBook.bookId}}"
+                                            method="get" style="display:inline;">
+                                            <button type="submit" value="Submit" class="botonesDeLibros btn">
+                                                INTERCAMBIAR
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto d-none d-lg-block">
+                            <img th:src="@{'/books/' + ${userBook.bookId} + '/image'}" class="bd-placeholder-img"
+                                width="200" height="250" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cancel">
+            <a th:href="@{/elegirIntercambio/-1}" class="btn botonCancel">Cancelar</a>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -39,7 +39,8 @@
                 </ul>
             </div>
         </div>
-        <div th:if="${isAdmin == false}" class="col-mess">
+        <div class="lateral-derecho">
+        <div class="col-mess">
             <form action="/sendMessage" method="post">
                 <div class="input-group">
                     <input type="text" name="content" class="form-control" placeholder="Tu mensaje" required>
@@ -51,6 +52,18 @@
                 </div>
             </form>
         </div>
+        <div class="normas">
+            <p>Estas normas deben ser cumplidas por todos los miembros de esta comunidad.<b> Un mal uso de esta puede llevar a la expulsión de la comunidad y la eliminación de la cuenta</b></p>
+            <ul>
+                <li>1. Respetar el propósito y objetivo del grupo el cual es dar a conocer información o responder consultas de carácter general entre los diferentes usuarios. Sobre temas relacionados con la lectura</li>
+                <li>2. Verificar el contenido que se envía y pensar si es de interés y objetivo del grupo.</li>
+                <li>3. No se permite la publicidad de material, servicios y otros no relacionados con la comunidad, si tienes dudas contacta con los administradores previamente.</li>
+                <li>4. Se respetuoso y moderado, evita hablar de temas políticos, religiosos, xenófobos y otros conflictivos.</li>
+                <li>5. Antes de mandar una queja o reclamo al grupo, identifica al administrador de la comunidad y transmítesela a él/ella de manera directa y por los canales oficiales.</li>
+                <li>6. Los administradores del grupo podrán expulsar a cualquier usuario que incumpla las normas de forma flagrante.</li>
+            </ul>
+        </div>
+    </div>
     </main>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -79,11 +92,11 @@
             });
         });
 
-        function reloadPage() {
-            location.reload();
-        }
+        // function reloadPage() {
+        //     location.reload();
+        // }
 
-        setInterval(reloadPage, 60000);
+        // setInterval(reloadPage, 60000);
     </script>
 </body>
 

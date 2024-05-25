@@ -46,6 +46,14 @@
                                     </option>
                                 </th:block>
                             </select>
+                            <select class="input_newBook form-control" id="condition" name="condition" required>
+                                <option value="" disabled selected>¿En qué condición se encuentra tu libro?</option>
+                                <th:block th:each="condition : ${T(com.paula.model.BookCondition).values()}">
+                                    <option th:value="${condition}"
+                                        th:text="${#strings.capitalize(condition.name().replaceAll('([A-Z])', ' $1').toLowerCase())}">
+                                    </option>
+                                </th:block>
+                            </select>
                         </div>
                         <button class="button_form" type="submit">Publicar Libro</button>
                     </form>
