@@ -125,13 +125,19 @@ public class BookswapController {
     }
 
     @GetMapping("/register")
-    public String registerPage(Model model) {
+    public String registerPage(Model model, HttpSession hsession) {
+        if (hsession.getAttribute("username") != null) {
+            return "redirect:/";
+        }
         model.addAttribute("user", new User());
         return "register";
     }
 
     @GetMapping("/login")
-    public String loginPage(Model model) {
+    public String loginPage(Model model, HttpSession hsession) {
+        if (hsession.getAttribute("username") != null) {
+            return "redirect:/";
+        }
         model.addAttribute("user", new User());
         return "login";
     }
@@ -163,27 +169,27 @@ public class BookswapController {
         if (bindingResult.hasErrors()) {
             return "register";
         } else {
-            User existingUser = userService.getUser(user.getUsername());
+            // Verificar si el nombre de usuario ya está registrado
+            User existingUser = userService.getUserByUsername(user.getUsername());
             if (existingUser != null) {
-                redirectAttributes.addFlashAttribute("errorUsuarioExiste", "El nombre de usuario ya está registrado.");
-                return "redirect:/register";
+                bindingResult.rejectValue("username", "error.username",
+                        "El nombre de usuario ya está registrado. Por favor, utiliza otro.");
+                return "register";
+            }
+
+            if (!user.getPassword().equals(repeatedPassword)) {
+                bindingResult.rejectValue("password", "error.password", "Las contraseñas no coinciden.");
+                return "register";
             } else {
-                if (user.getEmail() != null && user.getPassword() != null && repeatedPassword != null &&
-                        user.getName() != null && user.getUsername() != null &&
-                        user.getPassword().equals(repeatedPassword)) {
-                    Role role = Role.registeredUser;
-                    user.setRole(role);
-                    String encryptedPassword = Encriptation.encriptPassword(user.getPassword());
-                    user.setPassword(encryptedPassword);
-                    userService.createUser(user);
-                    session.setAttribute("email", user.getEmail());
-                    session.setAttribute("name", user.getName());
-                    session.setAttribute("username", user.getUsername());
-                    return "redirect:/perfil";
-                } else {
-                    redirectAttributes.addFlashAttribute("errorUsuarioExiste", "Error en los datos ingresados.");
-                    return "redirect:/register";
-                }
+                Role role = Role.registeredUser;
+                user.setRole(role);
+                String encryptedPassword = Encriptation.encriptPassword(user.getPassword());
+                user.setPassword(encryptedPassword);
+                userService.createUser(user);
+                session.setAttribute("email", user.getEmail());
+                session.setAttribute("name", user.getName());
+                session.setAttribute("username", user.getUsername());
+                return "redirect:/perfil";
             }
         }
     }

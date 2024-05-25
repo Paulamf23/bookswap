@@ -1,7 +1,7 @@
 package com.paula.model;
 
 import javax.persistence.*;
-
+import javax.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +20,8 @@ public class Book {
     @Column(name = "title")
     private String title;
 
+    @Min(value = 1000, message = "El año debe tener 4 dígitos")
+    @Max(value = 9999, message = "El año debe tener 4 dígitos")
     @Column(name = "year")
     private Integer year;
 
@@ -30,6 +32,7 @@ public class Book {
     @Column(name = "author")
     private String author;
 
+    @Pattern(regexp = "\\d{13}", message = "El ISBN debe tener 13 dígitos")
     @Column(name = "ISBN")
     private String ISBN;
 
@@ -41,7 +44,7 @@ public class Book {
     private byte[] image;
 
     private boolean disponible = false;
-    
+
     @Column(name = "bookCondition")
     private BookCondition condition;
 

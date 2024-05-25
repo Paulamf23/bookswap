@@ -22,23 +22,31 @@
             <div class="form-information-register">
                 <div class="form-information-childs">
                     <h2>Regístrate</h2>
-                    <form class="form" th:action="@{/newUser}" th:object="${user}" method="post" onsubmit="return validarRegistro();">
+                    <form class="form" th:action="@{/newUser}" th:object="${user}" method="post"
+                        onsubmit="return validarRegistro();">
                         <label>
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                             <input type="text" th:field="*{name}" placeholder="Nombre completo" name="name" required>
                         </label>
                         <label>
                             <i class="fa fa-user" aria-hidden="true"></i>
-                            <input type="text" th:field="*{username}" placeholder="Nombre de usuario" name="username" required>
+                            <input type="text" th:field="*{username}" placeholder="Nombre de usuario" name="username"
+                                required>
                         </label>
+                        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Nombre de usuario
+                            inválido</span>
                         <label>
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                             <input type="text" th:field="*{email}" placeholder="Email" name="email" required>
                         </label>
+                        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email inválido</span>
                         <label>
                             <i class="fa fa-lock" aria-hidden="true"></i>
-                            <input type="password" th:field="*{password}" placeholder="Contraseña" name="password" required>
+                            <input type="password" th:field="*{password}" placeholder="Contraseña" name="password"
+                                required>
                         </label>
+                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Contraseña
+                            inválido</span>
                         <label>
                             <i class="fa fa-lock" aria-hidden="true"></i>
                             <input type="password" name="repeatPassword" placeholder="Repite la contraseña" required>

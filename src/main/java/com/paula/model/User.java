@@ -1,7 +1,10 @@
 package com.paula.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import java.io.Serializable;
 // import java.util.Collection;
@@ -25,17 +28,20 @@ public class User implements Serializable {
 	@Column(name = "userId")
 	private int userId;
 
-	@NotBlank(message = "El campo usuario no puede estar vacio.")
+	@NotBlank(message = "*El campo usuario no puede estar vacio.")
 	@Column(name = "name")
 	private String name;
 
 	@Column(name = "email")
+	@Email(message = "*El formato del correo electrónico no es válido.")
 	private String email;
 
 	@Column(name = "password")
+	@Size(min = 8, max = 12, message = "*La contraseña debe tener entre 8 y 12 caracteres.")
 	private String password;
 
 	@Column(name = "username")
+	@Pattern(regexp = "\\w+", message = "*El nombre de usuario debe ser una sola palabra.")
 	private String username;
 
 	@Column(name = "role")

@@ -55,7 +55,7 @@
                 <div th:if="${not #lists.isEmpty(books)}">
                     <div class="row mb-2">
                         <div class="col-md-6 mb-4" th:each="book : ${books}" th:if="${book.disponible==false}">
-                            <div 
+                            <div
                                 class="card-libro-myBooks row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                                 <div class="col p-4 d-flex flex-column position-static">
                                     <h3 class="titulo-libro mb-0" th:text="${book.title}"></h3>
