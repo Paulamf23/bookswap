@@ -60,6 +60,10 @@ public class ExchangeService {
         return exchangesAsPublisher;
     }
 
+    public List<Exchange> getAllExchanges() {
+        return exchangeRepository.findAll();
+    }
+
     public void acceptExchange(Integer id) {
         Exchange exchange = getExchangeById(id);
         if (exchange != null) {

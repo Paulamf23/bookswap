@@ -439,6 +439,10 @@ h5.card-title {
     margin-left: 90%;
 }
 
+.button_newBook {
+    text-decoration: none;
+}
+
 .button_newBook:hover {
     background-color: #E8D6C6;
     border: solid 2px #7a503b;

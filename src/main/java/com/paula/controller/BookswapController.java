@@ -5,7 +5,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
-// import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
@@ -22,7 +21,6 @@ import com.paula.model.*;
 import com.paula.services.AdminService;
 import com.paula.services.BookService;
 import com.paula.services.ExchangeService;
-// import com.paula.services.MessageService;
 import com.paula.services.UserService;
 import com.paula.util.Encriptation;
 
@@ -40,9 +38,6 @@ public class BookswapController {
 
     @Autowired
     private AdminService adminService;
-
-    // @Autowired
-    // private MessageService messageService;
 
     @Autowired
     private ExchangeService exchangeService;
@@ -174,24 +169,22 @@ public class BookswapController {
                 return "redirect:/register";
             } else {
                 if (user.getEmail() != null && user.getPassword() != null && repeatedPassword != null &&
-                        user.getName() != null && user.getUsername() != null
-                        && user.getPassword().equals(repeatedPassword)) {
+                        user.getName() != null && user.getUsername() != null &&
+                        user.getPassword().equals(repeatedPassword)) {
                     Role role = Role.registeredUser;
                     user.setRole(role);
                     String encryptedPassword = Encriptation.encriptPassword(user.getPassword());
                     user.setPassword(encryptedPassword);
-                    user.setName(user.getName());
-                    user.setUsername(user.getUsername());
-                    user.setEmail(user.getEmail());
                     userService.createUser(user);
                     session.setAttribute("email", user.getEmail());
                     session.setAttribute("name", user.getName());
                     session.setAttribute("username", user.getUsername());
-                    return "/perfil";
+                    return "redirect:/perfil";
+                } else {
+                    redirectAttributes.addFlashAttribute("errorUsuarioExiste", "Error en los datos ingresados.");
+                    return "redirect:/register";
                 }
             }
-            redirectAttributes.addFlashAttribute("errorUsuarioExiste", "El nombre de usuario ya existe.");
-            return "register";
         }
     }
 
@@ -531,6 +524,15 @@ public class BookswapController {
             model.addAttribute("accept", accept);
             model.addAttribute("denied", denied);
             model.addAttribute("currentUsername", username);
+
+            List<Exchange> exchanges = exchangeService.getAllExchanges();
+            model.addAttribute("exchanges", exchanges);
+
+            if (user.getRole() == Role.admin) {
+                model.addAttribute("isAdmin", true);
+            } else {
+                model.addAttribute("isAdmin", false);
+            }
 
             return "exchanges";
         }

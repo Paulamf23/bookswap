@@ -51,7 +51,6 @@
                                 <div class="datosLibro">
                                     <h5 class="card-title" th:text="${#strings.length(book.title) gt 15 ? #strings.substring(book.title, 0, 15) + '...' : book.title}" data-toggle="tooltip" th:attr="title=${book.title}"></h5>
                                     <p class="card-text" th:text="'@' + ${book.user?.username}"></p>
-                                    <p th:text="${book.disponible}"></p>
                                 </div>
                                 <div class="btn-group">
                                     <a th:href="@{/bookDetail/{bookId}(bookId=${book.bookId})}" class="btn botonesDeLibros btn-secondary my-2">Ver libro</a>

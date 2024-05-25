@@ -32,7 +32,7 @@
                         <p class="user-email"><span th:text="${user.email}"></span></p>
                     </div>
                 </div>
-                <div th:if="${isAdmin == false}" class="position-sticky intercambios" style="top: 2rem;">
+                <div class="position-sticky intercambios" style="top: 2rem;">
                     <a th:href="@{/exchanges}">
                         <div class="p-4 mb-3 bg-body-tertiary rounded">
                             <h4 class="fst-italic">INTERCAMBIOS</h4>
@@ -136,7 +136,7 @@
                     </div>
                 </div>
             </div>
-            <div th:if="${isAdmin}">
+            <div th:if="${isAdmin}" class="librosPerfil">
                 <h3 class="titulo-apartado">USUARIOS REGISTRADOS</h3>
                 <div th:if="${#lists.isEmpty(allUsers)}" class="col text-center">
                     <p>No hay usuarios registrados.</p>

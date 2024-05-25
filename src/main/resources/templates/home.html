@@ -2,103 +2,104 @@
 <html lang="es" data-bs-theme="auto">
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>BookSwap</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BookSwap</title>
 
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 
-	<link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        .row-home {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .col-custom {
+            flex: 0 0 20%; /* Para asegurar que cada columna ocupe el 20% del ancho del contenedor */
+            max-width: 20%;
+            padding-right: 15px; /* Agregar espacio entre las columnas */
+            padding-left: 15px; /* Agregar espacio entre las columnas */
+            margin-bottom: 20px; /* Agregar espacio entre las filas */
+        }
+
+        @media (max-width: 992px) {
+            .col-custom {
+                flex: 0 0 33.33333%; /* Para cambiar a 3 columnas por fila en pantallas más pequeñas */
+                max-width: 33.33333%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .col-custom {
+                flex: 0 0 50%; /* Para cambiar a 2 columnas por fila en pantallas aún más pequeñas */
+                max-width: 50%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .col-custom {
+                flex: 0 0 100%; /* Para cambiar a 1 columna por fila en pantallas muy pequeñas */
+                max-width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
-	<div th:replace="plantillas/header :: header"></div>
+    <div th:replace="plantillas/header :: header"></div>
 
-	<main class="home">
-		<div class="content">
-			<div class="bg-image">
-			</div>
-		</div>
-		<div class="container">
-			<h3 class="titulo-apartado">ÚLTIMOS LIBROS</h3>
-			<div class="row row-home">
-				<div class="col cincoLibros">
-					<div class="row">
-						<div class="col" th:each="book, iterStat : ${books}" th:if="${iterStat.index lt 5}">
-							<div class="card card-home-grande shadow-sm">
-								<img th:src="@{'/books/' + ${book.bookId} + '/image'}" class="bd-placeholder-img card-img-top" width="100%" height="225"
-									alt="Book Image">
-								<div class="card-body card-home">
-									<div class="datosLibro">
-										<h5 class="card-title"
-											th:text="${#strings.length(book.title) gt 25 ? #strings.substring(book.title, 0, 25) + '...' : book.title}"
-											data-toggle="tooltip" th:attr="title=${book.title}"></h5>
-										<p class="card-text" th:text="'@' + ${book.user?.username}"></p>
-									</div>
-									<div class="btn-group">
-										<a th:href="@{/bookDetail/{bookId}(bookId=${book.bookId})}" class="btn botonesDeLibros btn-secondary my-2">Ver libro</a>
-										<form th:action="@{/addFavorite/__${book.bookId}__}" method="get" style="display:inline;">
-											<button type="submit" class="btn botonesDeLibros btn-secondary my-2">
-												<i class="fa fa-heart" aria-hidden="true"></i>
-											</button>
-										</form>																			
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row row-home">
-				<div class="col cincoLibros">
-					<div class="row">
-						<div class="col" th:each="book, iterStat : ${books}" th:if="${iterStat.index ge 5}">
-							<div class="card card-home-grande shadow-sm">
-								<img th:src="@{'/books/' + ${book.bookId} + '/image'}" class="bd-placeholder-img card-img-top" width="100%" height="225"
-									alt="Book Image">
-								<div class="card-body card-home">
-									<h5 class="card-title"
-										th:text="${#strings.length(book.title) gt 25 ? #strings.substring(book.title, 0, 25) + '...' : book.title}"
-										data-toggle="tooltip" th:attr="title=${book.title}"></h5>
-									<p class="card-text" th:text="'@' + ${book.user?.username}"></p>
-									<div class="btn-group">
-										<a th:href="@{/bookDetail/{bookId}(bookId=${book.bookId})}" class="btn botonesDeLibros btn-secondary my-2">Ver libro</a>
-										<form th:action="@{/addFavorite/__${book.bookId}__}" method="get" style="display:inline;">
-											<button type="submit" class="btn botonesDeLibros btn-secondary my-2">
-												<i class="fa fa-heart" aria-hidden="true"></i>
-											</button>
-										</form>									
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div th:if="${#lists.isEmpty(books)}" class="col text-center">
-				<p>No hay libros publicados.</p>
-			</div>
-		</div>
-	</main>
+    <main class="home">
+        <div class="content">
+            <div class="bg-image"></div>
+        </div>
+        <div class="container">
+            <h3 class="titulo-apartado">ÚLTIMOS LIBROS</h3>
+            <div class="row row-home">
+                <div class="col-custom" th:each="book, iterStat : ${books}" th:if="${iterStat.index lt 10 and book.disponible==false}">
+                    <div class="card card-home-grande shadow-sm">
+                        <img th:src="@{'/books/' + ${book.bookId} + '/image'}" class="bd-placeholder-img card-img-top"
+                            width="100%" height="225" alt="Book Image">
+                        <div class="card-body card-home">
+                            <h5 class="card-title"
+                                th:text="${#strings.length(book.title) gt 25 ? #strings.substring(book.title, 0, 25) + '...' : book.title}"
+                                data-toggle="tooltip" th:attr="title=${book.title}"></h5>
+                            <p class="card-text" th:text="'@' + ${book.user?.username}"></p>
+                            <div class="btn-group">
+                                <a th:href="@{/bookDetail/{bookId}(bookId=${book.bookId})}"
+                                    class="btn botonesDeLibros btn-secondary my-2">Ver libro</a>
+                                <form th:action="@{/addFavorite/__${book.bookId}__}" method="get" style="display:inline;">
+                                    <button type="submit" class="btn botonesDeLibros btn-secondary my-2">
+                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:if="${#lists.isEmpty(books)}" class="col text-center">
+                <p>No hay libros publicados.</p>
+            </div>
+        </div>
+    </main>
 
-	<div th:replace="plantillas/footer :: footer"></div>
-
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-		integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+CE8ii6Agh2okG6zcVR8a+N6BkWJcwNJzo27W8C"
-		crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
-	<script>
-		$(document).ready(function () {
-			$('[data-toggle="tooltip"]').tooltip();
-		});
-	</script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+CE8ii6Agh2okG6zcVR8a+N6BkWJcwNJzo27W8C"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 </body>
 
 </html>

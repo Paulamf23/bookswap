@@ -24,7 +24,8 @@
     <div th:replace="plantillas/header :: header"></div>
 
     <main class="perfil_container">
-        <div class="bloque-exchanges p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
+        <div th:if="${isAdmin == false}"
+            class="bloque-exchanges p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
             <div class="text-center mb-4">
                 <h1 class="interName"> MIS INTERCAMBIOS</h1>
             </div>
@@ -42,7 +43,7 @@
                                     <th>Usuario</th>
                                     <th>Libro solicitado</th>
                                     <th>Libro ofertado</th>
-                                    <th></th> 
+                                    <th></th>
                                 </tr>
                             </thead>
                         </table>
@@ -51,17 +52,22 @@
                         <table cellpadding="0" cellspacing="0" border="0">
                             <tbody>
                                 <tr th:each="propuesta : ${propuestaExchanges}">
-                                    <td th:text="${currentUsername == propuesta.usuarioSolicitante.username ? '@' + propuesta.usuarioPublicador.username : '@' + propuesta.usuarioSolicitante.username}"></td>
+                                    <td
+                                        th:text="${currentUsername == propuesta.usuarioSolicitante.username ? '@' + propuesta.usuarioPublicador.username : '@' + propuesta.usuarioSolicitante.username}">
+                                    </td>
                                     <td th:text="${propuesta.libroSolicitado.title}"></td>
                                     <td th:text="${propuesta.libroPorIntercambiar.title}"></td>
-                                    <td class="botonesTabla" th:if="${currentUsername ==propuesta.usuarioPublicador.username}">
+                                    <td class="botonesTabla"
+                                        th:if="${currentUsername ==propuesta.usuarioPublicador.username}">
                                         <form th:action="@{'/accept/' + ${propuesta.id}}" method="post">
-                                            <button type="submit" class="btn botonesDeLibros"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                            <button type="submit" class="btn botonesDeLibros"><i class="fa fa-check"
+                                                    aria-hidden="true"></i></button>
                                         </form>
                                         <form th:action="@{'/reject/' + ${propuesta.id}}" method="post">
-                                            <button type="submit" class="btn botonesDeLibros"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                            <button type="submit" class="btn botonesDeLibros"><i class="fa fa-times"
+                                                    aria-hidden="true"></i></button>
                                         </form>
-                                        
+
                                     </td>
                                 </tr>
                             </tbody>
@@ -91,7 +97,9 @@
                         <table cellpadding="0" cellspacing="0" border="0">
                             <tbody>
                                 <tr th:each="bookAccepted : ${accept}">
-                                    <td th:text="${currentUsername == bookAccepted.usuarioSolicitante.username ? '@' + bookAccepted.usuarioPublicador.username : '@' + bookAccepted.usuarioSolicitante.username}"></td>
+                                    <td
+                                        th:text="${currentUsername == bookAccepted.usuarioSolicitante.username ? '@' + bookAccepted.usuarioPublicador.username : '@' + bookAccepted.usuarioSolicitante.username}">
+                                    </td>
                                     <td th:text="${bookAccepted.libroSolicitado.title}"></td>
                                     <td th:text="${bookAccepted.libroPorIntercambiar.title}"></td>
                                 </tr>
@@ -122,9 +130,52 @@
                         <table cellpadding="0" cellspacing="0" border="0">
                             <tbody>
                                 <tr th:each="bookDenied : ${denied}">
-                                    <td th:text="${currentUsername == bookDenied.usuarioSolicitante.username ? '@' + bookDenied.usuarioPublicador.username : '@' + bookDenied.usuarioSolicitante.username}"></td>
+                                    <td
+                                        th:text="${currentUsername == bookDenied.usuarioSolicitante.username ? '@' + bookDenied.usuarioPublicador.username : '@' + bookDenied.usuarioSolicitante.username}">
+                                    </td>
                                     <td th:text="${bookDenied.libroSolicitado.title}"></td>
                                     <td th:text="${bookDenied.libroPorIntercambiar.title}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div th:if="${isAdmin}" class="bloque-exchanges p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
+            <div class="text-center mb-4">
+                <h1 class="interName">INTERCAMBIOS</h1>
+            </div>
+
+            <div class="mb-4 apartados">
+                <div th:if="${#lists.isEmpty(exchanges)}" class="col text-center">
+                    <p>No hay propuestas de intercambio.</p>
+                </div>
+                <div th:if="${not #lists.isEmpty(exchanges)}">
+                    <div class="tbl-header">
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+                                <tr>
+                                    <th>Usuario solicitante</th>
+                                    <th>Libro solicitado</th>
+                                    <th>Usuario ofertante</th>
+                                    <th>Libro ofertado</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="tbl-content">
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <tbody>
+                                <tr th:each="exchange : ${exchanges}">
+                                    <td th:text="${'@'+exchange.usuario_solicitante_id.username}"></td>
+                                    <td th:text="${propuesta.libroPorIntercambiar.title}"></td>
+                                    <td th:text="${'@'+exchange.usuario_publicador_id.username}"></td>
+                                    <td th:text="${propuesta.libroSolicitado.title}"></td>
+                                    <td th:text="${propuesta.estado}"></td>
                                 </tr>
                             </tbody>
                         </table>
