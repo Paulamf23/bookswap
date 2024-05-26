@@ -489,15 +489,6 @@ public class BookswapController {
 
                 exchangeService.createExchange(exchange);
 
-                // Message message = new Message();
-                // message.setReceptor(bookToExchange.getUser());
-                // message.setContenido("El usuario @" + loggedUser.getUsername() +
-                // " quiere cambiar tu libro '" + bookToExchange.getTitle() +
-                // "' por su libro '" + userBook.getTitle() + "'. ¿Quieres aceptar el
-                // intercambio?");
-                // message.setMessageType(MessageType.propuesta);
-                // messageService.sendNotification(message);
-
                 redirectAttributes.addFlashAttribute("success", "Intercambio solicitado correctamente.");
                 return "redirect:/exchangedetail/" + exchange.getId();
             }
