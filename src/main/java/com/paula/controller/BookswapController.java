@@ -169,7 +169,6 @@ public class BookswapController {
         if (bindingResult.hasErrors()) {
             return "register";
         } else {
-            // Verificar si el nombre de usuario ya está registrado
             User existingUser = userService.getUserByUsername(user.getUsername());
             if (existingUser != null) {
                 bindingResult.rejectValue("username", "error.username",

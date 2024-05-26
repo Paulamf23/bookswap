@@ -42,11 +42,8 @@
                         <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email inválido</span>
                         <label>
                             <i class="fa fa-lock" aria-hidden="true"></i>
-                            <input type="password" th:field="*{password}" placeholder="Contraseña" name="password"
-                                required>
-                        </label>
-                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Contraseña
-                            inválido</span>
+                            <input type="password" th:field="*{password}" placeholder="Contraseña" name="password" required>
+                        </label>                       
                         <label>
                             <i class="fa fa-lock" aria-hidden="true"></i>
                             <input type="password" name="repeatPassword" placeholder="Repite la contraseña" required>

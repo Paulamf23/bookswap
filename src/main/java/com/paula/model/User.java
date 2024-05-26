@@ -3,6 +3,7 @@ package com.paula.model;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -36,9 +37,7 @@ public class User implements Serializable {
 	@Email(message = "*El formato del correo electrónico no es válido.")
 	private String email;
 
-	@Column(name = "password")
-	@Size(min = 8, max = 12, message = "*La contraseña debe tener entre 8 y 12 caracteres.")
-	private String password;
+    private String password;
 
 	@Column(name = "username")
 	@Pattern(regexp = "\\w+", message = "*El nombre de usuario debe ser una sola palabra.")
@@ -49,7 +48,7 @@ public class User implements Serializable {
 	private Role role;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<FavouriteBooks> favorites = new HashSet<>();
+	private Set<FavouriteBooks> favorites = new HashSet<>();
 
 	public User(String email) {
 		this.email = email;
@@ -80,6 +79,6 @@ public class User implements Serializable {
 	}
 
 	public Integer getId() {
-        return userId;
-    }
+		return userId;
+	}
 }
