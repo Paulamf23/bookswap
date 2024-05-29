@@ -37,7 +37,8 @@
                             <p><strong>Usuario publicador:</strong> <span
                                     th:text="${'@'+exchange.usuarioPublicador.username}"></span>
                             </p>
-                            <p><strong>Estado:</strong> <span th:text="${exchange.estado}"></span></p>
+                            <p><strong>Estado:</strong> <span th:text="${#strings.capitalize(exchange.estado.name().replaceAll('([A-Z])', ' $1'))}"></span></p>
+                            
                             <a class="button_form" href="/exchanges">Ir a mis Intercambios</a>
                         </div>
                     </div>

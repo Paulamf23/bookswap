@@ -31,11 +31,11 @@
             </div>
 
             <div class="mb-4 apartados">
-                <h3 class="titulo-apartado">PROPUESTAS DE INTERCAMBIO</h3>
-                <div th:if="${#lists.isEmpty(propuestaExchanges)}" class="col text-center">
-                    <p>No hay propuestas de intercambio.</p>
+                <div th:if="${#lists.isEmpty(propuestaExchanges) and #lists.isEmpty(accept) and #lists.isEmpty(denied)}" class="col text-center">
+                    No hay ningun intercambio registrado
                 </div>
                 <div th:if="${not #lists.isEmpty(propuestaExchanges)}">
+                    <h3 class="titulo-apartado">PROPUESTAS DE INTERCAMBIO</h3>
                     <div class="tbl-header">
                         <table cellpadding="0" cellspacing="0" border="0">
                             <thead>
@@ -77,11 +77,8 @@
             </div>
 
             <div class="mb-4 apartados">
-                <h3 class="titulo-apartado">INTERCAMBIOS ACEPTADOS</h3>
-                <div th:if="${#lists.isEmpty(accept)}" class="col text-center">
-                    <p>No hay intercambios aceptados.</p>
-                </div>
                 <div th:if="${not #lists.isEmpty(accept)}">
+                    <h3 class="titulo-apartado">INTERCAMBIOS ACEPTADOS</h3>
                     <div class="tbl-header">
                         <table cellpadding="0" cellspacing="0" border="0">
                             <thead>
@@ -110,11 +107,8 @@
             </div>
 
             <div class="mb-4 apartados">
-                <h3 class="titulo-apartado">INTERCAMBIOS RECHAZADOS</h3>
-                <div th:if="${#lists.isEmpty(denied)}" class="col text-center">
-                    <p>No hay intercambios rechazados.</p>
-                </div>
                 <div th:if="${not #lists.isEmpty(denied)}">
+                    <h3 class="titulo-apartado">INTERCAMBIOS RECHAZADOS</h3>
                     <div class="tbl-header">
                         <table cellpadding="0" cellspacing="0" border="0">
                             <thead>
@@ -151,7 +145,7 @@
 
             <div class="mb-4 apartados">
                 <div th:if="${#lists.isEmpty(exchanges)}" class="col text-center">
-                    <p>No hay propuestas de intercambio.</p>
+                    <p>No hay intercambios.</p>
                 </div>
                 <div th:if="${not #lists.isEmpty(exchanges)}">
                     <div class="tbl-header">
@@ -171,11 +165,11 @@
                         <table cellpadding="0" cellspacing="0" border="0">
                             <tbody>
                                 <tr th:each="exchange : ${exchanges}">
-                                    <td th:text="${'@'+exchange.usuario_solicitante_id.username}"></td>
-                                    <td th:text="${propuesta.libroPorIntercambiar.title}"></td>
-                                    <td th:text="${'@'+exchange.usuario_publicador_id.username}"></td>
-                                    <td th:text="${propuesta.libroSolicitado.title}"></td>
-                                    <td th:text="${propuesta.estado}"></td>
+                                    <td th:text="${'@'+exchange.usuarioSolicitante.username}"></td>
+                                    <td th:text="${exchange.libroPorIntercambiar.title}"></td>
+                                    <td th:text="${'@'+exchange.usuarioPublicador.username}"></td>
+                                    <td th:text="${exchange.libroSolicitado.title}"></td>
+                                    <td th:text="${#strings.capitalize(exchange.estado.name().replaceAll('([A-Z])', ' $1'))}"></td>
                                 </tr>
                             </tbody>
                         </table>

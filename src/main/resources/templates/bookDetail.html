@@ -64,7 +64,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Genero</td>
-                                                <td th:text="${book.genre}"></td>
+                                                <td th:text="${#strings.capitalize(book.genre.name().replaceAll('([A-Z])', ' $1'))}"></td>
                                             </tr>
                                             <tr>
                                                 <td>ISBN</td>
@@ -72,7 +72,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Condición del producto</td>
-                                                <td th:text="${book.condition}">Condición del libro</td>
+                                                <td th:text="${#strings.capitalize(book.condition.name().replaceAll('([A-Z])', ' $1'))}">Condición del libro</td>
                                             </tr>
                                         </tbody>
                                     </table>

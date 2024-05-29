@@ -165,7 +165,7 @@ public class BookswapController {
     public String newUser(@Valid @ModelAttribute User user, BindingResult bindingResult, Model model,
             RedirectAttributes redirectAttributes,
             @RequestParam(name = "repeatPassword", required = false) String repeatedPassword,
-            HttpSession session) {
+            HttpSession session, @RequestParam("ciudad") Ciudad ciudad) {
         if (bindingResult.hasErrors()) {
             return "register";
         } else {
@@ -184,6 +184,7 @@ public class BookswapController {
                 user.setRole(role);
                 String encryptedPassword = Encriptation.encriptPassword(user.getPassword());
                 user.setPassword(encryptedPassword);
+                user.setCity(ciudad);
                 userService.createUser(user);
                 session.setAttribute("email", user.getEmail());
                 session.setAttribute("name", user.getName());
@@ -223,6 +224,9 @@ public class BookswapController {
 
         List<Genre> genres = Arrays.asList(Genre.values());
         model.addAttribute("genres", genres);
+
+        List<Ciudad> ciudades = Arrays.asList(Ciudad.values());
+        model.addAttribute("ciudades", ciudades);
 
         return "books";
     }

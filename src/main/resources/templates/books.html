@@ -27,7 +27,7 @@
                     <ul class="list-unstyled mb-0">
                         <li><a th:href="@{/books}">Todos</a></li>
                         <li th:each="genre : ${genres}">
-                            <a th:href="@{/books/__${genre}__}" th:text="${genre}"></a>
+                            <a th:href="@{/books/__${genre}__}" th:text="${#strings.capitalize(genre.name().replaceAll('([A-Z])', ' $1'))}"></a>
                         </li>
                     </ul>
                 </div>

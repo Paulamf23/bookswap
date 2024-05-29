@@ -42,12 +42,21 @@
                         <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email inválido</span>
                         <label>
                             <i class="fa fa-lock" aria-hidden="true"></i>
-                            <input type="password" th:field="*{password}" placeholder="Contraseña" name="password" required>
-                        </label>                       
+                            <input type="password" th:field="*{password}" placeholder="Contraseña" name="password"
+                                required>
+                        </label>
                         <label>
                             <i class="fa fa-lock" aria-hidden="true"></i>
                             <input type="password" name="repeatPassword" placeholder="Repite la contraseña" required>
                         </label>
+                        <select class="input_newBook form-control" id="ciudad" name="ciudad" required>
+                            <option value="" disabled selected>Ciudad de residencia</option>
+                            <th:block th:each="ciudad : ${T(com.paula.model.Ciudad).values()}">
+                                <option th:value="${ciudad}"
+                                    th:text="${#strings.capitalize(ciudad.name().replaceAll('([A-Z])', ' $1'))}">
+                                </option>
+                            </th:block>
+                        </select>
                         <input type="submit" value="Regístrate">
                     </form>
                 </div>

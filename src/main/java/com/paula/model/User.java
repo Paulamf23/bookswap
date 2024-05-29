@@ -33,7 +33,7 @@ public class User implements Serializable {
 	@Email(message = "*El formato del correo electrónico no es válido.")
 	private String email;
 
-    private String password;
+	private String password;
 
 	@Column(name = "username")
 	@Pattern(regexp = "\\w+", message = "*El nombre de usuario debe ser una sola palabra.")
@@ -45,6 +45,10 @@ public class User implements Serializable {
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<FavouriteBooks> favorites = new HashSet<>();
+
+	@Column(name = "city")
+	@Enumerated(EnumType.STRING)
+	private Ciudad city;
 
 	public User(String email) {
 		this.email = email;
