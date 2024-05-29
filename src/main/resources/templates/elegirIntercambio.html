@@ -54,10 +54,10 @@
             </div>
         </div>
         <div th:if="${#lists.isEmpty(userBooksSameCondition)}" class="col text-center">
-            <h4 class="noLibroIntercambio">No tienes libros en la misma condición para intercambiar.</h4>
+            <h4 class="noLibroIntercambio">No tienes libros que se encuentren en el mismo estado para intercambiar.</h4>
         </div>
         <div th:if="${not #lists.isEmpty(userBooksSameCondition)}">
-            <h4 class="noLibroIntercambio">Estos libros tienen la misma condición que el libro que quieres intercambiar.
+            <h4 class="noLibroIntercambio">Estos libros se encuentran en el mismo estado que el libro que quieres intercambiar.
                 Elige 1</h4>
             <div class="row mb-2">
                 <div class="col-md-6 mb-4" th:each="userBook : ${userBooksSameCondition}" th:if="${book.disponible==false}">

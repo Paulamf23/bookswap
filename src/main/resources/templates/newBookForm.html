@@ -25,21 +25,21 @@
                 <div class="form-information-childs newBookForm">
                     <form th:action="@{/createBook}" method="post" th:object="${book}" enctype="multipart/form-data">
                         <div class="newBook">
-                            <label class="label_newBook" for="title">Título:</label>
+                            <label class="label_newBook" for="title">Título: *</label>
                             <input class="input_newBook form-control" type="text" id="title" name="title"
                                 th:field="*{title}" required>
-                            <label class="label_newBook" for="year">Año de publicación:</label>
+                            <label class="label_newBook" for="year">Año de publicación: *</label>
                             <input class="input_newBook form-control" type="number" id="year" name="year"
                                 th:field="*{year}" required>
                             <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span>
-                            <label class="label_newBook" for="author">Autor del libro:</label>
+                            <label class="label_newBook" for="author">Autor del libro: *</label>
                             <input class="input_newBook form-control" type="text" id="author" name="author"
                                 th:field="*{author}" required>
-                            <label class="label_newBook" for="isbn">ISBN:</label>
+                            <label class="label_newBook" for="isbn">ISBN: *</label>
                             <input class="input_newBook form-control" type="text" id="isbn" name="isbn"
                                 th:field="*{ISBN}" required>
                             <span th:if="${#fields.hasErrors('ISBN')}" th:errors="*{ISBN}"></span>
-                            <label class="label_newBook" for="genre">Género:</label>
+                            <label class="label_newBook" for="genre">Género: *</label>
                             <select class="input_newBook form-control" id="genre" name="genre" required>
                                 <option value="" disabled selected>Selecciona un género</option>
                                 <th:block th:each="genre : ${T(com.paula.model.Genre).values()}">
