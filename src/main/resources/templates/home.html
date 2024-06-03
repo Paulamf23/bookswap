@@ -44,7 +44,7 @@
                                 <h5 class="card-title"
                                     th:text="${#strings.length(book.title) gt 25 ? #strings.substring(book.title, 0, 25) + '...' : book.title}"
                                     data-toggle="tooltip" th:attr="title=${book.title}"></h5>
-                                <p class="card-text" th:text="'@' + ${book.user?.username}"></p>
+                                <p class="card-user" th:text="'@' + ${book.user?.username}"></p>
                             </div>
                         </div>
                     </a>

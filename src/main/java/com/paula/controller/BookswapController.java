@@ -414,7 +414,7 @@ public class BookswapController {
             long currentTime = System.currentTimeMillis();
             Long lastMessageTime = (Long) session.getAttribute("lastMessageTime");
 
-            if (lastMessageTime == null || (currentTime - lastMessageTime) > 1000) { 
+            if (lastMessageTime == null || (currentTime - lastMessageTime) > 1000) {
                 Community message = new Community();
                 message.setContent(content);
                 message.setSender(sender);
@@ -426,6 +426,15 @@ public class BookswapController {
             }
         }
         return "redirect:/community";
+    }
+
+    @GetMapping("/getMessages")
+    @ResponseBody
+    public String getMessages(Model model) {
+        List<Community> messages = userService.getAllMessages();
+        Collections.reverse(messages);
+        model.addAttribute("messages", messages);
+        return "fragments/messages :: message-list";
     }
 
     @GetMapping("/deleteUser/{userId}")

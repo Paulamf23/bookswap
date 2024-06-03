@@ -67,7 +67,7 @@
             function formatTimestamps() {
                 const timestamps = document.querySelectorAll('.timestamp');
                 let lastDate = '';
-
+    
                 timestamps.forEach(function (timestamp) {
                     const date = new Date(timestamp.textContent);
                     const day = date.getDate();
@@ -76,9 +76,9 @@
                     const formattedDate = `${day} ${month} ${year}`;
                     const hours = String(date.getHours()).padStart(2, '0');
                     const minutes = String(date.getMinutes()).padStart(2, '0');
-
+    
                     timestamp.textContent = `${hours}:${minutes}`;
-
+    
                     if (formattedDate !== lastDate) {
                         const dateDivider = document.createElement('div');
                         dateDivider.className = 'date-divider';
@@ -88,26 +88,31 @@
                     }
                 });
             }
-
+    
             function reloadMessages() {
                 $.ajax({
                     url: '/getMessages', 
                     method: 'GET',
                     success: function (data) {
-                        $('#chat-messages').html($(data).find('#chat-messages').html());
-                        formatTimestamps();
+                        var newMessages = $(data).find('#message-list').html();
+                        $('#message-list').append(newMessages); // Agrega los nuevos mensajes
+                        formatTimestamps(); // Actualiza los timestamps
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error al recargar los mensajes:', error);
                     }
                 });
             }
-
+    
             setInterval(reloadMessages, 30000);
-
+    
             document.getElementById('message-form').addEventListener('submit', function (event) {
                 document.getElementById('send-button').disabled = true;
             });
-
+    
             formatTimestamps();
         });
     </script>
+    
 </body>
 </html>
