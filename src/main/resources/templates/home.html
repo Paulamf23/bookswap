@@ -14,41 +14,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 
     <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <style>
-        .row-home {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .col-custom {
-            flex: 0 0 20%; /* Para asegurar que cada columna ocupe el 20% del ancho del contenedor */
-            max-width: 20%;
-            padding-right: 15px; /* Agregar espacio entre las columnas */
-            padding-left: 15px; /* Agregar espacio entre las columnas */
-            margin-bottom: 20px; /* Agregar espacio entre las filas */
-        }
-
-        @media (max-width: 992px) {
-            .col-custom {
-                flex: 0 0 33.33333%; /* Para cambiar a 3 columnas por fila en pantallas más pequeñas */
-                max-width: 33.33333%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .col-custom {
-                flex: 0 0 50%; /* Para cambiar a 2 columnas por fila en pantallas aún más pequeñas */
-                max-width: 50%;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .col-custom {
-                flex: 0 0 100%; /* Para cambiar a 1 columna por fila en pantallas muy pequeñas */
-                max-width: 100%;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -61,27 +26,30 @@
         <div class="container">
             <h3 class="titulo-apartado">ÚLTIMOS LIBROS</h3>
             <div class="row row-home">
-                <div class="col-custom" th:each="book, iterStat : ${books}" th:if="${iterStat.index lt 10 and book.disponible==false}">
-                    <div class="card card-home-grande shadow-sm">
-                        <img th:src="@{'/books/' + ${book.bookId} + '/image'}" class="bd-placeholder-img card-img-top"
-                            width="100%" height="225" alt="Book Image">
-                        <div class="card-body card-home">
-                            <h5 class="card-title"
-                                th:text="${#strings.length(book.title) gt 25 ? #strings.substring(book.title, 0, 25) + '...' : book.title}"
-                                data-toggle="tooltip" th:attr="title=${book.title}"></h5>
-                            <p class="card-text" th:text="'@' + ${book.user?.username}"></p>
-                            <div class="btn-group">
-                                <a th:href="@{/bookDetail/{bookId}(bookId=${book.bookId})}"
-                                    class="btn botonesDeLibros btn-secondary my-2">Ver libro</a>
-                                <form th:action="@{/addFavorite/__${book.bookId}__}" method="get" style="display:inline;">
+                <div class="col-custom cardHomeLibro" th:each="book, iterStat : ${books}"
+                    th:if="${iterStat.index lt 10 and book.disponible==false}">
+                    <a class="botonVerLibro" th:href="@{/bookDetail/{bookId}(bookId=${book.bookId})}">
+                        <div class="card shadow-sm">
+                            <div class="card-img-container">
+                                <img th:src="${book.image != null} ? '/books/' + ${book.bookId} + '/image' : @{/images/defecto.jpg}"
+                                    class="bd-placeholder-img card-img-top" height="225" alt="Book Image">
+                                <form th:action="@{/addFavorite/__${book.bookId}__}" method="get"
+                                    class="favorite-button-form">
                                     <button type="submit" class="btn botonesDeLibros btn-secondary my-2">
                                         <i class="fa fa-heart" aria-hidden="true"></i>
                                     </button>
                                 </form>
                             </div>
+                            <div class="card-body card-home">
+                                <h5 class="card-title"
+                                    th:text="${#strings.length(book.title) gt 25 ? #strings.substring(book.title, 0, 25) + '...' : book.title}"
+                                    data-toggle="tooltip" th:attr="title=${book.title}"></h5>
+                                <p class="card-text" th:text="'@' + ${book.user?.username}"></p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
+
             </div>
             <div th:if="${#lists.isEmpty(books)}" class="col text-center">
                 <p>No hay libros publicados.</p>

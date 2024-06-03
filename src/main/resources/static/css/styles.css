@@ -204,6 +204,21 @@ section {
 
 /* HOME */
 
+.card-img-container {
+    position: relative;
+}
+
+.favorite-button-form {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: none;
+}
+
+.card:hover .favorite-button-form {
+    display: block;
+}
+
 .container-newBook {
     background-color: #E8D6C6;
     margin-top: 8%;
@@ -226,13 +241,11 @@ section {
     padding-top: 0.7rem;
 }
 
-.card-home-grande {
-    max-width: 341px;
-}
-
 .row-home {
     margin-top: 2%;
     max-width: inherit;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .botonesDeLibros {
@@ -261,6 +274,23 @@ h5.card-title {
 .card-img-top {
     width: 50%;
     margin: auto;
+}
+
+.botonVerLibro h5, .botonVerLibro p,
+.botonVerLibro h5:hover, .botonVerLibro p:hover{
+    color: #7a503b;
+}
+
+.cardHomeLibro a{
+    text-decoration: none;
+}
+
+.col-custom{
+     flex: 0 0 20%;
+    max-width: 20%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 20px;
 }
 
 /* LOGIN */
@@ -737,20 +767,20 @@ section {
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #fff;
     background-clip: border-box;
     border: 0 solid transparent;
     border-radius: 0;
     margin-bottom: 30px;
+    text-align: center;
 }
 
 .table-product.table-striped tbody tr:nth-of-type(odd) {
-    background-color: #f3f8fa !important;
+    background-color: #E8D6C6 !important;
 }
 
 .table-product td {
-    border-top: 0px solid #dee2e6 !important;
-    color: #728299 !important;
+    border-top: 0px solid #93674E !important;
+    color: #93674E !important;
 }
 
 .botonComprarDetalle {
@@ -776,18 +806,25 @@ section {
     max-width: 80%;
 }
 
-.info-title {
-    margin-left: auto;
-    margin-right: auto;
+.table{
+    color:#7a503b
+}
+
+.img-detail{
+    width: 30%;
+}
+
+.card-text{
     text-align: left;
-    max-width: 80%;
 }
 
-.usuario {
-    display: grid;
-    gap: 5%;
+.col-lg-7{
+    margin: auto;
 }
 
+.col-lg-12{
+    margin-top: 2%;
+}
 /* --------------------------------------------- */
 input.selectImg {
     margin-bottom: 5%;
@@ -796,10 +833,6 @@ input.selectImg {
 .botonAñadir:hover {
     background-color: #93674E;
     color: #E8D6C6;
-}
-
-.btnFavDetail {
-    width: auto;
 }
 
 /* BOOKS */
@@ -1174,85 +1207,4 @@ ul {
 
 .detailIntercambio {
     background-color: #E8D6C6;
-}
-
-/* RESPONSIVE */
-
-@media screen and (max-width: 1200px) {
-    .login {
-        height: auto;
-    }
-
-    .home {
-        flex-direction: column;
-    }
-
-    .logo img {
-        width: 80%;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-    }
-
-    nav ul li {
-        margin: 0.2rem 0;
-    }
-
-    .button_header {
-        font-size: 1rem;
-    }
-
-    .card-home-grande {
-        max-width: 280px;
-    }
-
-    .card-img-top {
-        width: 70%;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .logo img {
-        width: 60%;
-    }
-
-    .info-childs h2,
-    .form-information-childs h2 {
-        font-size: 1.5rem;
-    }
-
-    .info-childs p,
-    .form-information-childs p {
-        font-size: 1rem;
-    }
-
-    .button,
-    .button_header,
-    .button_myBooks {
-        font-size: 0.8rem;
-        padding: 8px 16px;
-    }
-
-    .form label input {
-        font-size: 0.8rem;
-        padding: 8px;
-    }
-
-    .form input[type="submit"] {
-        font-size: 0.8rem;
-        padding: 8px 16px;
-    }
-
-    .image {
-        width: 80%;
-    }
-
-    .card-home-grande,
-    .card,
-    .card-libro-myBooks {
-        width: 100%;
-    }
 }

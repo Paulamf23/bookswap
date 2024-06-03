@@ -406,14 +406,24 @@ public class BookswapController {
     }
 
     @PostMapping("/sendMessage")
-    public String sendMessage(@RequestParam String content, HttpSession session) {
+    public String sendMessage(@RequestParam String content, HttpSession session,
+            RedirectAttributes redirectAttributes) {
         String username = (String) session.getAttribute("username");
         if (username != null && !content.isEmpty()) {
             User sender = userService.getUserByUsername(username);
-            Community message = new Community();
-            message.setContent(content);
-            message.setSender(sender);
-            userService.saveMessage(message);
+            long currentTime = System.currentTimeMillis();
+            Long lastMessageTime = (Long) session.getAttribute("lastMessageTime");
+
+            if (lastMessageTime == null || (currentTime - lastMessageTime) > 1000) { 
+                Community message = new Community();
+                message.setContent(content);
+                message.setSender(sender);
+                userService.saveMessage(message);
+                session.setAttribute("lastMessageTime", currentTime);
+            } else {
+                redirectAttributes.addFlashAttribute("error",
+                        "Por favor, espera un momento antes de enviar otro mensaje.");
+            }
         }
         return "redirect:/community";
     }

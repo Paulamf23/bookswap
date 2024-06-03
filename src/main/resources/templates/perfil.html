@@ -63,7 +63,7 @@
                                     </div>
                                 </div>
                                 <div class="col-auto d-none d-lg-block">
-                                    <img th:src="@{'/books/' + ${book.bookId} + '/image'}" class="bd-placeholder-img"
+                                    <img th:src="${book.image != null} ? '/books/' + ${book.bookId} + '/image' : @{/images/defecto.jpg}" class="bd-placeholder-img"
                                         width="200" height="250" />
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
                                 <div class="col-auto d-none d-lg-block">
-                                    <img th:src="@{'/books/' + ${book.bookId} + '/image'}" class="bd-placeholder-img"
+                                    <img th:src="${book.image != null} ? '/books/' + ${book.bookId} + '/image' : @{/images/defecto.jpg}" class="bd-placeholder-img"
                                         width="200" height="250" />
                                 </div>
                             </div>

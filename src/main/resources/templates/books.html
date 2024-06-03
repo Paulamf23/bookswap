@@ -46,7 +46,7 @@
                 <div class="row row-home">
                     <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4 mb-4-books" th:each="book, iterStat : ${books}" th:if="${book.disponible==false}">
                         <div class="card card-book card-home-grande shadow-sm">
-                            <img th:src="@{'/books/' + ${book.bookId} + '/image'}" class="bd-placeholder-img card-img-top" width="100%" height="225" alt="Book Image">
+                            <img th:src="${book.image != null} ? '/books/' + ${book.bookId} + '/image' : @{/images/defecto.jpg}" class="bd-placeholder-img card-img-top" width="100%" height="225" alt="Book Image">
                             <div class="card-body card-home">
                                 <div class="datosLibro">
                                     <h5 class="card-title" th:text="${#strings.length(book.title) gt 15 ? #strings.substring(book.title, 0, 15) + '...' : book.title}" data-toggle="tooltip" th:attr="title=${book.title}"></h5>
