@@ -91,7 +91,7 @@
 
             function reloadMessages() {
                 $.ajax({
-                    url: '/getMessages', // URL para obtener los mensajes
+                    url: '/getMessages', 
                     method: 'GET',
                     success: function (data) {
                         $('#chat-messages').html($(data).find('#chat-messages').html());
