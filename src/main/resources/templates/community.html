@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BookSwap</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
@@ -15,26 +14,7 @@
     <div th:replace="plantillas/header :: header"></div>
     <main class="community">
         <div class="col-md-8 col-comm">
-            <div id="chat-messages">
-                <ul id="message-list">
-                    <li th:each="message : ${messages}">
-                        <div th:class="${message.sender.username == username ? 'message current-user-message' : 'message user-message'}">
-                            <b><span th:text="${'@' + message.sender.username}"></span></b><br>
-                            <span th:text="${message.content}"></span>
-                            <div class="esquina">
-                                <div th:if="${isAdmin}" class="del_message">
-                                    <a th:href="@{/deleteMessage/{id}(id=${message.id})}" class="delete_message btn">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div class="horaPub">
-                                    <span class="timestamp" th:text="${message.timestamp}"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <div id="chat-messages" th:replace="fragments/messageList :: messageList"></div> <!-- Aquí se carga el fragmento -->
         </div>
         <div class="lateral-derecho">
             <div class="col-mess">
@@ -50,24 +30,35 @@
                 </form>
             </div>
             <div class="normas">
-                <p>Estas normas deben ser cumplidas por todos los miembros de esta comunidad.<b> Un mal uso de esta puede llevar a la expulsión de la comunidad y la eliminación de la cuenta</b></p>
+                <p>Estas normas deben ser cumplidas por todos los miembros de esta comunidad.<b> Un mal uso de esta
+                        puede llevar a la expulsión de la comunidad y la eliminación de la cuenta</b></p>
                 <ul>
-                    <li>1. Respetar el propósito y objetivo del grupo el cual es dar a conocer información o responder consultas de carácter general entre los diferentes usuarios. Sobre temas relacionados con la lectura</li>
+                    <li>1. Respetar el propósito y objetivo del grupo el cual es dar a conocer información o responder
+                        consultas de carácter general entre los diferentes usuarios. Sobre temas relacionados con la
+                        lectura</li>
                     <li>2. Verificar el contenido que se envía y pensar si es de interés y objetivo del grupo.</li>
-                    <li>3. No se permite la publicidad de material, servicios y otros no relacionados con la comunidad, si tienes dudas contacta con los administradores previamente.</li>
-                    <li>4. Se respetuoso y moderado, evita hablar de temas políticos, religiosos, xenófobos y otros conflictivos.</li>
-                    <li>5. Antes de mandar una queja o reclamo al grupo, identifica al administrador de la comunidad y transmítesela a él/ella de manera directa y por los canales oficiales.</li>
-                    <li>6. Los administradores del grupo podrán expulsar a cualquier usuario que incumpla las normas de forma flagrante.</li>
+                    <li>3. No se permite la publicidad de material, servicios y otros no relacionados con la comunidad,
+                        si tienes dudas contacta con los administradores previamente.</li>
+                    <li>4. Se respetuoso y moderado, evita hablar de temas políticos, religiosos, xenófobos y otros
+                        conflictivos.</li>
+                    <li>5. Antes de mandar una queja o reclamo al grupo, identifica al administrador de la comunidad y
+                        transmítesela a él/ella de manera directa y por los canales oficiales.</li>
+                    <li>6. Los administradores del grupo podrán expulsar a cualquier usuario que incumpla las normas de
+                        forma flagrante.</li>
                 </ul>
             </div>
         </div>
     </main>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha384-tsQFqpERiu0ZmTcZBYnRqGUG03uMoyH22U0ppOTi2mgpcU4Z6RZp6meF4mVtqWIW"
+        crossorigin="anonymous"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            const messageList = document.getElementById('message-list');
+
             function formatTimestamps() {
                 const timestamps = document.querySelectorAll('.timestamp');
                 let lastDate = '';
-    
                 timestamps.forEach(function (timestamp) {
                     const date = new Date(timestamp.textContent);
                     const day = date.getDate();
@@ -76,9 +67,9 @@
                     const formattedDate = `${day} ${month} ${year}`;
                     const hours = String(date.getHours()).padStart(2, '0');
                     const minutes = String(date.getMinutes()).padStart(2, '0');
-    
+
                     timestamp.textContent = `${hours}:${minutes}`;
-    
+
                     if (formattedDate !== lastDate) {
                         const dateDivider = document.createElement('div');
                         dateDivider.className = 'date-divider';
@@ -88,31 +79,35 @@
                     }
                 });
             }
-    
-            function reloadMessages() {
+
+            function loadMessages() {
                 $.ajax({
-                    url: '/getMessages', 
+                    url: '/getMessages',
                     method: 'GET',
                     success: function (data) {
-                        var newMessages = $(data).find('#message-list').html();
-                        $('#message-list').append(newMessages); // Agrega los nuevos mensajes
-                        formatTimestamps(); // Actualiza los timestamps
+                        $('#chat-messages').html(data); // Actualiza el contenedor de mensajes
+                        formatTimestamps();
                     },
-                    error: function (xhr, status, error) {
-                        console.error('Error al recargar los mensajes:', error);
+                    error: function () {
+                        console.error('Error al cargar los mensajes.');
                     }
                 });
             }
-    
-            setInterval(reloadMessages, 30000);
-    
-            document.getElementById('message-form').addEventListener('submit', function (event) {
-                document.getElementById('send-button').disabled = true;
+
+            setInterval(loadMessages, 30000);
+
+            $('#message-form').on('submit', function (event) {
+                event.preventDefault();
+                const formData = $(this).serialize();
+                $.post('/sendMessage', formData, function () {
+                    $('#send-button').prop('disabled', false);
+                    loadMessages();
+                });
             });
-    
+
             formatTimestamps();
         });
     </script>
-    
 </body>
+
 </html>

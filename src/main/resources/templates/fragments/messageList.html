@@ -1,0 +1,21 @@
+<!-- src/main/resources/templates/fragments/messageList.html -->
+<div th:fragment="messageList">
+    <ul id="message-list">
+        <li th:each="message : ${messages}">
+            <div th:class="${message.sender.username == username ? 'message current-user-message' : 'message user-message'}">
+                <b><span th:text="${'@' + message.sender.username}"></span></b><br>
+                <span th:text="${message.content}"></span>
+                <div class="esquina">
+                    <div th:if="${isAdmin}" class="del_message">
+                        <a th:href="@{/deleteMessage/{id}(id=${message.id})}" class="delete_message btn">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <div class="horaPub">
+                        <span class="timestamp" th:text="${message.timestamp}"></span>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

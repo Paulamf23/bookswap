@@ -429,12 +429,18 @@ public class BookswapController {
     }
 
     @GetMapping("/getMessages")
-    @ResponseBody
-    public String getMessages(Model model) {
-        List<Community> messages = userService.getAllMessages();
-        Collections.reverse(messages);
-        model.addAttribute("messages", messages);
-        return "fragments/messages :: message-list";
+    public String getMessages(Model model, HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            List<Community> messages = userService.getAllMessages();
+            Collections.reverse(messages);
+            model.addAttribute("messages", messages);
+            model.addAttribute("username", username);
+
+            User user = userService.getUserByUsername(username);
+            model.addAttribute("isAdmin", user != null && user.getRole() == Role.admin);
+        }
+        return "fragments/messageList :: messageList";
     }
 
     @GetMapping("/deleteUser/{userId}")
