@@ -256,10 +256,16 @@ section {
     background-color: #E8D6C6;
 }
 
+.boton-foto{
+    
+}
+
 h5.card-title {
-    font-weight: 700;
-    margin-bottom: .05rem;
-    padding-top: 2%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    font-weight: bold;
 }
 
 .botonesDeLibros:hover {
@@ -525,6 +531,7 @@ h5.card-title {
     margin: 2%;
     width: 50%;
     align-self: center;
+    color: #7a503b;
 }
 
 .bajo {

@@ -33,40 +33,35 @@
                 </div>
                 <div th:if="${not #lists.isEmpty(books)}">
                     <div class="row mb-2">
-                        <div class="col-md-6 mb-4" th:each="book : ${books}" th:if="${book.disponible==false}">
-                            <div
-                                class="card-libro-myBooks row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                                <div class="col p-4 d-flex flex-column position-static">
-                                    <h3 class="titulo-libro mb-0" th:text="${book.title}"></h3>
-                                    <div class="border rounded p-2 mb-1">
-                                        <div class="text-body-secondary" th:text="${book.year}"></div>
-                                        <div class="text-body-secondary" th:text="${book.author}"></div>
-                                    </div>
-                                    <div class="bajo">
-                                        <p class="isbn icon-link gap-1 icon-link-hover stretched-link">
-                                            <span th:text="${'ISBN: ' + book.ISBN}"></span>
-                                        </p>
-                                        <div class="botonesTarjetas">
-                                            <div class="boton_verLibro">
-                                                <a th:href="@{/bookDetail/{bookId}(bookId=${book.bookId})}"
-                                                    class="botonesDeLibros btn">
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
-                                            <div class="boton_eliminar">
-                                                <a th:href="@{/deleteBook/{bookId}(bookId=${book.bookId})}"
-                                                    class="btn btn-danger">
+                        <div class="col-md-6 col-custom cardHomeLibro" th:each="book, iterStat : ${books}"
+                            th:if="${book.disponible==false}">
+                            <a class="botonVerLibro" th:href="@{/bookDetail/{bookId}(bookId=${book.bookId})}">
+                                <div class="card shadow-sm">
+                                    <div class="card-img-container">
+                                        <img th:src="${book.image != null} ? '/books/' + ${book.bookId} + '/image' : @{/images/defecto.jpg}"
+                                            class="bd-placeholder-img card-img-top" height="225" alt="Book Image">
+                                        <div class="botones">
+                                            <form th:action="@{/deleteBook/{bookId}(bookId=${book.bookId})}"
+                                                method="get" class="favorite-button-form">
+                                                <button type="submit" class="btn botonesDeLibros btn-secondary my-2">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
+                                                </button>
+                                            </form>
+                                            <form th:if="${book.image == null}" th:action="@{/uploadImage/{bookId}(bookId=${book.id})}" method="get"
+                                                class="favorite-button-form">
+                                                <button type="submit"
+                                                    class="btn botonesDeLibros btn-secondary boton-foto my-2">
+                                                    <i class="fa fa-camera" aria-hidden="true"></i>
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
+                                    <div class="card-body card-home">
+                                        <h5 class="card-title" th:text="${book.title}" data-toggle="tooltip"
+                                            th:attr="title=${book.title}"></h5>
+                                    </div>
                                 </div>
-                                <div class="col-auto d-none d-lg-block">
-                                    <img th:src="${book.image != null} ? '/books/' + ${book.bookId} + '/image' : @{/images/defecto.jpg}" class="bd-placeholder-img"
-                                        width="200" height="250" />
-                                </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -81,14 +76,7 @@
                                 class="card-libro-myBooks row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                                 <div class="col p-4 d-flex flex-column position-static">
                                     <h3 class="titulo-libro mb-0" th:text="${book.title}"></h3>
-                                    <div class="border rounded p-2 mb-1">
-                                        <div class="text-body-secondary" th:text="${book.year}"></div>
-                                        <div class="text-body-secondary" th:text="${book.author}"></div>
-                                    </div>
                                     <div class="bajo">
-                                        <p class="isbn icon-link gap-1 icon-link-hover stretched-link">
-                                            <span th:text="${'ISBN: ' + book.ISBN}"></span>
-                                        </p>
                                         <div class="botonesTarjetas">
                                             <div class="boton_verLibro">
                                                 <a th:href="@{/bookDetail/{bookId}(bookId=${book.bookId})}"
@@ -107,8 +95,8 @@
                                     </div>
                                 </div>
                                 <div class="col-auto d-none d-lg-block">
-                                    <img th:src="${book.image != null} ? '/books/' + ${book.bookId} + '/image' : @{/images/defecto.jpg}" class="bd-placeholder-img"
-                                        width="200" height="250" />
+                                    <img th:src="${book.image != null} ? '/books/' + ${book.bookId} + '/image' : @{/images/defecto.jpg}"
+                                        class="bd-placeholder-img" width="200" height="250" />
                                 </div>
                             </div>
                         </div>

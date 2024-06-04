@@ -82,10 +82,6 @@
                                     </button>
                                 </form>
                             </div>
-                            <div th:if="${book.image == null} and ${session.username == book.user.username}">
-                                <a th:href="@{/uploadImage/{bookId}(bookId=${book.id})}"
-                                    class="botonComprarDetalle btn btn-rounded mt-3">Subir imagen</a>
-                            </div>
                         </div>
                     </div>
                 </div>
