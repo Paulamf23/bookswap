@@ -46,10 +46,6 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<FavouriteBooks> favorites = new HashSet<>();
 
-	@Column(name = "city")
-	@Enumerated(EnumType.STRING)
-	private Ciudad city;
-
 	public User(String email) {
 		this.email = email;
 	}
