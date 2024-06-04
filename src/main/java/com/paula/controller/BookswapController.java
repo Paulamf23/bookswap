@@ -428,21 +428,6 @@ public class BookswapController {
         return "redirect:/community";
     }
 
-    @GetMapping("/getMessages")
-    public String getMessages(Model model, HttpSession session) {
-        String username = (String) session.getAttribute("username");
-        if (username != null) {
-            List<Community> messages = userService.getAllMessages();
-            Collections.reverse(messages);
-            model.addAttribute("messages", messages);
-            model.addAttribute("username", username);
-
-            User user = userService.getUserByUsername(username);
-            model.addAttribute("isAdmin", user != null && user.getRole() == Role.admin);
-        }
-        return "fragments/messageList :: messageList";
-    }
-
     @GetMapping("/deleteUser/{userId}")
     public String deleteUser(@PathVariable Integer userId, RedirectAttributes redirectAttributes) {
         try {
