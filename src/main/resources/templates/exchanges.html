@@ -5,8 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BookSwap</title>
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -27,7 +25,7 @@
         <div th:if="${isAdmin == false}"
             class="bloque-exchanges p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
             <div class="text-center mb-4">
-                <h1 class="interName"> MIS INTERCAMBIOS</h1>
+                <h1 class="interName">MIS INTERCAMBIOS</h1>
             </div>
 
             <div class="mb-4 apartados">
@@ -60,7 +58,8 @@
                                     <td th:text="${propuesta.libroPorIntercambiar.title}"></td>
                                     <td class="botonesTabla"
                                         th:if="${currentUsername ==propuesta.usuarioPublicador.username}">
-                                        <form th:action="@{'/accept/' + ${propuesta.id}}" method="post">
+                                        <form th:action="@{'/accept/' + ${propuesta.id}}" method="post"
+                                            onsubmit="showAcceptModal('${propuesta.usuarioSolicitante.email}'); return false;">
                                             <button type="submit" class="btn botonesDeLibros"><i class="fa fa-check"
                                                     aria-hidden="true"></i></button>
                                         </form>
@@ -68,7 +67,6 @@
                                             <button type="submit" class="btn botonesDeLibros"><i class="fa fa-times"
                                                     aria-hidden="true"></i></button>
                                         </form>
-
                                     </td>
                                 </tr>
                             </tbody>
@@ -87,6 +85,7 @@
                                     <th>Usuario</th>
                                     <th>Libro solicitado</th>
                                     <th>Libro ofertado</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                         </table>
@@ -98,8 +97,13 @@
                                     <td
                                         th:text="${currentUsername == bookAccepted.usuarioSolicitante.username ? '@' + bookAccepted.usuarioPublicador.username : '@' + bookAccepted.usuarioSolicitante.username}">
                                     </td>
-                                    <td th:text="${bookAccepted.libroSolicitado.title}"></td>
-                                    <td th:text="${bookAccepted.libroPorIntercambiar.title}"></td>
+                                    <td class="trAcept" th:text="${bookAccepted.libroSolicitado.title}"></td>
+                                    <td class="trAcept" th:text="${bookAccepted.libroPorIntercambiar.title}"></td>
+                                    <td>
+                                        <i class="bi bi-info-circle" th:data-toggle="tooltip" th:data-placement="top"
+                                            th:title="${'El intercambio ha sido aceptado, para llevarlo a cabo pongase en contacto &#10; con el usuario solicitante a través del siguiente mail: ' + bookAccepted.usuarioSolicitante.email}">
+                                        </i>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -128,8 +132,8 @@
                                     <td
                                         th:text="${currentUsername == bookDenied.usuarioSolicitante.username ? '@' + bookDenied.usuarioPublicador.username : '@' + bookDenied.usuarioSolicitante.username}">
                                     </td>
-                                    <td th:text="${bookDenied.libroSolicitado.title}"></td>
-                                    <td th:text="${bookDenied.libroPorIntercambiar.title}"></td>
+                                    <td class="trAcept" th:text="${bookDenied.libroSolicitado.title}"></td>
+                                    <td class="trAcept" th:text="${bookDenied.libroPorIntercambiar.title}"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -161,10 +165,14 @@
                                         <td style="text-align: center;" width="390"><b>Estado del intercambio</b></td>
                                     </tr>
                                     <tr th:each="exchange : ${exchanges}">
-                                        <td style="text-align: center;" th:text="${'@'+exchange.usuarioSolicitante.username}"></td>
-                                        <td style="text-align: center;" th:text="${exchange.libroPorIntercambiar.title}"></td>
-                                        <td style="text-align: center;" th:text="${'@'+exchange.usuarioPublicador.username}"></td>
-                                        <td style="text-align: center;" th:text="${exchange.libroSolicitado.title}"></td>
+                                        <td style="text-align: center;"
+                                            th:text="${'@'+exchange.usuarioSolicitante.username}"></td>
+                                        <td style="text-align: center;"
+                                            th:text="${exchange.libroPorIntercambiar.title}"></td>
+                                        <td style="text-align: center;"
+                                            th:text="${'@'+exchange.usuarioPublicador.username}"></td>
+                                        <td style="text-align: center;" th:text="${exchange.libroSolicitado.title}">
+                                        </td>
                                         <td style="text-align: center;"
                                             th:text="${#strings.capitalize(exchange.estado.name().replaceAll('([A-Z])', ' $1'))}">
                                         </td>
@@ -177,16 +185,6 @@
             </div>
         </div>
     </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <script>
-        $(window).on("load resize ", function () {
-            var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
-            $('.tbl-header').css({ 'padding-right': scrollWidth });
-        }).resize();
-    </script>
 </body>
 
 </html>

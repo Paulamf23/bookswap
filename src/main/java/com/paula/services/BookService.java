@@ -12,12 +12,16 @@ import com.paula.model.Book;
 import com.paula.model.Genre;
 import com.paula.model.User;
 import com.paula.repository.BookRepository;
+import com.paula.repository.ExchangeRepository;
 
 @Service
 public class BookService {
 
     @Autowired
     BookRepository bookRepository;
+
+    @Autowired
+    ExchangeRepository exchangeRepository;
 
     public void createBook(Book book) {
         bookRepository.save(book);
@@ -37,6 +41,7 @@ public class BookService {
 
 		if (book.isPresent()) {
             bookRepository.deleteFavouriteBooksByBookId(bookId);
+            exchangeRepository.deleteExchangeByBookId(bookId);
 			bookRepository.deleteById(bookId);
 		} else {
 			throw new RuntimeException("¡Error! El libro con id " + bookId + " no está en la base de datos.");

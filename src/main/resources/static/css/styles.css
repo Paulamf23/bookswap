@@ -212,7 +212,6 @@ section {
     position: absolute;
     top: 10px;
     right: 10px;
-    display: none;
 }
 
 .foto-button-form {
@@ -1195,6 +1194,15 @@ ul {
 
 .botonesTabla {
     display: flex;
+}
+
+.trAcept {
+    text-align: center;
+}
+
+.bi-info-circle{
+    font-size: large;
+    color: red;
 }
 
 /* EXCHANGE DETAIL */

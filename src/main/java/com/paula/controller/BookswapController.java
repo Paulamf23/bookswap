@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.paula.model.*;
+import com.paula.repository.ExchangeRepository;
 import com.paula.services.AdminService;
 import com.paula.services.BookService;
 import com.paula.services.ExchangeService;
@@ -41,6 +42,9 @@ public class BookswapController {
 
     @Autowired
     private ExchangeService exchangeService;
+
+    @Autowired
+    private ExchangeRepository exchangeRepository;
 
     @GetMapping("/")
     public String home(HttpSession session, Model model) {
@@ -326,8 +330,14 @@ public class BookswapController {
 
     @GetMapping("/deleteBook/{bookId}")
     public String deleteBook(@PathVariable Integer bookId, RedirectAttributes redirectAttributes) {
-        bookService.deleteBook(bookId);
-        redirectAttributes.addFlashAttribute("exito", "El libro con id " + bookId + " ha sido eliminado exitosamente.");
+        try {
+            exchangeRepository.deleteExchangeByBookId(bookId);
+            bookService.deleteBook(bookId);
+            redirectAttributes.addFlashAttribute("success",
+                    "El libro con id " + bookId + " ha sido eliminado exitosamente.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Error al eliminar el libro.");
+        }
         return "redirect:/perfil";
     }
 
