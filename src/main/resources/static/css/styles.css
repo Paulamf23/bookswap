@@ -235,10 +235,13 @@ nav ul li a:hover {
 }
 
 .row-home {
-    margin-top: 2%;
+    margin: 40px 0 0 0;
+    padding-left: 10px;
+    padding-right: 10px;
     max-width: inherit;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .botonesDeLibros {
@@ -282,7 +285,9 @@ h5.card-title {
 
 .col-custom{
     flex: 0 0 20%;
-    max-width: 20%;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 280px;
     padding-right: 15px;
     padding-left: 15px;
     margin-bottom: 20px;
