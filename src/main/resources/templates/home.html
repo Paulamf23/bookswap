@@ -44,7 +44,7 @@
                                 <h5 class="card-title"
                                     th:text="${#strings.length(book.title) gt 25 ? #strings.substring(book.title, 0, 25) + '...' : book.title}"
                                     data-toggle="tooltip" th:attr="title=${book.title}"></h5>
-                                <p class="card-user" th:text="'@' + ${book.user?.username}"></p>
+                                <p th:text="'@' + ${book.user?.username}"></p>
                             </div>
                         </div>
                     </a>
@@ -58,12 +58,6 @@
 
     <div th:replace="plantillas/footer :: footer"></div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+CE8ii6Agh2okG6zcVR8a+N6BkWJcwNJzo27W8C"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
     <script>
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();

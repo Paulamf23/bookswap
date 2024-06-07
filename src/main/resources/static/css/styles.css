@@ -108,19 +108,7 @@ nav ul li a:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
 }
 
-
 /* FOOTER */
-
-section {
-    width: 100%;
-    display: inline-block;
-    background-color: #E8D6C6;
-    height: fit-content;
-    text-align: center;
-    font-size: 22px;
-    font-weight: 700;
-    text-decoration: underline;
-}
 
 .footer-distributed {
     background: #E8D6C6;
@@ -144,13 +132,9 @@ section {
     width: 25%;
 }
 
-/* Footer left */
-
 .footer-distributed .footer-left {
     width: 40%;
 }
-
-/* Footer Center */
 
 .footer-distributed .footer-center {
     width: 35%;
@@ -187,8 +171,6 @@ section {
     color: #949b6c;
     text-decoration: none;
 }
-
-/* Footer Right */
 
 .footer-distributed .footer-right {
     width: 20%;
@@ -299,7 +281,7 @@ h5.card-title {
 }
 
 .col-custom{
-     flex: 0 0 20%;
+    flex: 0 0 20%;
     max-width: 20%;
     padding-right: 15px;
     padding-left: 15px;
@@ -1231,3 +1213,4 @@ ul {
 .detailIntercambio {
     background-color: #E8D6C6;
 }
+
