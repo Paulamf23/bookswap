@@ -60,7 +60,7 @@
             <h4 class="noLibroIntercambio">Estos libros se encuentran en el mismo estado que el libro que quieres intercambiar.
                 Elige 1</h4>
             <div class="row mb-2">
-                <div class="col-md-6 mb-4" th:each="userBook : ${userBooksSameCondition}" th:if="${book.disponible==false}">
+                <div class="col-md-6 mb-4" th:each="userBook : ${userBooksSameCondition}" th:if="${userBook.disponible==false}">
                     <div
                         class="card-libro-myBooks row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                         <div class="col p-4 d-flex flex-column position-static">
@@ -87,7 +87,7 @@
                             </div>
                         </div>
                         <div class="col-auto d-none d-lg-block">
-                            <img th:src="${book.image != null} ? '/books/' + ${book.bookId} + '/image' : @{/images/defecto.jpg}" class="bd-placeholder-img"
+                            <img th:src="${userBook.image != null} ? '/books/' + ${userBook.bookId} + '/image' : @{/images/defecto.jpg}" class="bd-placeholder-img"
                                 width="200" height="250" />
                         </div>
                     </div>
