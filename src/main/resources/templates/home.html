@@ -33,7 +33,7 @@
                             <div class="card-img-container">
                                 <img th:src="${book.image != null} ? '/books/' + ${book.bookId} + '/image' : @{/images/defecto.jpg}"
                                     class="bd-placeholder-img card-img-top" height="225" alt="Book Image">
-                                <form th:action="@{/addFavorite/__${book.bookId}__}" method="get"
+                                <form th:action="@{/addFavorite/__${book.bookId}__}" method="get" th:if="${!isAdmin}"
                                     class="favorite-button-form">
                                     <button type="submit" class="btn botonesDeLibros btn-secondary my-2">
                                         <i class="fa fa-heart" aria-hidden="true"></i>
