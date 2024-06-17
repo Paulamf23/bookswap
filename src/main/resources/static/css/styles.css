@@ -1095,9 +1095,9 @@ ul {
     align-items: baseline;
 }
 
-.del_message {
+/* .del_message {
     margin-left: 850px;
-}
+} */
 
 .delete_message:hover {
     color: red;
