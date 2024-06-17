@@ -6,14 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BookSwap</title>
 
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 
+    <!-- Custom CSS -->
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" th:href="@{/images/icono.png}">
 </head>
 
 <body>
@@ -27,12 +34,14 @@
             <h3 class="titulo-apartado">ÚLTIMOS LIBROS</h3>
             <div class="row row-home">
                 <div class="col-custom cardHomeLibro" th:each="book, iterStat : ${books}"
-                    th:if="${iterStat.index lt 10 and book.disponible==false}">
+                    th:if="${iterStat.index lt 10}">
                     <a class="botonVerLibro" th:href="@{/bookDetail/{bookId}(bookId=${book.bookId})}">
                         <div class="card shadow-sm">
                             <div class="card-img-container">
+                                <!-- Imagen del libro -->
                                 <img th:src="${book.image != null} ? '/books/' + ${book.bookId} + '/image' : @{/images/defecto.jpg}"
                                     class="bd-placeholder-img card-img-top" height="225" alt="Book Image">
+                                <!-- Formulario de favoritos -->
                                 <form th:action="@{/addFavorite/__${book.bookId}__}" method="get" th:if="${!isAdmin}"
                                     class="favorite-button-form">
                                     <button type="submit" class="btn botonesDeLibros btn-secondary my-2">
@@ -40,9 +49,10 @@
                                     </button>
                                 </form>
                             </div>
+                            <!-- Detalles del libro -->
                             <div class="card-body card-home">
                                 <h5 class="card-title"
-                                    th:text="${#strings.length(book.title) gt 25 ? #strings.substring(book.title, 0, 25) + '...' : book.title}"
+                                    th:text="${#strings.length(book.title) > 25 ? #strings.substring(book.title, 0, 25) + '...' : book.title}"
                                     data-toggle="tooltip" th:attr="title=${book.title}"></h5>
                                 <p th:text="'@' + ${book.user?.username}"></p>
                             </div>
@@ -58,6 +68,9 @@
 
     <div th:replace="plantillas/footer :: footer"></div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
     <script>
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();

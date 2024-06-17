@@ -53,7 +53,6 @@ public class BookswapController {
         if (userUsername != null) {
             books = bookService.getRecentBooksExcludingUser(userUsername);
 
-            // Verificar si el usuario es administrador
             User user = userService.getUserByUsername(userUsername);
             if (user != null && user.getRole() == Role.admin) {
                 model.addAttribute("isAdmin", true);
